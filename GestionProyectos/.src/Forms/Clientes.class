@@ -12,7 +12,7 @@ Private sFiltro As String = "%"
 
 Public Sub Form_Open()
   
-  Me.Title = "Clientes"
+  Me.Title = "Clientes  "
   
   CargaGrid(sFiltro)
   
@@ -84,7 +84,6 @@ Public Sub CargaGrid(sFiltro As String)
     Else      
       GridView1[i, 4].Picture = picBaja 
     End If
-    
     i += 1
     rstResultado.MoveNext
   Loop
