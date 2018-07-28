@@ -1,0 +1,24 @@
+' Gambas module file
+
+Private conectar As Connection
+
+Public Sub ConectarDB() As Connection
+
+  conectar = New Connection
+  conectar.Host = "localhost"
+  conectar.Name = "GestionProyectos"
+  conectar.Port = "3306"
+  conectar.Type = "mysql"
+  conectar.User = "root"
+  conectar.Password = "1012"
+
+
+  Try conectar.Open()
+  Return conectar
+  If Error Then
+    conectar = Null
+    Message.Error(Error.Text)
+  Endif
+
+End
+

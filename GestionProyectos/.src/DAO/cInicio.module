@@ -1,0 +1,15 @@
+' Gambas module file
+
+Private conn As Connection
+
+Public Function Acceso(sUsuario As String, sPass As String) As Result
+  
+  Dim rstResultado As Result
+  
+  conn = gConexion.ConectarDB()
+  
+  rstResultado = conn.Exec("SELECT ID_ROL FROM USUARIOS WHERE COD_USUARIO ='" & Upper(sUsuario) & "' AND PASSWORD='" & sPass & "'")
+  
+  Return rstResultado
+  
+End

@@ -1,0 +1,20 @@
+# Gambas Form File 3.0
+
+{ Form Form
+  MoveScaled(0,0,54,35)
+  { txtUsuario TextBox
+    MoveScaled(24,10,24,4)
+  }
+  { PictureBox1 PictureBox
+    MoveScaled(1,4,20,19)
+  }
+  { txtPass MaskBox
+    MoveScaled(24,19,24,4)
+  }
+  { btnAcceder Button
+    MoveScaled(24,26,24,5)
+    AutoResize = True
+    Text = ("Aceptar")
+    Picture = Picture["images/aceptar.png"]
+  }
+}

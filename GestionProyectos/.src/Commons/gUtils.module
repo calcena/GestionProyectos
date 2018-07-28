@@ -1,0 +1,23 @@
+' Gambas module file
+
+Private sResultado As String
+
+Public Function FechaConFormato(dFecha As Date) As String
+  
+  Dim sFecha As String = CStr(dFecha)
+  
+  sResultado = Mid$(sFecha, 1, 10)
+  
+  Return sResultado
+  
+End
+
+Public Function HoraConFormato(tTiempo As Date) As String
+  
+  Dim sHora As String = CStr(tTiempo)
+  
+  sResultado = Mid$(sHora, 1, 8)
+  
+  Return sResultado
+  
+End

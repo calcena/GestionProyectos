@@ -1,0 +1,30 @@
+' Gambas class file
+
+Private rstAcceso As Result
+
+Public Sub btnAcceder_Click()
+  
+  rstAcceso = cInicio.Acceso(txtUsuario.text, txtPass.Text)
+  
+  rstAcceso.MoveFirst
+  If rstAcceso.Count = 1 Then
+    Do While rstAcceso.Available
+      ' recogemos los permisos del usuario logado
+      rstAcceso.MoveNext
+    Loop
+    ' Abrimos el menu principal del sistema
+    
+    MenuPrincipal.Show()
+    
+    ' insertamos linea de log con acceso correcto
+    cLogs.InsOkLog(gUtils.FechaConFormato(Now), gUtils.HoraConFormato(Time), "Inicio", "El usuario: " & Upper(txtUsuario.Text) & " ha accedido correctamente al sistema.")
+    Inicio.Close()
+  Else
+    
+    cLogs.InsKoLog(gUtils.FechaConFormato(Now), gUtils.HoraConFormato(Time), "Inicio", "El usuario: " & Upper(txtUsuario.Text) & " con contraseña: " & txtPass.Text & " ha intentado acceder al sistema.")
+    ' Mensaje al usuario
+    Message.Warning("Acceso no permitido")
+    
+  Endif
+  
+End

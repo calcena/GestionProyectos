@@ -1,0 +1,84 @@
+# Gambas Form File 3.0
+
+{ Form Form
+  MoveScaled(0,0,158,69)
+  { txtFiltroProy TextBox
+    MoveScaled(2,5,29,4)
+  }
+  { GridView1 GridView
+    MoveScaled(32,10,66,49)
+    Mode = Select.Single
+    Grid = False
+    AutoResize = False
+  }
+  { btnAplicar Button
+    MoveScaled(2,61,20,7)
+    Text = ("Aplicar")
+    Picture = Picture["images/aceptar.png"]
+  }
+  { btnBorrar Button
+    MoveScaled(23,61,20,7)
+    Text = ("Borrar")
+  }
+  { btnSalir2 Button
+    MoveScaled(140,64,16,4)
+    Text = ("Salir")
+    Picture = Picture["images/salir.png"]
+  }
+  { lblCodigo Label
+    MoveScaled(99,10,24,4)
+    Text = ("Codigo")
+  }
+  { txaDescripcion TextArea
+    MoveScaled(99,24,57,20)
+  }
+  { txtCodigo TextBox
+    MoveScaled(99,14,27,4)
+  }
+  { lblDescripcion Label
+    MoveScaled(99,20,24,4)
+    Text = ("Descripcion")
+  }
+  { btnAplicar3 Button
+    MoveScaled(99,52,57,7)
+    Text = ("Seleccionar Archivo")
+  }
+  { lblProyectos Label
+    MoveScaled(3,2,24,4)
+    Text = ("Buscador")
+  }
+  { btnAplicar4 Button
+    MoveScaled(44,61,20,7)
+    Text = ("Limpiar")
+  }
+  { btnActivar Button
+    MoveScaled(65,61,20,7)
+    Text = ("Activar")
+  }
+  { btnDuplicar Button
+    MoveScaled(86,61,20,7)
+    Text = ("Duplicar")
+  }
+  { lsvProyectos ListView
+    MoveScaled(2,10,29,44)
+  }
+  { SwitchButton1 SwitchButton
+    MoveScaled(10,55,8,4)
+    Animated = True
+  }
+  { lblTodos Label
+    MoveScaled(2,55,8,4)
+    Text = ("Todos")
+  }
+  { lblActivos Label
+    MoveScaled(20,55,8,4)
+    Text = ("Activos")
+  }
+  { txtFiltroReq TextBox
+    MoveScaled(32,5,29,4)
+  }
+  { lblProyectos2 Label
+    MoveScaled(33,2,24,4)
+    Text = ("Buscador")
+  }
+}

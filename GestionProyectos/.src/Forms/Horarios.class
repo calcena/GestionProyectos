@@ -1,0 +1,15 @@
+' Gambas class file
+
+Public Sub Form_Open()
+  
+End
+
+Public Sub tplMeses_MouseDown()
+  
+End
+
+Public Sub dcDate_Click()
+  
+  txtFechaInicio.Text = dcDate.Value
+  
+End

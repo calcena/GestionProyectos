@@ -1,0 +1,22 @@
+' Gambas class file
+
+Public Sub btnHorarios_Click()
+  
+  Me.Hide()
+  Horarios.Show()
+  
+End
+
+Public Sub btnSalir_Click()
+  ' cerramos la aplicacion
+  
+  Me.Close()
+  
+End
+
+Public Sub btnUsuarios_Click()
+  
+  Me.Hide()
+  Usuarios.Show()
+  
+End

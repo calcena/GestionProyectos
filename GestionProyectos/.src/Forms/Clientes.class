@@ -1,0 +1,106 @@
+' Gambas class file
+
+Private rstResultado As Result
+'
+Private picActivo As Picture = Picture.Load("images/alta.png")
+Private picBaja As Picture = Picture.Load("images/baja.png")
+Private picCerrado As Picture = Picture.Load("images/cerrado.png")
+Private picWarn As Picture = Picture.Load("images/warning.png")
+
+Private iSelect As Integer = 0
+Private sFiltro As String = "%"
+
+Public Sub Form_Open()
+  
+  Me.Title = "Clientes"
+  
+  CargaGrid(sFiltro)
+  
+  lsvProyectos.Clear()
+  
+End
+
+Public Sub ObtenerProyectosId(iSelect As Integer)
+  
+  rstResultado = cProyectos.FiltrarProyectosId(iSelect)
+  rstResultado.MoveFirst
+  lsvProyectos.Clear
+  Do While rstResultado.Available 
+    
+    If rstResultado!P_CERRADO = "+" And rstResultado!C_BAJA = "-" Then
+      lsvProyectos.Add(rstResultado!ID_PROYECTO, " - " & rstResultado!COD_PROYECTO, picCerrado)
+    Else If rstResultado!P_BAJA = "+" And rstResultado!C_BAJA = "-" Then
+      lsvProyectos.Add(rstResultado!ID_PROYECTO, " - " & rstResultado!COD_PROYECTO, picBaja)
+    Else If rstResultado!C_BAJA = "+" Then
+      lsvProyectos.Add(rstResultado!ID_PROYECTO, " - " & rstResultado!COD_PROYECTO, picWarn)
+    Else
+      lsvProyectos.Add(rstResultado!ID_PROYECTO, " - " & rstResultado!COD_PROYECTO, picActivo)
+    Endif
+    
+    rstResultado.MoveNext
+  Loop
+  
+End
+
+Public Sub CargaGrid(sFiltro As String)
+  
+  Dim i As Integer = 0
+  
+  GridView1.Clear
+  
+  rstResultado = cClientes.FiltrarClientes(sFiltro)
+  
+  GridView1.Columns.Count = rstResultado.Fields.Count 
+  GridView1.Header = rstResultado.Fields.Count
+  GridView1.Columns[0].Title = "ID_CLIENTE"
+  GridView1.Columns[1].Title = "COD_CLIENTE"
+  GridView1.Columns[2].Title = "NOMBRE"
+  GridView1.Columns[3].Title = "POBLACIÓN"
+  GridView1.Columns[4].Title = ""
+  GridView1.Columns[0].width = 0
+  GridView1.Columns[0].Resizable = False
+  GridView1.Columns[1].width = 100
+  GridView1.Columns[1].Resizable = False
+  GridView1.Columns[2].width = 290
+  GridView1.Columns[2].Resizable = False
+  GridView1.Columns[3].width = 150
+  GridView1.Columns[3].Resizable = False
+  GridView1.Columns[4].width = 25
+  GridView1.Columns[4].Alignment = 3
+  GridView1.Columns[4].Resizable = False
+  
+  '::::::::::::::::::::::::::::::::::::::::::::::::::::
+  
+  rstResultado.MoveFirst
+  
+  Do While rstResultado.Available
+    GridView1.Rows.Insert(i, 1)
+    GridView1[i, 0].Text = rstResultado!ID_CLIENTE
+    GridView1[i, 1].Text = rstResultado!COD_CLIENTE
+    GridView1[i, 2].Text = rstResultado!NOMBRE
+    GridView1[i, 3].Text = rstResultado!POBLACION
+    If rstResultado!ES_BAJA = "-" Then
+      GridView1[i, 4].Picture = picActivo     
+    Else      
+      GridView1[i, 4].Picture = picBaja 
+    End If
+    
+    i += 1
+    rstResultado.MoveNext
+  Loop
+  
+End
+
+Public Sub GridView1_Click()
+  
+  iSelect = CInt(GridView1[gridview1.Row, 0].text)
+  ObtenerProyectosId(iSelect)  
+  
+End
+
+Public Sub txtFiltro_KeyRelease()
+  
+  sFiltro = txtFiltro.Text
+  CargaGrid(sFiltro)
+  
+End

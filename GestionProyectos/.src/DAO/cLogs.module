@@ -1,0 +1,98 @@
+' Gambas module file
+
+Private conn As Connection
+Private bResultado As Boolean
+Private iContador As String
+Private rstResultado As Result
+
+Public Function InsCriticLog(sFecha As String, sHora As String, sPantalla As String, sMensaje As String) As Boolean
+  ' Declaramos la variable de salida como FALSE :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+  
+  bResultado = False
+  
+  conn = gConexion.ConectarDB()
+  
+  conn.Exec("INSERT INTO LOGS (FECHA,HORA,PANTALLA,MENSAJE,ESTADO) VALUES ('" & sFecha & "','" & sHora & "','" & sPantalla & "','" & sMensaje & "','4')")
+  ' Filas afectadas por nuestro insert
+  rstResultado = conn.Exec("SELECT row_count() AS AFFECTED_ROWS")
+  ' Evaluamos el resultado de la insercion
+  If rstResultado.Count = 1 Then
+    bResultado = True
+  Endif
+  
+  Return bResultado
+  
+End
+
+Public Function InsWarnLog(sFecha As String, sHora As String, sPantalla As String, sMensaje As String) As Boolean
+  ' Declaramos la variable de salida como FALSE :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+  
+  bResultado = False
+  
+  conn = gConexion.ConectarDB()
+  
+  conn.Exec("INSERT INTO LOGS (FECHA,HORA,PANTALLA,MENSAJE,ESTADO) VALUES ('" & sFecha & "','" & sHora & "','" & sPantalla & "','" & sMensaje & "','3')")
+  ' Filas afectadas por nuestro insert
+  rstResultado = conn.Exec("SELECT row_count() AS AFFECTED_ROWS")
+  ' Evaluamos el resultado de la insercion
+  If rstResultado.Count = 1 Then
+    bResultado = True
+  Endif
+  
+  Return bResultado
+  
+End
+
+Public Function InsKoLog(sFecha As String, sHora As String, sPantalla As String, sMensaje As String) As Boolean
+  ' Declaramos la variable de salida como FALSE :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+  
+  bResultado = False
+  
+  conn = gConexion.ConectarDB()
+  
+  conn.Exec("INSERT INTO LOGS (FECHA,HORA,PANTALLA,MENSAJE,ESTADO) VALUES ('" & sFecha & "','" & sHora & "','" & sPantalla & "','" & sMensaje & "','2')")
+  ' Filas afectadas por nuestro insert
+  rstResultado = conn.Exec("SELECT row_count() AS AFFECTED_ROWS")
+  ' Evaluamos el resultado de la insercion
+  If rstResultado.Count = 1 Then
+    bResultado = True
+  Endif
+  
+  Return bResultado
+  
+End
+
+Public Function InsOkLog(sFecha As String, sHora As String, sPantalla As String, sMensaje As String) As Boolean
+  ' Declaramos la variable de salida como FALSE :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+  
+  bResultado = False
+  
+  conn = gConexion.ConectarDB()
+  
+  conn.Exec("INSERT INTO LOGS (FECHA,HORA,PANTALLA,MENSAJE,ESTADO) VALUES ('" & sFecha & "','" & sHora & "','" & sPantalla & "','" & sMensaje & "','1')")
+  ' Filas afectadas por nuestro insert
+  rstResultado = conn.Exec("SELECT row_count() AS AFFECTED_ROWS")
+  ' Evaluamos el resultado de la insercion
+  If rstResultado.Count = 1 Then
+    bResultado = True
+  Endif
+  
+  Return bResultado
+  
+End
+
+Public Function ObtenerLogs(ByRef gdvLogs As GridView, sFecha As String, sPantalla As String, sMensaje As String) As GridView
+  
+  conn = gConexion.ConectarDB()
+  rstResultado = conn.Exec("SELECT * FROM LOGS WHERE ...")
+  
+  rstResultado.MoveFirst
+  Do While rstResultado.Available
+    ' montamos la estrucutra del GridView que vamos a devolver
+    
+    rstResultado.MoveNext
+  Loop
+  
+  Return gdvLogs
+  
+End

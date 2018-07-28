@@ -1,0 +1,50 @@
+# Gambas Form File 3.0
+
+{ Form Form
+  MoveScaled(0,0,133,40)
+  { lblStatus Label
+    MoveScaled(2,2,130,4)
+  }
+  { btnUsuarios Button
+    MoveScaled(0,9,32,7)
+    Text = ("Usuarios")
+  }
+  { btnVacaciones Button
+    MoveScaled(0,18,32,7)
+    Text = ("Vacaciones y Festivos")
+    Picture = Picture["images/calendar.png"]
+  }
+  { btnLogs Button
+    MoveScaled(0,26,32,7)
+    Text = ("Logs")
+  }
+  { btnProyectos Button
+    MoveScaled(99,9,32,7)
+    Text = ("Proyectos")
+  }
+  { btnHorarios Button
+    MoveScaled(33,18,32,7)
+    Text = ("Horarios")
+  }
+  { btnInforrmes Button
+    MoveScaled(66,18,32,7)
+    Text = ("Informes")
+  }
+  { btnInforrmes2 Button
+    MoveScaled(99,18,32,7)
+    Text = ("Sistema")
+  }
+  { btnTareas Button
+    MoveScaled(66,9,32,7)
+    Text = ("Tareas")
+  }
+  { btnClientes Button
+    MoveScaled(33,9,32,7)
+    Text = ("Clientes")
+  }
+  { btnSalir Button
+    MoveScaled(115,35,16,4)
+    Text = ("Salir")
+    Picture = Picture["images/salir.png"]
+  }
+}

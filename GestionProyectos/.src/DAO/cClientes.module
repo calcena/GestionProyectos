@@ -1,0 +1,19 @@
+' Gambas module file
+
+Private conn As Connection
+Private bResultado As Boolean
+Private iContador As String
+Private rstResultado As Result
+
+' Funcion que nos devuelve el ID i COD_PROYECTO segun texto entrado
+Public Function FiltrarClientes(sFiltro As String) As Result
+  
+  Dim rstResultado As Result
+  
+  conn = gConexion.ConectarDB()
+  
+  rstResultado = conn.Exec("SELECT ID_CLIENTE,COD_CLIENTE,NOMBRE,POBLACION,ES_BAJA FROM CLIENTES WHERE (COD_CLIENTE  LIKE '%" & Upper(sFiltro) & "%' OR NOMBRE LIKE '%" & sFiltro & "%' OR POBLACION LIKE '%" & sFiltro & "%')")
+  
+  Return rstResultado 
+  
+End

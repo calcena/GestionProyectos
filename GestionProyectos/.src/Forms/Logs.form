@@ -1,0 +1,17 @@
+# Gambas Form File 3.0
+
+{ Form Form
+  MoveScaled(0,0,108,69)
+  { GridView1 GridView
+    MoveScaled(1,6,105,56)
+  }
+  { TextBox1 TextBox
+    MoveScaled(1,1,16,4)
+  }
+  { TextBox2 TextBox
+    MoveScaled(18,1,71,4)
+  }
+  { TextBox3 TextBox
+    MoveScaled(90,1,16,4)
+  }
+}

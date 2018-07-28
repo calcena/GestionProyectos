@@ -1,0 +1,30 @@
+' Gambas module file
+
+Private conn As Connection
+Private bResultado As Boolean
+Private iContador As String
+Private rstResultado As Result
+
+Public Function ObtenerRequerimientos(sFiltro As String) As Result
+  
+  Dim rstResultado As Result
+  
+  conn = gConexion.ConectarDB()
+  
+  rstResultado = conn.Exec("SELECT R.ID_REQUERIMIENTO, P.COD_PROYECTO, R.COD_REQUERIMIENTO, R.DESCRIPCION, R.ES_BAJA, R.ES_CERRADO FROM REQUERIMIENTOS R INNER JOIN PROYECTOS P ON R.ID_PROYECTO = P.ID_PROYECTO WHERE(P.COD_PROYECTO LIKE '% " & sFiltro & " %' OR R.COD_REQUERIMIENTO LIKE '%" & sFiltro & "%' OR R.DESCRIPCION LIKE '%" & sFiltro & "%')")
+  
+  Return rstResultado 
+  
+End
+
+Public Function ObtenerRequerimientosId(iIdProyecto As String) As Result
+  
+  Dim rstResultado As Result
+  
+  conn = gConexion.ConectarDB()
+  
+  rstResultado = conn.Exec("SELECT R.ID_REQUERIMIENTO, P.COD_PROYECTO, R.COD_REQUERIMIENTO, R.DESCRIPCION, R.ES_BAJA, R.ES_CERRADO FROM REQUERIMIENTOS R INNER JOIN PROYECTOS P ON R.ID_PROYECTO = P.ID_PROYECTO WHERE (P.ID_PROYECTO = " & iIdProyecto & ")")
+  
+  Return rstResultado 
+  
+End
