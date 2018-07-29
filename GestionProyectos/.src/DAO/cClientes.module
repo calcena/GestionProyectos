@@ -1,5 +1,7 @@
 ' Gambas module file
 
+' Modulo Clase Clientes
+
 Private conn As Connection
 Private bResultado As Boolean
 Private iContador As String

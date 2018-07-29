@@ -3,6 +3,13 @@
 { Form Form
   MoveScaled(0,0,129,64)
   { ColumnView1 ColumnView
-    MoveScaled(4,7,30,30)
+    MoveScaled(4,12,30,37)
+  }
+  { txtFiltro TextBox
+    MoveScaled(4,7,30,4)
+  }
+  { lblFitlro Label
+    MoveScaled(4,3,24,4)
+    Text = ("Buscardor")
   }
 }
