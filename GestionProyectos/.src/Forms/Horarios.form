@@ -8,12 +8,18 @@
     Border = Border.Plain
   }
   { Panel4 Panel
-    MoveScaled(2,4,36,36)
+    MoveScaled(2,4,36,27)
     Foreground = Color.Black
     Border = Border.Plain
+    { DateBox1 DateBox
+      MoveScaled(6,8,24,4)
+    }
+    { DateBox2 DateBox
+      MoveScaled(6,16,24,4)
+    }
   }
   { Panel3 Panel
-    MoveScaled(2,41,36,13)
+    MoveScaled(2,36,36,13)
     Foreground = Color.Black
     Border = Border.Plain
     { cmbMesAnyo ComboBox
@@ -89,20 +95,11 @@
     Text = ("Domingo")
   }
   { lblMes Label
-    MoveScaled(4,42,14,4)
+    MoveScaled(4,37,14,4)
     Text = ("Mes")
   }
   { cmbMes ComboBox
-    MoveScaled(3,47,15,4)
-  }
-  { dcDate DateChooser
-    MoveScaled(3,7,34,26)
-  }
-  { txtFechaInicio TextBox
-    MoveScaled(3,34,9,4)
-  }
-  { txtFechaFin TextBox
-    MoveScaled(28,34,9,4)
+    MoveScaled(3,42,15,4)
   }
   { lblDias Label
     MoveScaled(42,2,8,4)
@@ -110,7 +107,7 @@
     Text = ("Días")
   }
   { lblMes2 Label
-    MoveScaled(22,42,14,4)
+    MoveScaled(22,37,14,4)
     Text = ("Año")
   }
   { btnAplicar Button
@@ -120,9 +117,16 @@
     Picture = Picture["images/aceptar.png"]
   }
   { btnAplicar2 Button
-    MoveScaled(70,12,20,7)
+    MoveScaled(71,13,20,7)
     AutoResize = True
     Text = ("Limpiar")
-    Picture = Picture["images/aceptar.png"]
+  }
+  { lblDesde Label
+    MoveScaled(8,8,14,4)
+    Text = ("Desde")
+  }
+  { lblHasta Label
+    MoveScaled(9,17,14,4)
+    Text = ("Hasta")
   }
 }
