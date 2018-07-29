@@ -1,8 +1,8 @@
 # Gambas Form File 3.0
 
 { Form Form
-  MoveScaled(0,0,170,72)
-  { ColumnView1 ColumnView
+  MoveScaled(0,0,170,92)
+  { clvProyectos ColumnView
     MoveScaled(4,12,30,37)
   }
   { txtFiltro TextBox
@@ -13,6 +13,16 @@
     Text = ("Buscardor")
   }
   { GridView1 GridView
-    MoveScaled(37,7,82,60)
+    MoveScaled(36,12,82,76)
+  }
+  { clvRequeremientos ColumnView
+    MoveScaled(4,51,30,37)
+  }
+  { txtFiltro2 TextBox
+    MoveScaled(36,7,30,4)
+  }
+  { lblFitlro2 Label
+    MoveScaled(36,3,24,4)
+    Text = ("Buscardor")
   }
 }
