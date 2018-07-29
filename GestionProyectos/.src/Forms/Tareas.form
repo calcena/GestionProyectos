@@ -2,4 +2,7 @@
 
 { Form Form
   MoveScaled(0,0,129,64)
+  { ColumnView1 ColumnView
+    MoveScaled(4,7,30,30)
+  }
 }
