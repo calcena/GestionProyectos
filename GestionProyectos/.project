@@ -1,6 +1,6 @@
 # Gambas Project File 3.0
 Title=GestionProyectos
-Startup=Requerimientos
+Startup=Tareas
 Version=0.0.1
 Component=gb.image
 Component=gb.gui.qt
