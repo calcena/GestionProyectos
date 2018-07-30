@@ -5,7 +5,7 @@ Private bResultado As Boolean
 Private iContador As String
 Private rstResultado As Result
 
-Public Function ObtenerRequerimientos(sFiltro As String) As Result
+Public Function GetReqByProy(sFiltro As String) As Result
   
   Dim rstResultado As Result
   
@@ -17,7 +17,7 @@ Public Function ObtenerRequerimientos(sFiltro As String) As Result
   
 End
 
-Public Function ObtenerRequerimientosId(iIdProyecto As String) As Result
+Public Function GetReqById(iIdProyecto As String) As Result
   
   Dim rstResultado As Result
   

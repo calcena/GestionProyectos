@@ -19,7 +19,7 @@ Public Sub Form_Open()
   
   EnviarFiltro()
   ' Requerimientos
-  rstResultado = cRequerimientos.ObtenerRequerimientos(sFiltroReq)
+  rstResultado = cRequerimientos.GetReqByProy(sFiltroReq)
   CargaGrid()
   
 End
@@ -78,13 +78,13 @@ Public Sub FiltroRequerimientos()
   Do While rstResultado.Available 
     
     If rstResultado!P_CERRADO = "+" And rstResultado!C_BAJA = "-" Then
-      lsvProyectos.Add(rstResultado!ID_PROYECTO, " - " & rstResultado!COD_PROYECTO, picCerrado)
+      lsvProyectos.Add(rstResultado!ID_PROYECTO, " - " & rstResultado!COD_PROYECTO, gConst.picCerrado)
     Else If rstResultado!P_BAJA = "+" And rstResultado!C_BAJA = "-" Then
-      lsvProyectos.Add(rstResultado!ID_PROYECTO, " - " & rstResultado!COD_PROYECTO, picBaja)
+      lsvProyectos.Add(rstResultado!ID_PROYECTO, " - " & rstResultado!COD_PROYECTO, gConst.picBaja)
     Else If rstResultado!C_BAJA = "+" Then
-      lsvProyectos.Add(rstResultado!ID_PROYECTO, " - " & rstResultado!COD_PROYECTO, picWarn)
+      lsvProyectos.Add(rstResultado!ID_PROYECTO, " - " & rstResultado!COD_PROYECTO, gConst.picWarn)
     Else
-      lsvProyectos.Add(rstResultado!ID_PROYECTO, " - " & rstResultado!COD_PROYECTO, picActivo)
+      lsvProyectos.Add(rstResultado!ID_PROYECTO, " - " & rstResultado!COD_PROYECTO, gConst.picActivo)
     Endif
     
     rstResultado.MoveNext
@@ -103,7 +103,7 @@ Public Sub txtFiltroReq_KeyRelease()
   
   sFiltroReq = txtFiltroReq.Text
   
-  rstResultado = cRequerimientos.ObtenerRequerimientos(sFiltroReq)
+  rstResultado = cRequerimientos.GetReqByProy(sFiltroReq)
   CargaGrid()
   
 End
@@ -160,7 +160,7 @@ End
 
 Public Sub lsvProyectos_Select()
   
-  rstResultado = cRequerimientos.ObtenerRequerimientosId(CInt(lsvProyectos.Key))
+  rstResultado = cRequerimientos.GetReqById(CInt(lsvProyectos.Key))
   CargaGrid()
   
 End
@@ -177,7 +177,7 @@ Public Sub txtFiltroProy_GotFocus()
   
   txtFiltroReq.Clear
   sFiltroReq = "%"
-  rstResultado = cRequerimientos.ObtenerRequerimientos(sFiltroReq)
+  rstResultado = cRequerimientos.GetReqByProy(sFiltroReq)
   CargaGrid()
   
 End

@@ -1,0 +1,57 @@
+' Gambas module file
+
+Private conn As Connection
+Private bResultado As Boolean
+Private iContador As String
+Private rstResultado As Result
+
+Public Function GetReqByFilter(sFiltro As String) As Result
+  
+  Dim rstResultado As Result
+  
+  conn = gConexion.ConectarDB()
+  
+  rstResultado = conn.Exec("SELECT R.ID_REQUERIMIENTO, R.COD_REQUERIMIENTO, R.DESCRIPCION, R.ES_BAJA, R.ES_CERRADO FROM REQUERIMIENTOS R WHERE(R.COD_REQUERIMIENTO LIKE '%" & sFiltro & "%' OR R.DESCRIPCION LIKE '%" & sFiltro & "%')")
+  
+  Return rstResultado 
+  
+End 
+
+' Funcion que nos retorna los resultados de las tareas que hay asociadas a un id de requerimiento
+Public Function GeTaskByReqId(iIdReq As Integer) As Result
+  
+  Dim rstResultado As Result
+  
+  conn = gConexion.ConectarDB()
+  
+  rstResultado = conn.Exec("SELECT T.ID_TAREA, T.COD_TAREA,T.DESCRIPCION,T.ES_BAJA, T.ES_CERRADO FROM TAREAS T INNER JOIN REQUERIMIENTOS R ON T.ID_REQUERIMIENTO = R.ID_REQUERIMIENTO WHERE T.ID_REQUERIMIENTO = " & iIdReq & "")
+  
+  Return rstResultado
+  
+End
+
+' Funcion que nos retorna los resultados de las tareas que hay asociadas a un id de proyecto
+Public Function GetTaskByProId(iIdProy As Integer) As Result
+  
+  Dim rstResultado As Result
+  
+  conn = gConexion.ConectarDB()
+  
+  rstResultado = conn.Exec("SELECT T.ID_TAREA, T.COD_TAREA,T.DESCRIPCION,T.ES_BAJA, T.ES_CERRADO FROM TAREAS T INNER JOIN PROYECTOS P ON T.ID_PROYECTO = P.ID_PROYECTO WHERE T.ID_PROYECTO = " & iIdProy & "")
+  
+  Return rstResultado
+  
+End
+
+' Funcion que nos retorna los resultados segun filtro de la pagina
+Public Function GetTaskByFilter(sFiltro As String) As Result
+  
+  Dim rstResultado As Result
+  
+  conn = gConexion.ConectarDB()
+  
+  rstResultado = conn.Exec("SELECT T.ID_TAREA, T.COD_TAREA,T.DESCRIPCION,T.ES_BAJA, T.ES_CERRADO FROM TAREAS T WHERE (T.COD_TAREA LIKE '%" & sFiltro & "%' OR T.DESCRIPCION LIKE '%" & sFiltro & "%')")
+  
+  Return rstResultado
+  
+End

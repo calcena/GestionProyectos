@@ -2,9 +2,6 @@
 
 { Form Form
   MoveScaled(0,0,173,92)
-  { clvProyectos ColumnView
-    MoveScaled(4,12,30,35)
-  }
   { txtFiltro TextBox
     MoveScaled(4,7,30,4)
   }
@@ -12,11 +9,10 @@
     MoveScaled(4,3,24,4)
     Text = ("Buscardor")
   }
-  { GridView1 GridView
+  { grvTareas GridView
     MoveScaled(36,12,82,72)
-  }
-  { clvRequeremientos ColumnView
-    MoveScaled(4,48,30,36)
+    Mode = Select.Single
+    Grid = False
   }
   { txtFiltro2 TextBox
     MoveScaled(36,7,30,4)
@@ -52,5 +48,11 @@
   { lblFechaPrevista Label
     MoveScaled(152,42,20,4)
     Text = ("Fecha Finalización")
+  }
+  { lsvProyectos ListView
+    MoveScaled(4,12,30,35)
+  }
+  { lsvRequeremientos ListView
+    MoveScaled(4,48,30,36)
   }
 }
