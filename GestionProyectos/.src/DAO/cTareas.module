@@ -55,3 +55,45 @@ Public Function GetTaskByFilter(sFiltro As String) As Result
   Return rstResultado
   
 End
+
+Public Function GetGrid(ByRef objGridView As GridView, rstResultado As Result) As GridView
+  
+  Dim objResultado As GridView
+  Dim i As Integer = 0
+  
+  objGridView.Columns.Count = rstResultado.Fields.Count - 1
+  objGridView.Header = rstResultado.Fields.Count - 1
+  
+  objGridView.Columns[0].width = 0
+  objGridView.Columns[0].Resizable = False
+  objGridView.Columns[1].width = 100
+  objGridView.Columns[1].Resizable = False
+  objGridView.Columns[2].width = 425
+  objGridView.Columns[2].Resizable = False
+  objGridView.Columns[3].width = 25
+  objGridView.Columns[3].Resizable = False
+  
+  '::::::::::::::::::::::::::::::::::::::::::::::::::::
+  
+  rstResultado.MoveFirst
+  
+  Do While rstResultado.Available
+    objGridView.Rows.Insert(i, 1)
+    objGridView[i, 0].Text = rstResultado!ID_TAREA
+    objGridView[i, 1].Text = rstResultado!COD_TAREA
+    objGridView[i, 2].Text = rstResultado!DESCRIPCION
+    If rstResultado!ES_BAJA = "+" Then
+      objGridView[i, 3].Picture = gConst.picBaja      
+    Else If rstResultado!ES_CERRADO = "+"
+      objGridView[i, 3].Picture = gConst.picCerrado
+    Else
+      objGridView[i, 3].Picture = gConst.picActivo
+    End If
+    
+    i += 1
+    rstResultado.MoveNext
+  Loop
+  
+  Return objResultado
+  
+End

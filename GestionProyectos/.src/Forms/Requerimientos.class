@@ -92,7 +92,7 @@ Public Sub FiltroRequerimientos()
   
 End
 
-Public Sub btnAplicar4_Click()
+Public Sub btnLimpiar_Click()
   
   ' Reiniciamos los filtros 
   SwitchButton1.value = ""

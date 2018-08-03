@@ -3,16 +3,22 @@
 Private sFiltro As String = "%"
 Private sFiltroTask As String = "%"
 Private rstResultado As Result
-Private I As Integer = 0
+Private i As Integer = 0
+Private n As Integer = 0
 
 Public Sub Form_Open()
+  
+  Dim n As Integer = 0
   
   Me.Title = "Tareas"
   
   IniBuscadores()
   
   rstResultado = cTareas.GetTaskByFilter(sFiltroTask)
-  CargarGrid()
+  
+  grvTareas = cTareas.GetGrid(grvTareas, rstResultado)
+  
+  ' InicializarGrid()
   
 End
 
@@ -66,12 +72,11 @@ Public Sub txtFiltro_KeyRelease()
   
 End
 
-Public Sub CargarGrid()
-  
-  grvTareas.Clear
+Public Sub InicializarGrid()
   
   grvTareas.Columns.Count = rstResultado.Fields.Count - 1
   grvTareas.Header = rstResultado.Fields.Count - 1
+  
   grvTareas.Columns[0].Title = "ID_TAREA"
   grvTareas.Columns[1].Title = "COD_TAREA"
   grvTareas.Columns[2].Title = "DESCRIPCION"
@@ -86,35 +91,53 @@ Public Sub CargarGrid()
   grvTareas.Columns[3].width = 25
   grvTareas.Columns[3].Resizable = False
   
-  '::::::::::::::::::::::::::::::::::::::::::::::::::::
-  
-  rstResultado.MoveFirst
-  
-  Do While rstResultado.Available
-    grvTareas.Rows.Insert(i, 1)
-    grvTareas[i, 0].Text = rstResultado!ID_TAREA
-    grvTareas[i, 1].Text = rstResultado!COD_TAREA
-    grvTareas[i, 2].Text = rstResultado!DESCRIPCION
-    If rstResultado!ES_BAJA = "+" Then
-      grvTareas[i, 3].Picture = gConst.picBaja      
-    Else If rstResultado!ES_CERRADO = "+"
-      grvTareas[i, 3].Picture = gConst.picCerrado
-    Else
-      grvTareas[i, 3].Picture = gConst.picActivo
-    End If
-    
-    i += 1
-    rstResultado.MoveNext
-  Loop
-  
 End
+
+' Public Sub CargarGrid()
+'   
+
+'   grvTareas.Columns.Count = rstResultado.Fields.Count - 1
+'   grvTareas.Header = rstResultado.Fields.Count - 1
+'   
+'   grvTareas.Columns[0].width = 0
+'   grvTareas.Columns[0].Resizable = False
+'   grvTareas.Columns[1].width = 100
+'   grvTareas.Columns[1].Resizable = False
+'   grvTareas.Columns[2].width = 425
+'   grvTareas.Columns[2].Resizable = False
+'   grvTareas.Columns[3].width = 25
+'   grvTareas.Columns[3].Resizable = False
+'   
+'   '::::::::::::::::::::::::::::::::::::::::::::::::::::
+'   
+'   rstResultado.MoveFirst
+'   
+'   Do While rstResultado.Available
+'     grvTareas.Rows.Insert(i, 1)
+'     grvTareas[i, 0].Text = rstResultado!ID_TAREA
+'     grvTareas[i, 1].Text = rstResultado!COD_TAREA
+'     grvTareas[i, 2].Text = rstResultado!DESCRIPCION
+'     If rstResultado!ES_BAJA = "+" Then
+'       grvTareas[i, 3].Picture = gConst.picBaja      
+'     Else If rstResultado!ES_CERRADO = "+"
+'       grvTareas[i, 3].Picture = gConst.picCerrado
+'     Else
+'       grvTareas[i, 3].Picture = gConst.picActivo
+'     End If
+'     
+'     i += 1
+'     rstResultado.MoveNext
+'   Loop
+'   
+' End
 
 'Funcion que para cargar el Grid con la parte escrita en el buscador 
 Public Sub txtFiltro2_KeyRelease()
   
   sFiltroTask = txtFiltro2.Text
-  rstResultado = Null
+  
   rstResultado = cTareas.GetTaskByFilter(sFiltroTask)
-  CargarGrid()
+  'CargarGrid()
+  grvTareas = cTareas.GetGrid(grvTareas, rstResultado)
   
 End

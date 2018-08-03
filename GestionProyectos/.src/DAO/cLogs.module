@@ -81,18 +81,51 @@ Public Function InsOkLog(sFecha As String, sHora As String, sPantalla As String,
   
 End
 
-Public Function ObtenerLogs(ByRef gdvLogs As GridView, sFecha As String, sPantalla As String, sMensaje As String) As GridView
+Public Function LogsFilter(ByRef gdvLogs As GridView, sFecha As String, sMensaje As String, sEstado As String) As Result
   
   conn = gConexion.ConectarDB()
-  rstResultado = conn.Exec("SELECT * FROM LOGS WHERE ...")
+  rstResultado = conn.Exec("SELECT ID_LOG,FECHA,HORA,PANTALLA,MENSAJE,ESTADO FROM LOGS WHERE (FECHA LIKE '%" & sFecha & "%' OR PANTALLA LIKE '%" & sMensaje & "%' OR MENSAJE LIKE '%" & sMensaje & "%')")
+  
+  Return rstResultado
+  
+End
+
+Public Function GetLogs(ByRef objGridView As GridView, rstResultado As Result) As GridView
+  
+  Dim objResultado As GridView
+  Dim i As Integer = 0
+  
+  objGridView.Columns.Count = rstResultado.Fields.Count - 1
+  objGridView.Header = rstResultado.Fields.Count - 1
+  
+  objGridView.Columns[0].width = 0
+  objGridView.Columns[0].Resizable = False
+  objGridView.Columns[1].width = 100
+  objGridView.Columns[1].Resizable = False
+  objGridView.Columns[2].width = 425
+  objGridView.Columns[2].Resizable = False
+  objGridView.Columns[3].width = 25
+  objGridView.Columns[3].Resizable = False
+  objGridView.Columns[4].width = 25
+  objGridView.Columns[4].Resizable = False
+  objGridView.Columns[5].width = 25
+  objGridView.Columns[5].Resizable = False 
+  ':::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
   
   rstResultado.MoveFirst
+  
   Do While rstResultado.Available
-    ' montamos la estrucutra del GridView que vamos a devolver
-    
+    objGridView.Rows.Insert(i, 1)
+    objGridView[i, 0].Text = rstResultado!ID_LOG
+    objGridView[i, 1].Text = rstResultado!FECHA
+    objGridView[i, 2].Text = rstResultado!HORA
+    objGridView[i, 3].Text = rstResultado!PANTALLA
+    objGridView[i, 4].Text = rstResultado!MENSAJE
+    objGridView[i, 5].Text = rstResultado!ESTADO     
+    i += 1
     rstResultado.MoveNext
   Loop
   
-  Return gdvLogs
+  Return objResultado
   
 End

@@ -1,17 +1,22 @@
 # Gambas Form File 3.0
 
 { Form Form
-  MoveScaled(0,0,108,69)
+  MoveScaled(0,0,108,71)
   { GridView1 GridView
     MoveScaled(1,6,105,56)
   }
-  { TextBox1 TextBox
+  { txtFecha TextBox
     MoveScaled(1,1,16,4)
   }
-  { TextBox2 TextBox
+  { txtDescripcion TextBox
     MoveScaled(18,1,71,4)
   }
-  { TextBox3 TextBox
+  { btnLimpiar Button
+    MoveScaled(86,63,20,7)
+    Text = ("Limpiar")
+    Picture = Picture["images/limpiar_20.png"]
+  }
+  { cmbPrioridad ComboBox
     MoveScaled(90,1,16,4)
   }
 }

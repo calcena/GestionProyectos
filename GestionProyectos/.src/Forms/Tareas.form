@@ -13,6 +13,7 @@
     MoveScaled(36,12,82,72)
     Mode = Select.Single
     Grid = False
+    Header = GridView.Horizontal
   }
   { txtFiltro2 TextBox
     MoveScaled(36,7,30,4)

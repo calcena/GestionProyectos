@@ -1,2 +1,22 @@
 ' Gambas class file
 
+Public Sub btnLimpiar_Click()
+  
+  ' Borramos los filtros entrados
+  txtFecha.Text = Null
+  txtDescripcion.Text = Null
+  cmbPrioridad.index = 0
+  
+End
+
+Public Sub Form_Open()
+  
+  Me.Title = "Logs"
+  cmbPrioridad.Clear
+  cmbPrioridad.Add("Todos", 0)
+  cmbPrioridad.Add("Ok", 1)
+  cmbPrioridad.Add("Ko", 2)
+  cmbPrioridad.Add("Warning", 3) 
+  cmbPrioridad.Add("Critical", 4)
+  
+End
