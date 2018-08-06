@@ -1,0 +1,34 @@
+' Gambas module file
+
+Property _idProyecto As Integer 
+Property _idRequerimiento As Integer
+Private iIdProyecto As Integer 
+Private iIdRequerimiento As Integer
+
+Public Sub _new()
+  
+End
+
+Private Function _idProyecto_Read() As Integer
+  
+  Return iIdProyecto
+  
+End
+
+Private Sub _idProyecto_Write(Value As Integer)
+  
+  iIdProyecto = Value
+  
+End
+
+Private Function _idRequerimiento_Read() As Integer
+  
+  Return iIdRequerimiento
+  
+End
+
+Private Sub _idRequerimiento_Write(Value As Integer)
+  
+  iIdRequerimiento = Value
+  
+End
