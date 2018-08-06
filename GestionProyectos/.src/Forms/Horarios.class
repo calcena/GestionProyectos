@@ -11,3 +11,7 @@ End
 Public Sub dcDate_Click()
   
 End
+
+Public Sub btnAplicar_Click()
+  
+End

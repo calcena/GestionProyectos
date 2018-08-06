@@ -1,5 +1,90 @@
 # Gambas Form File 3.0
 
 { Form Form
-  MoveScaled(0,0,133,64)
+  MoveScaled(0,0,174,62)
+  { btnAdd Button
+    MoveScaled(153,4,20,7)
+    Text = ("Añadir")
+    Picture = Picture["images/add_20.png"]
+  }
+  { btnBorrar Button
+    MoveScaled(153,12,20,7)
+    Text = ("Borrar")
+    Picture = Picture["images/borrar_20.png"]
+  }
+  { btnSalir2 Button
+    MoveScaled(153,53,20,7)
+    Text = ("Salir")
+    Picture = Picture["images/salir.png"]
+  }
+  { btnLimpiar Button
+    MoveScaled(153,20,20,7)
+    Text = ("Limpiar")
+    Picture = Picture["images/limpiar_20.png"]
+  }
+  { btnActivar Button
+    MoveScaled(153,28,20,7)
+    Enabled = False
+    Text = ("Activar")
+    Picture = Picture["images/activar.png"]
+  }
+  { btnDuplicar Button
+    MoveScaled(153,36,20,7)
+    Text = ("Duplicar")
+    Picture = Picture["images/duplicar_20.png"]
+  }
+  { txtFiltroCli TextBox
+    MoveScaled(1,5,29,4)
+  }
+  { lsvClientes ListView
+    MoveScaled(1,10,29,49)
+  }
+  { grvProyectos GridView
+    MoveScaled(31,10,66,49)
+    Mode = Select.Single
+    Grid = False
+    AutoResize = False
+  }
+  { txtFiltroProyecots TextBox
+    MoveScaled(31,5,29,4)
+  }
+  { lblProyectos2 Label
+    MoveScaled(32,2,10,4)
+    Text = ("Buscador")
+  }
+  { lblProyectos1 Label
+    MoveScaled(2,1,10,4)
+    Text = ("Buscador")
+  }
+  { txtProyecto TextBox
+    MoveScaled(99,10,20,4)
+    ReadOnly = True
+  }
+  { lblProyecto Label
+    MoveScaled(99,6,20,4)
+    Text = ("Código de Proyecto")
+  }
+  { lblDescripcion Label
+    MoveScaled(99,14,20,4)
+    Text = ("Descripción")
+  }
+  { txtDescripcion TextArea
+    MoveScaled(99,18,52,16)
+  }
+  { txtHorasPrevistas TextBox
+    MoveScaled(99,38,17,4)
+  }
+  { txtHorasImputadas TextBox
+    MoveScaled(134,38,17,4)
+    Background = &HA7D1DF&
+    ReadOnly = True
+  }
+  { lblHorasPrevistas Label
+    MoveScaled(99,34,17,4)
+    Text = ("Horas Previstas")
+  }
+  { lblHorasImputadas Label
+    MoveScaled(134,34,17,4)
+    Text = ("Horas Imputadas")
+  }
 }

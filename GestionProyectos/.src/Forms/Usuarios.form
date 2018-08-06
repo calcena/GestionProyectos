@@ -2,4 +2,35 @@
 
 { Form Form
   MoveScaled(0,0,126,64)
+  { btnAdd Button
+    MoveScaled(81,39,20,7)
+    Text = ("Añadir")
+    Picture = Picture["images/add_20.png"]
+  }
+  { btnBorrar Button
+    MoveScaled(81,47,20,7)
+    Text = ("Borrar")
+    Picture = Picture["images/borrar_20.png"]
+  }
+  { btnLimpiar Button
+    MoveScaled(81,55,20,7)
+    Text = ("Limpiar")
+    Picture = Picture["images/limpiar_20.png"]
+  }
+  { btnActivar Button
+    MoveScaled(104,39,20,7)
+    Enabled = False
+    Text = ("Activar")
+    Picture = Picture["images/activar.png"]
+  }
+  { btnDuplicar Button
+    MoveScaled(104,47,20,7)
+    Text = ("Duplicar")
+    Picture = Picture["images/duplicar_20.png"]
+  }
+  { btnSalir2 Button
+    MoveScaled(104,55,20,7)
+    Text = ("Salir")
+    Picture = Picture["images/salir.png"]
+  }
 }

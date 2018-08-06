@@ -97,9 +97,9 @@ Public Sub GridView1_Click()
   
 End
 
-Public Sub txtFiltro_KeyRelease()
+Public Sub txtFiltroProyectos_KeyRelease()
   
-  sFiltro = txtFiltro.Text
+  sFiltro = txtFiltroProyectos.Text
   CargaGrid(sFiltro)
   
 End

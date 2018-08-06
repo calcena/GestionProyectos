@@ -5,8 +5,7 @@ Private sFiltroTask As String = "%"
 Private rstResultado As Result
 Private i As Integer = 0
 Private n As Integer = 0
-Dim strObjeto As GObjects = New GObjects
-  
+
 Public Sub Form_Open()
   
   Dim n As Integer = 0
@@ -185,9 +184,15 @@ Public Sub btnAdd_Click()
 End
 
 Public Sub lsvProyectos_Click()
+  '
+
+  gEstructuras.setIdProyecto(lsvProyectos.Key)
   
-  strObjeto.
-  
-  .SetIdProyecto(lsvProyectos.Key)
+End
+
+Public Sub lsvRequeremientos_Click()
+  '
+
+  gEstructuras.setIdRequerimiento(lsvRequeremientos.key)
   
 End

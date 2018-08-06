@@ -1,34 +1,54 @@
 ' Gambas module file
 
-Property _idProyecto As Integer 
-Property _idRequerimiento As Integer
-Private iIdProyecto As Integer 
-Private iIdRequerimiento As Integer
+Private _idProyecto As Integer 
+Private _idRequerimiento As Integer
+Private _idTarea As Integer
+Private _idCliente As Integer
 
-Public Sub _new()
+Public Function getIdProyecto() As Integer
+  
+  Return _idProyecto
   
 End
 
-Private Function _idProyecto_Read() As Integer
+Public Sub setIdProyecto(Value As Integer)
   
-  Return iIdProyecto
-  
-End
-
-Private Sub _idProyecto_Write(Value As Integer)
-  
-  iIdProyecto = Value
+  _idProyecto = Value
   
 End
 
-Private Function _idRequerimiento_Read() As Integer
+Public Function getIdRequerimiento() As Integer
   
-  Return iIdRequerimiento
+  Return _idRequerimiento
   
 End
 
-Private Sub _idRequerimiento_Write(Value As Integer)
+Public Sub setIdRequerimiento(Value As Integer)
   
-  iIdRequerimiento = Value
+  _idRequerimiento = Value
+  
+End
+
+Public Function getIdTarea() As Integer
+  
+  Return _idTarea
+  
+End
+
+Public Sub setIdTarea(Value As Integer)
+  
+  _idTarea = Value
+  
+End
+
+Public Function getIdCliente() As Integer
+  
+  Return _idCliente 
+  
+End
+
+Public Sub setIdCliente(Value As Integer)
+  
+  _idCliente = Value
   
 End

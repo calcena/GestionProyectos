@@ -1,2 +1,9 @@
 ' Gambas class file
 
+Public Sub Form_Open()
+  
+End
+
+Public Sub lblDescripcion_MouseDown()
+  
+End

@@ -181,3 +181,35 @@ Public Sub txtFiltroProy_GotFocus()
   CargaGrid()
   
 End
+
+Public Sub lsvProyectos_Click()
+  
+  gEstructuras.setIdProyecto(lsvProyectos.key)
+  
+End
+
+Public Sub btnAdd_Click()
+  
+  If Len(Trim(txtCodigo.Text)) = 0 Or Len(Trim(txaDescripcion.Text)) = 0 Then
+    
+    If Len(Trim(txtCodigo.Text)) = 0 Then 
+      txtCodigo.Background = Color.Red
+    Else 
+      txtCodigo.Background = Color.White
+    End If
+    
+    If Len(Trim(txaDescripcion.Text)) = 0 Then 
+      txaDescripcion.Background = Color.Red
+    Else 
+      txaDescripcion.Background = Color.White
+    End If
+    ' Aviso por pantalla al usuario
+    Message.Warning("Debe cumplimentar los datos marcados en rojo")
+    
+  Else
+    txtCodigo.Background = Color.White
+    txaDescripcion.Background = Color.White
+    
+  Endif
+  
+End

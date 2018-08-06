@@ -1,20 +1,58 @@
 # Gambas Form File 3.0
 
 { Form Form
-  MoveScaled(0,0,164,64)
+  MoveScaled(0,0,162,57)
   { lsvProyectos ListView
-    MoveScaled(86,9,29,45)
+    MoveScaled(2,9,29,45)
   }
   { GridView1 GridView
-    MoveScaled(2,9,83,45)
+    MoveScaled(32,9,83,45)
     Mode = Select.Single
     Grid = False
   }
-  { txtFiltro TextBox
+  { txtFiltroProyectos TextBox
     MoveScaled(2,4,29,4)
   }
   { lblProyectos Label
     MoveScaled(3,1,24,4)
     Text = ("Buscador")
+  }
+  { txtFiltroClientes TextBox
+    MoveScaled(32,4,29,4)
+  }
+  { lblProyectos2 Label
+    MoveScaled(33,1,24,4)
+    Text = ("Buscador")
+  }
+  { btnAdd Button
+    MoveScaled(116,31,20,7)
+    Text = ("Añadir")
+    Picture = Picture["images/add_20.png"]
+  }
+  { btnBorrar Button
+    MoveScaled(116,39,20,7)
+    Text = ("Borrar")
+    Picture = Picture["images/borrar_20.png"]
+  }
+  { btnLimpiar Button
+    MoveScaled(116,47,20,7)
+    Text = ("Limpiar")
+    Picture = Picture["images/limpiar_20.png"]
+  }
+  { btnActivar Button
+    MoveScaled(140,31,20,7)
+    Enabled = False
+    Text = ("Activar")
+    Picture = Picture["images/activar.png"]
+  }
+  { btnDuplicar Button
+    MoveScaled(140,39,20,7)
+    Text = ("Duplicar")
+    Picture = Picture["images/duplicar_20.png"]
+  }
+  { btnSalir2 Button
+    MoveScaled(140,47,20,7)
+    Text = ("Salir")
+    Picture = Picture["images/salir.png"]
   }
 }

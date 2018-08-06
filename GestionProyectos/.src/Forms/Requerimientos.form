@@ -22,7 +22,7 @@
     Picture = Picture["images/borrar_20.png"]
   }
   { btnSalir2 Button
-    MoveScaled(159,52,20,7)
+    MoveScaled(158,52,20,7)
     Text = ("Salir")
     Picture = Picture["images/salir.png"]
   }
@@ -34,7 +34,8 @@
     MoveScaled(99,24,57,20)
   }
   { txtCodigo TextBox
-    MoveScaled(99,14,27,4)
+    MoveScaled(99,14,22,4)
+    ReadOnly = True
   }
   { lblDescripcion Label
     MoveScaled(99,20,24,4)

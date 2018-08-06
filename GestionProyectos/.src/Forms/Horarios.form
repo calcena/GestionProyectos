@@ -1,7 +1,7 @@
 # Gambas Form File 3.0
 
 { Form Form
-  MoveScaled(0,0,105,78)
+  MoveScaled(0,0,117,71)
   { Panel1 Panel
     MoveScaled(41,4,27,64)
     Foreground = Color.Black
@@ -30,11 +30,6 @@
     MoveScaled(2,55,36,13)
     Foreground = Color.Black
     Border = Border.Plain
-  }
-  { btnSalir Button
-    MoveScaled(87,71,16,4)
-    Text = ("Salir")
-    Picture = Picture["images/salir.png"]
   }
   { cmbAnyo ComboBox
     MoveScaled(12,62,15,4)
@@ -110,17 +105,6 @@
     MoveScaled(22,37,14,4)
     Text = ("Año")
   }
-  { btnAplicar Button
-    MoveScaled(70,4,20,7)
-    AutoResize = True
-    Text = ("Aplicar")
-    Picture = Picture["images/aceptar.png"]
-  }
-  { btnAplicar2 Button
-    MoveScaled(71,13,20,7)
-    AutoResize = True
-    Text = ("Limpiar")
-  }
   { lblDesde Label
     MoveScaled(8,8,14,4)
     Text = ("Desde")
@@ -128,5 +112,36 @@
   { lblHasta Label
     MoveScaled(9,17,14,4)
     Text = ("Hasta")
+  }
+  { btnAdd Button
+    MoveScaled(72,45,20,7)
+    Text = ("Añadir")
+    Picture = Picture["images/add_20.png"]
+  }
+  { btnBorrar Button
+    MoveScaled(72,53,20,7)
+    Text = ("Borrar")
+    Picture = Picture["images/borrar_20.png"]
+  }
+  { btnLimpiar Button
+    MoveScaled(72,61,20,7)
+    Text = ("Limpiar")
+    Picture = Picture["images/limpiar_20.png"]
+  }
+  { btnActivar Button
+    MoveScaled(96,45,20,7)
+    Enabled = False
+    Text = ("Activar")
+    Picture = Picture["images/activar.png"]
+  }
+  { btnDuplicar Button
+    MoveScaled(96,53,20,7)
+    Text = ("Duplicar")
+    Picture = Picture["images/duplicar_20.png"]
+  }
+  { btnSalir2 Button
+    MoveScaled(96,61,20,7)
+    Text = ("Salir")
+    Picture = Picture["images/salir.png"]
   }
 }

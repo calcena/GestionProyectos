@@ -1,5 +1,36 @@
 # Gambas Form File 3.0
 
-{ Vacaciones Form
-  MoveScaled(0,0,64,64)
+{ Form Form
+  MoveScaled(0,0,124,69)
+  { btnAdd Button
+    MoveScaled(78,44,20,7)
+    Text = ("Añadir")
+    Picture = Picture["images/add_20.png"]
+  }
+  { btnBorrar Button
+    MoveScaled(78,52,20,7)
+    Text = ("Borrar")
+    Picture = Picture["images/borrar_20.png"]
+  }
+  { btnLimpiar Button
+    MoveScaled(78,60,20,7)
+    Text = ("Limpiar")
+    Picture = Picture["images/limpiar_20.png"]
+  }
+  { btnActivar Button
+    MoveScaled(102,44,20,7)
+    Enabled = False
+    Text = ("Activar")
+    Picture = Picture["images/activar.png"]
+  }
+  { btnDuplicar Button
+    MoveScaled(102,52,20,7)
+    Text = ("Duplicar")
+    Picture = Picture["images/duplicar_20.png"]
+  }
+  { btnSalir2 Button
+    MoveScaled(102,60,20,7)
+    Text = ("Salir")
+    Picture = Picture["images/salir.png"]
+  }
 }

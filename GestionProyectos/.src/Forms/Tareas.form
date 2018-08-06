@@ -58,32 +58,33 @@
     MoveScaled(4,48,30,36)
   }
   { btnAdd Button
-    MoveScaled(121,55,20,7)
+    MoveScaled(124,55,20,7)
     Text = ("Añadir")
     Picture = Picture["images/add_20.png"]
   }
   { btnBorrar Button
-    MoveScaled(121,63,20,7)
+    MoveScaled(124,63,20,7)
     Text = ("Borrar")
     Picture = Picture["images/borrar_20.png"]
   }
   { btnLimpiar Button
-    MoveScaled(121,71,20,7)
+    MoveScaled(124,71,20,7)
     Text = ("Limpiar")
     Picture = Picture["images/limpiar_20.png"]
   }
   { btnActivar Button
-    MoveScaled(150,55,20,7)
+    MoveScaled(147,55,20,7)
+    Enabled = False
     Text = ("Activar")
     Picture = Picture["images/activar.png"]
   }
   { btnDuplicar Button
-    MoveScaled(150,63,20,7)
+    MoveScaled(147,63,20,7)
     Text = ("Duplicar")
     Picture = Picture["images/duplicar_20.png"]
   }
   { btnSalir2 Button
-    MoveScaled(150,71,20,7)
+    MoveScaled(147,71,20,7)
     Text = ("Salir")
     Picture = Picture["images/salir.png"]
   }
