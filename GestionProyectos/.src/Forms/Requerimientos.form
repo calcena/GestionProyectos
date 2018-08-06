@@ -1,7 +1,7 @@
 # Gambas Form File 3.0
 
 { Form Form
-  MoveScaled(0,0,179,71)
+  MoveScaled(0,0,179,61)
   { txtFiltroProy TextBox
     MoveScaled(2,5,29,4)
   }
@@ -22,7 +22,7 @@
     Picture = Picture["images/borrar_20.png"]
   }
   { btnSalir2 Button
-    MoveScaled(159,62,20,7)
+    MoveScaled(159,52,20,7)
     Text = ("Salir")
     Picture = Picture["images/salir.png"]
   }

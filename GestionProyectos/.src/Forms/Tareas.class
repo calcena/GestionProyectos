@@ -5,7 +5,8 @@ Private sFiltroTask As String = "%"
 Private rstResultado As Result
 Private i As Integer = 0
 Private n As Integer = 0
-
+Dim strObjeto As GObjects = New GObjects
+  
 Public Sub Form_Open()
   
   Dim n As Integer = 0
@@ -139,5 +140,54 @@ Public Sub txtFiltro2_KeyRelease()
   rstResultado = cTareas.GetTaskByFilter(sFiltroTask)
   'CargarGrid()
   grvTareas = cTareas.GetGrid(grvTareas, rstResultado)
+  
+End
+
+Public Sub btnAdd_Click()
+  
+  ' Comprobación de valores entrados datos obligatorios
+  
+  If Len(Trim(txtCodTarea.Text)) = 0 Or Len(Trim(txtDescripcion.Text)) = 0 Or Len(Trim(txtHorasPrevistas.text)) = 0 Or Len(Trim(dbFechaFinalizacion.Text)) = 0 Then  
+    '   'Codigo de Tarea
+    If Len(Trim(txtCodTarea.Text)) = 0 Then 
+      txtCodTarea.Background = Color.Red
+    Else 
+      txtCodTarea.Background = Color.White
+    End If
+    '   ' Descripción 
+    If Len(Trim(txtDescripcion.Text)) = 0 Then 
+      txtDescripcion.Background = Color.Red
+    Else 
+      txtDescripcion.Background = Color.White
+    End If
+    '   ' Horas previstas
+    If Len(Trim(txtHorasPrevistas.Text)) = 0 Then 
+      txtHorasPrevistas.Background = Color.Red
+    Else 
+      txtHorasPrevistas.Background = Color.White
+    End If
+    '   ' Fecha finalización
+    If Len(Trim(dbFechaFinalizacion.Text)) = 0 Then 
+      dbFechaFinalizacion.Background = Color.Red
+    Else 
+      dbFechaFinalizacion.Background = Color.White
+      
+    End If
+    ' Aviso por pantalla al usuario
+    Message.Warning("Debe cumplimentar los datos marcados en rojo")
+  Else
+    txtCodTarea.Background = Color.White
+    txtDescripcion.Background = Color.White
+    txtHorasPrevistas.Background = Color.White
+    dbFechaFinalizacion.Background = Color.White
+  End If
+  
+End
+
+Public Sub lsvProyectos_Click()
+  
+  strObjeto.
+  
+  .SetIdProyecto(lsvProyectos.Key)
   
 End

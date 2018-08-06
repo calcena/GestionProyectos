@@ -1,7 +1,7 @@
 # Gambas Form File 3.0
 
 { Form Form
-  MoveScaled(0,0,173,92)
+  MoveScaled(0,0,173,88)
   { txtFiltro TextBox
     MoveScaled(4,7,30,4)
   }
@@ -28,26 +28,27 @@
   }
   { txtCodTarea TextBox
     MoveScaled(120,15,24,4)
+    ReadOnly = True
   }
-  { DateBox1 DateBox
-    MoveScaled(152,46,18,4)
+  { dbFechaFinalizacion DateBox
+    MoveScaled(154,46,16,4)
   }
   { lblCodTarea2 Label
     MoveScaled(120,21,24,4)
     Text = ("Descripción")
   }
-  { TextArea1 TextArea
+  { txtDescripcion TextArea
     MoveScaled(120,25,51,16)
   }
   { lblHorasPrevistas Label
-    MoveScaled(120,42,24,4)
+    MoveScaled(120,42,15,4)
     Text = ("Horas previstas")
   }
-  { TexttxtHorasPresvistasBox1 TextBox
-    MoveScaled(120,46,17,4)
+  { txtHorasPrevistas TextBox
+    MoveScaled(120,46,14,4)
   }
   { lblFechaPrevista Label
-    MoveScaled(152,42,20,4)
+    MoveScaled(154,42,17,4)
     Text = ("Fecha Finalización")
   }
   { lsvProyectos ListView
@@ -55,5 +56,35 @@
   }
   { lsvRequeremientos ListView
     MoveScaled(4,48,30,36)
+  }
+  { btnAdd Button
+    MoveScaled(121,55,20,7)
+    Text = ("Añadir")
+    Picture = Picture["images/add_20.png"]
+  }
+  { btnBorrar Button
+    MoveScaled(121,63,20,7)
+    Text = ("Borrar")
+    Picture = Picture["images/borrar_20.png"]
+  }
+  { btnLimpiar Button
+    MoveScaled(121,71,20,7)
+    Text = ("Limpiar")
+    Picture = Picture["images/limpiar_20.png"]
+  }
+  { btnActivar Button
+    MoveScaled(150,55,20,7)
+    Text = ("Activar")
+    Picture = Picture["images/activar.png"]
+  }
+  { btnDuplicar Button
+    MoveScaled(150,63,20,7)
+    Text = ("Duplicar")
+    Picture = Picture["images/duplicar_20.png"]
+  }
+  { btnSalir2 Button
+    MoveScaled(150,71,20,7)
+    Text = ("Salir")
+    Picture = Picture["images/salir.png"]
   }
 }
