@@ -72,12 +72,14 @@ End
 
 Public Sub Form_Open()
   'llamamos a la clase que contiene los datos del usuario logado  
-
+  
   lblStatus.Foreground = Color.Blue
   
   lblStatus.Text = gEstructuras.getUserLogged()
   
   picStatus.Picture = gConst.picInfo
+  picStatus.Picture = gConst.picWarning
+  
   ' añadimos Tooltip con detalles de ultima sesión en icono
   picStatus.Tooltip = gEstructuras.getDetailsUserLogged()
   

@@ -11,6 +11,8 @@ Public Sub btnAcceder_Click()
     Do While rstAcceso.Available
       ' recogemos los permisos del usuario logado
       gEstructuras.setUserLogged(rstAcceso!ID_USUARIO, rstAcceso!COD_USUARIO, rstAcceso!ID_ROL, rstAcceso!R_NOMBRE, Null, Null)
+      'TODO: Obtenemos los datos de última sesion
+      
       rstAcceso.MoveNext
     Loop
     ' Abrimos el menu principal del sistema
@@ -18,11 +20,11 @@ Public Sub btnAcceder_Click()
     MenuPrincipal.Show()
     
     ' insertamos linea de log con acceso correcto
-    cLogs.InsOkLog(gUtils.FechaConFormato(Now), gUtils.HoraConFormato(Time), "Inicio", "El usuario: " & Upper(txtUsuario.Text) & " ha accedido correctamente al sistema.")
+    cLogs.InsOkLog(gEstructuras.getIdUsuario(), gUtils.FechaConFormato(Now), gUtils.HoraConFormato(Time), "Inicio", "El usuario: " & Upper(txtUsuario.Text) & " ha accedido correctamente al sistema.")
     Inicio.Close()
   Else
     
-    cLogs.InsKoLog(gUtils.FechaConFormato(Now), gUtils.HoraConFormato(Time), "Inicio", "El usuario: " & Upper(txtUsuario.Text) & " con contraseña: " & txtPass.Text & " ha intentado acceder al sistema.")
+    cLogs.InsKoLog(0, gUtils.FechaConFormato(Now), gUtils.HoraConFormato(Time), "Inicio", "El usuario: " & Upper(txtUsuario.Text) & " con contraseña: " & txtPass.Text & " ha intentado acceder al sistema.")
     ' Mensaje al usuario
     Message.Warning("Acceso no permitido")
     

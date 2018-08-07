@@ -75,6 +75,12 @@ Public Sub setUserLogged(idUsuario As Integer, nombreUser As String, idRol As In
   
 End
 
+Public Function getIdUsuario() As Integer
+  
+  Return _idUsuario
+  
+End
+
 Public Function getUserLogged() As String
   
   Return "Usuario: " & _NomUsuario & " - Rol: " & _Rol
