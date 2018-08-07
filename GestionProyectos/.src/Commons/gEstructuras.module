@@ -4,6 +4,15 @@ Private _idProyecto As Integer
 Private _idRequerimiento As Integer
 Private _idTarea As Integer
 Private _idCliente As Integer
+' Log de último Status en el sistema ::::::::::::::
+Private _idUsuario As Integer = 0
+Private _NomUsuario As String = Null
+Private _idRol As Integer = 0
+Private _Rol As String = Null
+Private _LastSession As String = Null
+Private _LastAction As String = Null
+
+'::::::::::::::::::::::::::::::::::::::::::::::::::
 
 Public Function getIdProyecto() As Integer
   
@@ -50,5 +59,33 @@ End
 Public Sub setIdCliente(Value As Integer)
   
   _idCliente = Value
+  
+End
+
+' Detalles de usuario logado::::::::::::::::::::::::::::::::::::::::::::::::
+
+Public Sub setUserLogged(idUsuario As Integer, nombreUser As String, idRol As Integer, Rol As String, lastSession As String, lastAction As String)
+  
+  _idUsuario = idUsuario
+  _NomUsuario = nombreUser
+  _idRol = idRol
+  _Rol = Rol
+  _LastAction = lastAction
+  _LastSession = lastSession
+  
+End
+
+Public Function getUserLogged() As String
+  
+  Return "Usuario: " & _NomUsuario & " - Rol: " & _Rol
+  
+End
+
+Public Function getDetailsUserLogged() As String
+  
+  Dim resultado As String
+  
+  resultado = "- " & _LastSession & "\r\n" & "- " & _LastAction
+  Return resultado
   
 End

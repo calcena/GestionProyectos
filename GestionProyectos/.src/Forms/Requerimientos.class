@@ -213,3 +213,10 @@ Public Sub btnAdd_Click()
   Endif
   
 End
+
+Public Sub btnSalir2_Click()
+  
+  Me.Close()
+  MenuPrincipal.Show()
+  
+End

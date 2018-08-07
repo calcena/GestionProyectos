@@ -1,36 +1,95 @@
 # Gambas Form File 3.0
 
 { Form Form
-  MoveScaled(0,0,126,64)
+  MoveScaled(0,0,135,64)
   { btnAdd Button
-    MoveScaled(81,39,20,7)
+    MoveScaled(2,55,20,7)
+    Enabled = False
     Text = ("Añadir")
     Picture = Picture["images/add_20.png"]
   }
   { btnBorrar Button
-    MoveScaled(81,47,20,7)
+    MoveScaled(23,55,20,7)
+    Enabled = False
     Text = ("Borrar")
     Picture = Picture["images/borrar_20.png"]
   }
   { btnLimpiar Button
-    MoveScaled(81,55,20,7)
+    MoveScaled(86,55,20,7)
+    Enabled = False
     Text = ("Limpiar")
     Picture = Picture["images/limpiar_20.png"]
   }
   { btnActivar Button
-    MoveScaled(104,39,20,7)
+    MoveScaled(44,55,20,7)
     Enabled = False
     Text = ("Activar")
     Picture = Picture["images/activar.png"]
   }
   { btnDuplicar Button
-    MoveScaled(104,47,20,7)
+    MoveScaled(65,55,20,7)
+    Enabled = False
     Text = ("Duplicar")
     Picture = Picture["images/duplicar_20.png"]
   }
   { btnSalir2 Button
-    MoveScaled(104,55,20,7)
+    MoveScaled(114,55,20,7)
     Text = ("Salir")
     Picture = Picture["images/salir.png"]
+  }
+  { txtCodigo TextBox
+    MoveScaled(73,8,24,4)
+  }
+  { lblCodigoCliente Label
+    MoveScaled(73,4,24,4)
+    Text = ("Código cliente")
+  }
+  { lblPass Label
+    MoveScaled(100,4,24,4)
+    Text = ("Contraseña")
+  }
+  { txtPass MaskBox
+    MoveScaled(100,8,24,4)
+    Mask = "password"
+  }
+  { txtNombre TextBox
+    MoveScaled(73,17,24,4)
+  }
+  { lblNombre Label
+    MoveScaled(73,13,24,4)
+    Text = ("Nombre")
+  }
+  { cmbRol ComboBox
+    MoveScaled(73,45,26,4)
+  }
+  { lblRol Label
+    MoveScaled(73,41,24,4)
+    Text = ("Rol")
+  }
+  { txtApellido1 TextBox
+    MoveScaled(73,26,52,4)
+  }
+  { lblapellido1 Label
+    MoveScaled(73,22,24,4)
+    Text = ("Apellido paterno")
+  }
+  { txtApellido2 TextBox
+    MoveScaled(73,35,52,4)
+  }
+  { lblApellido2 Label
+    MoveScaled(73,31,24,4)
+    Text = ("Apellido paterno")
+  }
+  { GridView1 GridView
+    MoveScaled(0,8,71,45)
+    Mode = Select.Single
+    Grid = False
+  }
+  { txtFiltroClientes TextBox
+    MoveScaled(0,3,29,4)
+  }
+  { lblProyectos2 Label
+    MoveScaled(1,0,24,4)
+    Text = ("Buscador")
   }
 }

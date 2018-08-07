@@ -1,58 +1,105 @@
 # Gambas Form File 3.0
 
 { Form Form
-  MoveScaled(0,0,162,57)
+  MoveScaled(0,0,167,66)
   { lsvProyectos ListView
-    MoveScaled(2,9,29,45)
+    MoveScaled(1,9,29,45)
   }
   { GridView1 GridView
-    MoveScaled(32,9,83,45)
+    MoveScaled(31,9,79,45)
     Mode = Select.Single
     Grid = False
   }
   { txtFiltroProyectos TextBox
-    MoveScaled(2,4,29,4)
+    MoveScaled(1,4,29,4)
   }
   { lblProyectos Label
-    MoveScaled(3,1,24,4)
+    MoveScaled(2,1,24,4)
     Text = ("Buscador")
   }
   { txtFiltroClientes TextBox
-    MoveScaled(32,4,29,4)
+    MoveScaled(31,4,29,4)
   }
   { lblProyectos2 Label
-    MoveScaled(33,1,24,4)
+    MoveScaled(32,1,24,4)
     Text = ("Buscador")
   }
   { btnAdd Button
-    MoveScaled(116,31,20,7)
+    MoveScaled(3,57,20,7)
+    Enabled = False
     Text = ("Añadir")
     Picture = Picture["images/add_20.png"]
   }
   { btnBorrar Button
-    MoveScaled(116,39,20,7)
+    MoveScaled(24,57,20,7)
+    Enabled = False
     Text = ("Borrar")
     Picture = Picture["images/borrar_20.png"]
   }
   { btnLimpiar Button
-    MoveScaled(116,47,20,7)
+    MoveScaled(87,57,20,7)
+    Enabled = False
     Text = ("Limpiar")
     Picture = Picture["images/limpiar_20.png"]
   }
   { btnActivar Button
-    MoveScaled(140,31,20,7)
+    MoveScaled(45,57,20,7)
     Enabled = False
     Text = ("Activar")
     Picture = Picture["images/activar.png"]
   }
   { btnDuplicar Button
-    MoveScaled(140,39,20,7)
+    MoveScaled(66,57,20,7)
+    Enabled = False
     Text = ("Duplicar")
     Picture = Picture["images/duplicar_20.png"]
   }
   { btnSalir2 Button
-    MoveScaled(140,47,20,7)
+    MoveScaled(145,57,20,7)
     Text = ("Salir")
     Picture = Picture["images/salir.png"]
+  }
+  { txtCodigo TextBox
+    MoveScaled(113,12,24,4)
+  }
+  { lblCodigoCliente Label
+    MoveScaled(113,8,24,4)
+    Text = ("Código cliente")
+  }
+  { lblPass Label
+    MoveScaled(140,8,24,4)
+    Text = ("Contraseña")
+  }
+  { txtPass MaskBox
+    MoveScaled(140,12,24,4)
+    Mask = "password"
+  }
+  { txtNombre TextBox
+    MoveScaled(113,21,24,4)
+  }
+  { lblNombre Label
+    MoveScaled(113,17,24,4)
+    Text = ("Nombre")
+  }
+  { cmbRol ComboBox
+    MoveScaled(113,49,26,4)
+  }
+  { lblRol Label
+    MoveScaled(113,45,24,4)
+    Text = ("Rol")
+  }
+  { txtApellido1 TextBox
+    MoveScaled(113,30,52,4)
+  }
+  { lblapellido1 Label
+    MoveScaled(113,26,24,4)
+    Text = ("Apellido paterno")
+  }
+  { txtApellido2 TextBox
+    MoveScaled(113,39,52,4)
+  }
+  { lblApellido2 Label
+    MoveScaled(113,35,24,4)
+    Text = ("Apellido paterno")
   }
 }

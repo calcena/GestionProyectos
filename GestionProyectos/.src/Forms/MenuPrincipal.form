@@ -1,50 +1,81 @@
 # Gambas Form File 3.0
 
 { Form Form
-  MoveScaled(0,0,133,40)
+  MoveScaled(0,0,115,62)
+  { Panel4 Panel
+    MoveScaled(2,8,36,43)
+    Foreground = Color.Black
+    Border = Border.Plain
+  }
+  { Panel1 Panel
+    MoveScaled(39,8,36,43)
+    Foreground = Color.Black
+    Border = Border.Plain
+  }
+  { Panel2 Panel
+    MoveScaled(76,8,36,43)
+    Foreground = Color.Black
+    Border = Border.Plain
+  }
   { lblStatus Label
-    MoveScaled(2,2,130,4)
+    MoveScaled(7,2,105,4)
   }
   { btnUsuarios Button
-    MoveScaled(0,9,32,7)
-    Text = ("Usuarios")
+    MoveScaled(4,13,32,7)
+    Text = ("Usuarios                     ")
+    Picture = Picture["images/users_42.png"]
   }
   { btnVacaciones Button
-    MoveScaled(0,18,32,7)
+    MoveScaled(4,22,32,7)
     Text = ("Vacaciones y Festivos")
     Picture = Picture["images/calendar.png"]
   }
   { btnLogs Button
-    MoveScaled(0,26,32,7)
-    Text = ("Logs")
+    MoveScaled(78,22,32,7)
+    Text = ("  Logs                     ")
+    Picture = Picture["images/logs_42.png"]
   }
   { btnProyectos Button
-    MoveScaled(99,9,32,7)
-    Text = ("Proyectos")
+    MoveScaled(41,22,32,7)
+    Text = ("Proyectos                  ")
+    Picture = Picture["images/proyectos_42.png"]
   }
   { btnHorarios Button
-    MoveScaled(33,18,32,7)
-    Text = ("Horarios")
+    MoveScaled(4,31,32,7)
+    Text = ("Horarios                       ")
+    Picture = Picture["images/horarios_42.png"]
   }
   { btnInforrmes Button
-    MoveScaled(66,18,32,7)
-    Text = ("Informes")
+    MoveScaled(78,13,32,7)
+    Text = ("Informes             ")
+    Picture = Picture["images/informes_42.png"]
   }
   { btnInforrmes2 Button
-    MoveScaled(99,18,32,7)
-    Text = ("Sistema")
+    MoveScaled(78,31,32,7)
+    Text = ("Configuración")
+    Picture = Picture["images/configuracion_42.png"]
   }
   { btnTareas Button
-    MoveScaled(66,9,32,7)
-    Text = ("Tareas")
+    MoveScaled(41,31,32,7)
+    Text = ("Tareas                  ")
+    Picture = Picture["images/tareas_42.png"]
   }
   { btnClientes Button
-    MoveScaled(33,9,32,7)
-    Text = ("Clientes")
+    MoveScaled(41,13,32,7)
+    Text = ("Clientes                 ")
+    Picture = Picture["images/clientes_42.png"]
   }
   { btnSalir Button
-    MoveScaled(115,35,16,4)
+    MoveScaled(78,53,32,7)
     Text = ("Salir")
-    Picture = Picture["images/salir.png"]
+    Picture = Picture["images/salir_42.png"]
+  }
+  { PictureBox1 PictureBox
+    MoveScaled(2,2,4,5)
+  }
+  { btnRequerimientos Button
+    MoveScaled(41,40,32,7)
+    Text = ("Requerimientos")
+    Picture = Picture["images/requermientos_42.png"]
   }
 }

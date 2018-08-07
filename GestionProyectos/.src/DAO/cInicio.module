@@ -5,10 +5,23 @@ Private conn As Connection
 Public Function Acceso(sUsuario As String, sPass As String) As Result
   
   Dim rstResultado As Result
+  Dim sQuery As String 
   
   conn = gConexion.ConectarDB()
   
-  rstResultado = conn.Exec("SELECT ID_ROL FROM USUARIOS WHERE COD_USUARIO ='" & Upper(sUsuario) & "' AND PASSWORD='" & sPass & "'")
+  sQuery = "SELECT " 
+  sQuery &= "U.*, "
+  sQuery &= "R.NOMBRE R_NOMBRE, "
+  sQuery &= "P.* "
+  sQuery &= "FROM USUARIOS U "
+  sQuery &= "INNER JOIN ROLES R "
+  sQuery &= "ON U.ID_ROL = R.ID_ROL "
+  sQuery &= "INNER JOIN PERMISOS P "
+  sQuery &= "ON R.ID_PERMISO = P.ID_PERMISO "
+  sQuery &= "WHERE U.COD_USUARIO = '" & sUsuario & "' "
+  sQuery &= "AND U.PASSWORD = '" & sPass & "'"
+  
+  rstResultado = conn.Exec(sQuery)
   
   Return rstResultado
   

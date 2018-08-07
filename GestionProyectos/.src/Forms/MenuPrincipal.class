@@ -20,3 +20,69 @@ Public Sub btnUsuarios_Click()
   Usuarios.Show()
   
 End
+
+Public Sub btnClientes_Click()
+  
+  Me.Hide()
+  Clientes.Show()
+  
+End
+
+Public Sub btnTareas_Click()
+  
+  Me.Hide()
+  Tareas.Show()
+  
+End
+
+Public Sub btnProyectos_Click()
+  
+  Me.Hide()
+  Proyectos.Show()
+  
+End
+
+Public Sub btnVacaciones_Click()
+  
+  Me.Hide()
+  Vacaciones.Show()
+  
+End
+
+Public Sub btnInforrmes_Click()
+  
+  Me.Hide()
+  Informes.Show()
+  
+End
+
+Public Sub btnInforrmes2_Click()
+  
+  Me.Hide()
+  Sistema.Show()
+  
+End
+
+Public Sub btnLogs_Click()
+  
+  Me.Hide()
+  Logs.Show()
+  
+End
+
+Public Sub Form_Open()
+  'llamamos a la clase que contiene los datos del usuario logado
+  
+  lblStatus.Foreground = Color.Blue
+  
+  lblStatus.Text = gEstructuras.getUserLogged()
+  lblStatus.Tooltip = gEstructuras.getDetailsUserLogged()
+  
+End
+
+Public Sub btnRequerimientos_Click()
+  
+  Me.hide()
+  Requerimientos.Show()
+  
+End

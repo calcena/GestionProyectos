@@ -12,7 +12,7 @@
     MoveScaled(24,19,24,4)
   }
   { btnAcceder Button
-    MoveScaled(24,26,24,5)
+    MoveScaled(24,26,24,7)
     AutoResize = True
     Text = ("Aceptar")
     Picture = Picture["images/aceptar.png"]
