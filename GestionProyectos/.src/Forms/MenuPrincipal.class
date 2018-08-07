@@ -71,12 +71,15 @@ Public Sub btnLogs_Click()
 End
 
 Public Sub Form_Open()
-  'llamamos a la clase que contiene los datos del usuario logado
-  
+  'llamamos a la clase que contiene los datos del usuario logado  
+
   lblStatus.Foreground = Color.Blue
   
   lblStatus.Text = gEstructuras.getUserLogged()
-  lblStatus.Tooltip = gEstructuras.getDetailsUserLogged()
+  
+  picStatus.Picture = gConst.picInfo
+  ' añadimos Tooltip con detalles de ultima sesión en icono
+  picStatus.Tooltip = gEstructuras.getDetailsUserLogged()
   
 End
 

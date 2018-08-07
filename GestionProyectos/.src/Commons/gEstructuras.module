@@ -85,7 +85,12 @@ Public Function getDetailsUserLogged() As String
   
   Dim resultado As String
   
-  resultado = "- " & _LastSession & "\r\n" & "- " & _LastAction
+  If Len(_LastSession) = 0 Then 
+    resultado = Null
+  Else
+    resultado = "- " & _LastSession & "\r\n" & "- " & _LastAction     
+  Endif
+  
   Return resultado
   
 End

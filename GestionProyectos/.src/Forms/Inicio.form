@@ -1,20 +1,29 @@
 # Gambas Form File 3.0
 
 { Form Form
-  MoveScaled(0,0,54,35)
+  MoveScaled(0,0,66,35)
   { txtUsuario TextBox
-    MoveScaled(24,10,24,4)
+    MoveScaled(41,9,24,4)
   }
-  { PictureBox1 PictureBox
-    MoveScaled(1,4,20,19)
+  { picLogo PictureBox
+    MoveScaled(1,4,36,24)
+    Expand = True
+    Alignment = Align.Justify
   }
   { txtPass MaskBox
-    MoveScaled(24,19,24,4)
+    MoveScaled(41,18,24,4)
   }
   { btnAcceder Button
-    MoveScaled(24,26,24,7)
-    AutoResize = True
+    MoveScaled(41,25,24,7)
     Text = ("Aceptar")
     Picture = Picture["images/aceptar.png"]
+  }
+  { lblUsuario Label
+    MoveScaled(41,5,24,4)
+    Text = ("Usuario")
+  }
+  { lblPass Label
+    MoveScaled(41,14,24,4)
+    Text = ("Contraseña")
   }
 }

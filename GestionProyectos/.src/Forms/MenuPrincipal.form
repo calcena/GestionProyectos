@@ -18,7 +18,7 @@
     Border = Border.Plain
   }
   { lblStatus Label
-    MoveScaled(7,2,105,4)
+    MoveScaled(8,2,104,4)
   }
   { btnUsuarios Button
     MoveScaled(4,13,32,7)
@@ -70,8 +70,8 @@
     Text = ("Salir")
     Picture = Picture["images/salir_42.png"]
   }
-  { PictureBox1 PictureBox
-    MoveScaled(2,2,4,5)
+  { picStatus PictureBox
+    MoveScaled(2,2,5,5)
   }
   { btnRequerimientos Button
     MoveScaled(41,40,32,7)

@@ -5,14 +5,14 @@ Private bResultado As Boolean
 Private iContador As String
 Private rstResultado As Result
 
-Public Function InsCriticLog(sFecha As String, sHora As String, sPantalla As String, sMensaje As String) As Boolean
+Public Function InsCriticLog(iUsuario As Integer, sFecha As String, sHora As String, sPantalla As String, sMensaje As String) As Boolean
   ' Declaramos la variable de salida como FALSE :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
   
   bResultado = False
   
   conn = gConexion.ConectarDB()
   
-  conn.Exec("INSERT INTO LOGS (FECHA,HORA,PANTALLA,MENSAJE,ESTADO) VALUES ('" & sFecha & "','" & sHora & "','" & sPantalla & "','" & sMensaje & "','4')")
+  conn.Exec("INSERT INTO LOGS (ID_USUARIO,FECHA,HORA,PANTALLA,MENSAJE,ESTADO) VALUES (" & idUsuario & ",'" & sFecha & "','" & sHora & "','" & sPantalla & "','" & sMensaje & "','4')")
   ' Filas afectadas por nuestro insert
   rstResultado = conn.Exec("SELECT row_count() AS AFFECTED_ROWS")
   ' Evaluamos el resultado de la insercion
@@ -24,14 +24,14 @@ Public Function InsCriticLog(sFecha As String, sHora As String, sPantalla As Str
   
 End
 
-Public Function InsWarnLog(sFecha As String, sHora As String, sPantalla As String, sMensaje As String) As Boolean
+Public Function InsWarnLog(iUsuario As Integer, sFecha As String, sHora As String, sPantalla As String, sMensaje As String) As Boolean
   ' Declaramos la variable de salida como FALSE :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
   
   bResultado = False
   
   conn = gConexion.ConectarDB()
   
-  conn.Exec("INSERT INTO LOGS (FECHA,HORA,PANTALLA,MENSAJE,ESTADO) VALUES ('" & sFecha & "','" & sHora & "','" & sPantalla & "','" & sMensaje & "','3')")
+  conn.Exec("INSERT INTO LOGS (ID_USUARIO,FECHA,HORA,PANTALLA,MENSAJE,ESTADO) VALUES (" & idUsuario & ",'" & sFecha & "','" & sHora & "','" & sPantalla & "','" & sMensaje & "','3')")
   ' Filas afectadas por nuestro insert
   rstResultado = conn.Exec("SELECT row_count() AS AFFECTED_ROWS")
   ' Evaluamos el resultado de la insercion
@@ -43,14 +43,14 @@ Public Function InsWarnLog(sFecha As String, sHora As String, sPantalla As Strin
   
 End
 
-Public Function InsKoLog(sFecha As String, sHora As String, sPantalla As String, sMensaje As String) As Boolean
+Public Function InsKoLog(iUsuario As Integer, sFecha As String, sHora As String, sPantalla As String, sMensaje As String) As Boolean
   ' Declaramos la variable de salida como FALSE :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
   
   bResultado = False
   
   conn = gConexion.ConectarDB()
   
-  conn.Exec("INSERT INTO LOGS (FECHA,HORA,PANTALLA,MENSAJE,ESTADO) VALUES ('" & sFecha & "','" & sHora & "','" & sPantalla & "','" & sMensaje & "','2')")
+  conn.Exec("INSERT INTO LOGS (ID_USUARIO,FECHA,HORA,PANTALLA,MENSAJE,ESTADO) VALUES (" & idUsuario & ",'" & sFecha & "','" & sHora & "','" & sPantalla & "','" & sMensaje & "','2')")
   ' Filas afectadas por nuestro insert
   rstResultado = conn.Exec("SELECT row_count() AS AFFECTED_ROWS")
   ' Evaluamos el resultado de la insercion
@@ -62,14 +62,14 @@ Public Function InsKoLog(sFecha As String, sHora As String, sPantalla As String,
   
 End
 
-Public Function InsOkLog(sFecha As String, sHora As String, sPantalla As String, sMensaje As String) As Boolean
+Public Function InsOkLog(iUsuario As Integer, sFecha As String, sHora As String, sPantalla As String, sMensaje As String) As Boolean
   ' Declaramos la variable de salida como FALSE :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
   
   bResultado = False
   
   conn = gConexion.ConectarDB()
   
-  conn.Exec("INSERT INTO LOGS (FECHA,HORA,PANTALLA,MENSAJE,ESTADO) VALUES ('" & sFecha & "','" & sHora & "','" & sPantalla & "','" & sMensaje & "','1')")
+  conn.Exec("INSERT INTO LOGS (ID_USUARIO,FECHA,HORA,PANTALLA,MENSAJE,ESTADO) VALUES (" & idUsuario & ",'" & sFecha & "','" & sHora & "','" & sPantalla & "','" & sMensaje & "','1')")
   ' Filas afectadas por nuestro insert
   rstResultado = conn.Exec("SELECT row_count() AS AFFECTED_ROWS")
   ' Evaluamos el resultado de la insercion
