@@ -1,0 +1,18 @@
+' Gambas module file
+
+Private conn As Connection
+Private bResultado As Boolean
+Private iContador As String
+Private rstResultado As Result
+
+Public Function GetAllRoles() As Result
+  
+  Dim rstResultado As Result
+  
+  conn = gConexion.ConectarDB()
+  
+  rstResultado = conn.Exec("SELECT ID_ROL, NOMBRE FROM ROLES WHERE ES_BAJA ='-' AND FECHA_BAJA IS NULL")
+  
+  Return rstResultado 
+  
+End
