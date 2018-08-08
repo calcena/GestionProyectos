@@ -32,11 +32,14 @@ Public Sub txtHorasLunes_Change()
   
 End
 
-Public Function Recalcular() As String
+Public Function Recalcular() As Float
   
-  Dim resultado As String
+  Dim HorasLunes As Float = CFloat(txtHorasLunes.Text)
+  Dim HorasMartes As Float = txtHorasMartes.Text
   
-  resultado = txtHorasLunes.Text + txtHorasMartes.Text
+  Dim resultado As Float
+  
+  resultado = HorasLunes + HorasMartes 
   Return CStr(resultado)
   
 End
