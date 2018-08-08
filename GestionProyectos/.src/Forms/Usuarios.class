@@ -1,5 +1,7 @@
 ' Gambas class file
 
+Private rstResultado As Result
+
 Public Sub btnSalir2_Click()
   
   Me.Close()
@@ -10,5 +12,23 @@ End
 Public Sub Form_Open()
   
   picDuplicado.Picture = gConst.picDuplicado
+  ComboRoles()
+
+End
+
+Public Sub ComboRoles()
+  
+  cmbRol.Clear()
+  
+  rstResultado = cRoles.GetAllRoles()
+  
+  rstResultado.MoveFirst
+  
+  Do While rstResultado.Available
+    
+    cmbRol.Add(rstResultado!NOMBRE, rstResultado!ID_ROL)
+    
+    rstResultado.MoveNext  
+  Loop
   
 End

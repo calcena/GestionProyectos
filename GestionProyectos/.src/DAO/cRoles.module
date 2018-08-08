@@ -7,11 +7,20 @@ Private rstResultado As Result
 
 Public Function GetAllRoles() As Result
   
+  Dim sSql As String = Null
   Dim rstResultado As Result
+  
+  sSql = "SELECT " 
+  sSql &= "ID_ROL,"  
+  sSql &= "NOMBRE " 
+  sSql &= "FROM ROLES "
+  sSql &= "WHERE ID_ROL Not In (1) "
+  sSql &= "AND ES_BAJA ='-' "
+  sSql &= "ORDER BY NOMBRE ASC "
   
   conn = gConexion.ConectarDB()
   
-  rstResultado = conn.Exec("SELECT ID_ROL, NOMBRE FROM ROLES WHERE ES_BAJA ='-' AND FECHA_BAJA IS NULL")
+  rstResultado = conn.Exec(sSql)
   
   Return rstResultado 
   

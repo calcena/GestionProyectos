@@ -32,11 +32,11 @@
     Border = Border.Plain
   }
   { cmbAnyo ComboBox
-    MoveScaled(98,11,15,4)
+    MoveScaled(102,10,15,4)
   }
   { lblAnyo Label
-    MoveScaled(99,6,14,4)
-    Text = ("Año")
+    MoveScaled(102,5,14,4)
+    Text = ("Año completo")
   }
   { txtHorasLunes TextBox
     MoveScaled(4,29,9,4)

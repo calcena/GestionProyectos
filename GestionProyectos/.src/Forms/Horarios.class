@@ -10,6 +10,8 @@ Public Sub Form_Open()
   txtHorasSabado.Text = "0"
   txtHorasDomingo.Text = "0"
   
+  ComboMeses()
+  
   txtHorasTotal.Text = CInt(txtHorasLunes.Text) + CInt(txtHorasMartes.Text) + CInt(txtHorasMiercoles.Text) + CInt(txtHorasJueves.Text) + CInt(txtHorasViernes.Text) + CInt(txtHorasSabado.Text) + CInt(txtHorasDomingo.Text)
   
 End
@@ -34,12 +36,38 @@ End
 
 Public Function Recalcular() As Float
   
-  Dim HorasLunes As Float = CFloat(txtHorasLunes.Text)
-  Dim HorasMartes As Float = txtHorasMartes.Text
+  Dim HorasLunes As Float 
+  Dim HorasMartes As Float
   
   Dim resultado As Float
   
   resultado = HorasLunes + HorasMartes 
   Return CStr(resultado)
+  
+End
+
+Public Sub ComboMeses()
+  
+  cmbMes.Clear()
+  
+  cmbMes.Add("-- mes --", 0)
+  cmbMes.Add("Enero", 1)
+  cmbMes.Add("Febrero", 2)
+  cmbMes.Add("Marzo", 3)
+  cmbMes.Add("Abril", 4)
+  cmbMes.Add("Mayo", 5)
+  cmbMes.Add("Junio", 6)
+  cmbMes.Add("Julio", 7)
+  cmbMes.Add("Agosto", 8)
+  cmbMes.Add("Septiembre", 9)
+  cmbMes.Add("Octubre", 10)
+  cmbMes.Add("Noviembre", 11)
+  cmbMes.Add("Diciembre", 12)
+  
+End
+
+Public Sub ComboAnyo()
+  
+  cmbAnyo.Clear
   
 End

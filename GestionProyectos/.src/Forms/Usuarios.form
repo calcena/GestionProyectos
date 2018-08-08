@@ -38,62 +38,62 @@
     Picture = Picture["images/salir.png"]
   }
   { txtCodigo TextBox
-    MoveScaled(73,8,24,4)
+    MoveScaled(73,11,24,4)
   }
-  { lblCodigoCliente Label
-    MoveScaled(73,4,24,4)
-    Text = ("Código cliente")
+  { lblCodigoUsuario Label
+    MoveScaled(73,7,24,4)
+    Text = ("Código usuario")
   }
   { lblPass Label
-    MoveScaled(100,4,24,4)
+    MoveScaled(100,7,24,4)
     Text = ("Contraseña")
   }
-  { txtPass MaskBox
-    MoveScaled(100,8,24,4)
-    Mask = "password"
-  }
   { txtNombre TextBox
-    MoveScaled(73,17,24,4)
+    MoveScaled(73,20,24,4)
   }
   { lblNombre Label
-    MoveScaled(73,13,24,4)
+    MoveScaled(73,16,24,4)
     Text = ("Nombre")
   }
   { cmbRol ComboBox
-    MoveScaled(73,45,26,4)
+    MoveScaled(73,48,22,4)
+    ReadOnly = True
   }
   { lblRol Label
-    MoveScaled(73,41,24,4)
+    MoveScaled(73,44,24,4)
     Text = ("Rol")
   }
   { txtApellido1 TextBox
-    MoveScaled(73,26,52,4)
+    MoveScaled(73,29,52,4)
   }
   { lblapellido1 Label
-    MoveScaled(73,22,24,4)
+    MoveScaled(73,25,24,4)
     Text = ("Apellido paterno")
   }
   { txtApellido2 TextBox
-    MoveScaled(73,35,52,4)
+    MoveScaled(73,38,52,4)
   }
   { lblApellido2 Label
-    MoveScaled(73,31,24,4)
-    Text = ("Apellido paterno")
+    MoveScaled(73,34,24,4)
+    Text = ("Apellido materno")
   }
-  { GridView1 GridView
-    MoveScaled(0,8,71,45)
+  { grvUsuarios GridView
+    MoveScaled(1,8,71,45)
     Mode = Select.Single
     Grid = False
   }
-  { txtFiltroClientes TextBox
-    MoveScaled(0,3,29,4)
+  { txtFiltroUsuarios TextBox
+    MoveScaled(1,3,29,4)
   }
   { lblProyectos2 Label
-    MoveScaled(1,0,24,4)
+    MoveScaled(2,0,24,4)
     Text = ("Buscador")
   }
   { picDuplicado PictureBox
-    MoveScaled(30,2,41,5)
+    MoveScaled(31,2,41,5)
     Alignment = Align.Center
+  }
+  { txtPass TextBox
+    MoveScaled(100,11,24,4)
   }
 }
