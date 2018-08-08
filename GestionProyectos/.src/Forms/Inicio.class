@@ -10,8 +10,7 @@ Public Sub btnAcceder_Click()
   If rstAcceso.Count = 1 Then
     Do While rstAcceso.Available
       ' recogemos los permisos del usuario logado
-      gEstructuras.setUserLogged(rstAcceso!ID_USUARIO, rstAcceso!COD_USUARIO, rstAcceso!ID_ROL, rstAcceso!R_NOMBRE, Null, Null)
-      'TODO: Obtenemos los datos de última sesion
+      gEstructuras.setUserLogged(rstAcceso!ID_USUARIO, rstAcceso!COD_USUARIO, rstAcceso!ID_ROL, rstAcceso!R_NOMBRE)
       
       rstAcceso.MoveNext
     Loop

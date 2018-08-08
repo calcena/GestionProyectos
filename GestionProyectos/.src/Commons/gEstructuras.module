@@ -4,15 +4,13 @@ Private _idProyecto As Integer
 Private _idRequerimiento As Integer
 Private _idTarea As Integer
 Private _idCliente As Integer
-' Log de último Status en el sistema ::::::::::::::
+' Log de último Status en el sistema :::::::::::::::
 Private _idUsuario As Integer = 0
 Private _NomUsuario As String = Null
 Private _idRol As Integer = 0
 Private _Rol As String = Null
 Private _LastSession As String = Null
-Private _LastAction As String = Null
-
-'::::::::::::::::::::::::::::::::::::::::::::::::::
+Private _iconLastSession As String = Null
 
 Public Function getIdProyecto() As Integer
   
@@ -64,14 +62,23 @@ End
 
 ' Detalles de usuario logado::::::::::::::::::::::::::::::::::::::::::::::::
 
-Public Sub setUserLogged(idUsuario As Integer, nombreUser As String, idRol As Integer, Rol As String, lastSession As String, lastAction As String)
+Public Sub setUserLogged(idUsuario As Integer, nombreUser As String, idRol As Integer, Rol As String)
   
+  Dim lastSession As New String[]
+  
+  lastSession = cLogs.getLastSession(idUsuario) 
   _idUsuario = idUsuario
   _NomUsuario = nombreUser
   _idRol = idRol
   _Rol = Rol
-  _LastAction = lastAction
-  _LastSession = lastSession
+  _iconLastSession = lastSession[0]
+  _LastSession = lastSession[1]
+  
+End
+
+Public Function getIconSession() As String
+  
+  Return _iconLastSession
   
 End
 
@@ -87,16 +94,8 @@ Public Function getUserLogged() As String
   
 End
 
-Public Function getDetailsUserLogged() As String
+Public Function getLastSession() As String
   
-  Dim resultado As String
-  
-  If Len(_LastSession) = 0 Then 
-    resultado = Null
-  Else
-    resultado = "- " & _LastSession & "\r\n" & "- " & _LastAction     
-  Endif
-  
-  Return resultado
+  Return _LastSession
   
 End

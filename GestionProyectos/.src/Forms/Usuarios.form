@@ -92,4 +92,8 @@
     MoveScaled(1,0,24,4)
     Text = ("Buscador")
   }
+  { picDuplicado PictureBox
+    MoveScaled(30,2,41,5)
+    Alignment = Align.Center
+  }
 }

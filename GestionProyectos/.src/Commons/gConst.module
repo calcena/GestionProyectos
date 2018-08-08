@@ -5,6 +5,7 @@ Public picBaja As Picture = Picture.Load("images/baja.png")
 Public picCerrado As Picture = Picture.Load("images/cerrado.png")
 Public picWarn As Picture = Picture.Load("images/warning.png")
 Public picCalendar As Picture = Picture.Load("images/calendar_20.png")
+Public picDuplicado As Picture = Picture.Load("images/duplicado.png")
 
 ' Iconos para info, Warning, Critical:::::::::::::::::::::::::::::::::::::::
 Public picInfo As Picture = Picture.Load("images/info_32.png")

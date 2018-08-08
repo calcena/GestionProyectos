@@ -100,6 +100,10 @@
   }
   { lblApellido2 Label
     MoveScaled(113,35,24,4)
-    Text = ("Apellido paterno")
+    Text = ("Apellido materno")
+  }
+  { picDuplicado PictureBox
+    MoveScaled(62,4,41,5)
+    Alignment = Align.Center
   }
 }

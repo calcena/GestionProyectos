@@ -87,4 +87,8 @@
     MoveScaled(134,34,17,4)
     Text = ("Horas Imputadas")
   }
+  { picDuplicado PictureBox
+    MoveScaled(60,5,37,5)
+    Alignment = Align.Center
+  }
 }

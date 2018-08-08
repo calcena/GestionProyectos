@@ -90,6 +90,31 @@ Public Function LogsFilter(ByRef gdvLogs As GridView, sFecha As String, sMensaje
   
 End
 
+Public Function getLastSession(iIdUsuario As Integer) As String[]
+  
+  Dim sQuery As String = Null
+  Dim resultado As New String[]
+  
+  sQuery = "SELECT ESTADO,FECHA,HORA,PANTALLA,MENSAJE "
+  sQuery &= "FROM LOGS "
+  sQuery &= "WHERE ID_USUARIO=" & iIdUsuario & " "
+  sQuery &= "ORDER BY ID_LOG DESC "
+  sQuery &= "LIMIT 1"
+  conn = gConexion.ConectarDB()
+  rstResultado = conn.Exec(sQuery)
+  
+  rstResultado.MoveFirst
+  
+  Do While rstResultado.Available
+    resultado.Add(rstResultado!ESTADO)
+    resultado.Add("Última sesión: " & rstResultado!FECHA & " " & rstResultado!HORA & "\r\n- " & rstResultado!PANTALLA & "\r\n- " & rstResultado!MENSAJE)
+    rstResultado.MoveNext
+  Loop
+  
+  Return resultado
+  
+End
+
 Public Function GetLogs(ByRef objGridView As GridView, rstResultado As Result) As GridView
   
   Dim objResultado As GridView

@@ -10,9 +10,6 @@
     Expand = True
     Alignment = Align.Justify
   }
-  { txtPass MaskBox
-    MoveScaled(41,18,24,4)
-  }
   { btnAcceder Button
     MoveScaled(41,25,24,7)
     Text = ("Aceptar")
@@ -25,5 +22,9 @@
   { lblPass Label
     MoveScaled(41,14,24,4)
     Text = ("Contraseña")
+  }
+  { txtPass TextBox
+    MoveScaled(41,18,24,4)
+    Password = True
   }
 }

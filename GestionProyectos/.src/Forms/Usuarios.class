@@ -1,2 +1,14 @@
 ' Gambas class file
 
+Public Sub btnSalir2_Click()
+  
+  Me.Close()
+  MenuPrincipal.Show()
+  
+End
+
+Public Sub Form_Open()
+  
+  picDuplicado.Picture = gConst.picDuplicado
+  
+End

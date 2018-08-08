@@ -76,12 +76,19 @@ Public Sub Form_Open()
   lblStatus.Foreground = Color.Blue
   
   lblStatus.Text = gEstructuras.getUserLogged()
-  
-  picStatus.Picture = gConst.picInfo
-  picStatus.Picture = gConst.picWarning
+  Select gEstructuras.getIconSession()
+    Case "1"
+      picStatus.Picture = gConst.picInfo
+    Case "2"
+      picStatus.Picture = gConst.picWarning
+    Case "3"
+      picStatus.Picture = gConst.picWarning
+    Case "4"
+      picStatus.Picture = gConst.picCritical
+  End Select
   
   ' añadimos Tooltip con detalles de ultima sesión en icono
-  picStatus.Tooltip = gEstructuras.getDetailsUserLogged()
+  picStatus.Tooltip = gEstructuras.getLastSession()
   
 End
 
