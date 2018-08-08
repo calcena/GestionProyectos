@@ -2,6 +2,16 @@
 
 Public Sub Form_Open()
   
+  txtHorasLunes.Text = "0"
+  txtHorasMartes.Text = "0"
+  txtHorasMiercoles.Text = "0"
+  txtHorasJueves.Text = "0"
+  txtHorasViernes.Text = "0"
+  txtHorasSabado.Text = "0"
+  txtHorasDomingo.Text = "0"
+  
+  txtHorasTotal.Text = CInt(txtHorasLunes.Text) + CInt(txtHorasMartes.Text) + CInt(txtHorasMiercoles.Text) + CInt(txtHorasJueves.Text) + CInt(txtHorasViernes.Text) + CInt(txtHorasSabado.Text) + CInt(txtHorasDomingo.Text)
+  
 End
 
 Public Sub tplMeses_MouseDown()
@@ -13,5 +23,20 @@ Public Sub dcDate_Click()
 End
 
 Public Sub btnAplicar_Click()
+  
+End
+
+Public Sub txtHorasLunes_Change()
+  
+  txtHorasTotal.Text = Recalcular()
+  
+End
+
+Public Function Recalcular() As String
+  
+  Dim resultado As String
+  
+  resultado = txtHorasLunes.Text + txtHorasMartes.Text
+  Return CStr(resultado)
   
 End

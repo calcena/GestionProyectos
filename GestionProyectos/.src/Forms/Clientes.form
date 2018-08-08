@@ -60,46 +60,31 @@
     Picture = Picture["images/salir.png"]
   }
   { txtCodigo TextBox
-    MoveScaled(113,12,24,4)
+    MoveScaled(113,5,24,4)
   }
   { lblCodigoCliente Label
-    MoveScaled(113,8,24,4)
+    MoveScaled(113,1,24,4)
     Text = ("Código cliente")
   }
-  { lblPass Label
-    MoveScaled(140,8,24,4)
-    Text = ("Contraseña")
-  }
-  { txtPass MaskBox
-    MoveScaled(140,12,24,4)
-    Mask = "password"
-  }
   { txtNombre TextBox
-    MoveScaled(113,21,24,4)
+    MoveScaled(113,14,24,4)
   }
   { lblNombre Label
-    MoveScaled(113,17,24,4)
+    MoveScaled(113,10,24,4)
     Text = ("Nombre")
   }
-  { cmbRol ComboBox
-    MoveScaled(113,49,26,4)
-  }
-  { lblRol Label
-    MoveScaled(113,45,24,4)
-    Text = ("Rol")
-  }
   { txtApellido1 TextBox
-    MoveScaled(113,30,52,4)
+    MoveScaled(113,23,52,4)
   }
   { lblapellido1 Label
-    MoveScaled(113,26,24,4)
-    Text = ("Apellido paterno")
+    MoveScaled(113,19,24,4)
+    Text = ("Dirección")
   }
   { txtApellido2 TextBox
-    MoveScaled(113,39,52,4)
+    MoveScaled(113,32,52,4)
   }
   { lblApellido2 Label
-    MoveScaled(113,35,24,4)
+    MoveScaled(113,28,24,4)
     Text = ("Apellido materno")
   }
   { picDuplicado PictureBox

@@ -1,147 +1,166 @@
 # Gambas Form File 3.0
 
 { Form Form
-  MoveScaled(0,0,117,71)
+  MoveScaled(0,0,132,53)
   { Panel1 Panel
-    MoveScaled(41,4,27,64)
+    MoveScaled(2,22,85,17)
     Foreground = Color.Black
     Border = Border.Plain
   }
   { Panel4 Panel
-    MoveScaled(2,4,36,27)
+    MoveScaled(2,4,48,13)
     Foreground = Color.Black
     Border = Border.Plain
     { DateBox1 DateBox
-      MoveScaled(6,8,24,4)
+      MoveScaled(2,6,18,4)
     }
     { DateBox2 DateBox
-      MoveScaled(6,16,24,4)
+      MoveScaled(26,6,18,4)
     }
   }
   { Panel3 Panel
-    MoveScaled(2,36,36,13)
+    MoveScaled(51,4,41,13)
     Foreground = Color.Black
     Border = Border.Plain
     { cmbMesAnyo ComboBox
-      MoveScaled(20,6,14,4)
+      MoveScaled(22,6,14,4)
     }
   }
   { Panel2 Panel
-    MoveScaled(2,55,36,13)
+    MoveScaled(93,4,31,13)
     Foreground = Color.Black
     Border = Border.Plain
   }
   { cmbAnyo ComboBox
-    MoveScaled(12,62,15,4)
+    MoveScaled(98,11,15,4)
   }
   { lblAnyo Label
-    MoveScaled(13,57,14,4)
+    MoveScaled(99,6,14,4)
     Text = ("Año")
   }
   { txtHorasLunes TextBox
-    MoveScaled(55,7,9,4)
+    MoveScaled(4,29,9,4)
   }
   { lblLunes Label
-    MoveScaled(44,7,9,4)
+    MoveScaled(5,25,9,4)
     Text = ("Lunes")
   }
   { txtHorasMartes TextBox
-    MoveScaled(55,15,9,4)
+    MoveScaled(16,29,9,4)
   }
   { lblMartes Label
-    MoveScaled(44,15,9,4)
+    MoveScaled(16,25,9,4)
     Text = ("Martes")
   }
   { txtHorasMiercoles TextBox
-    MoveScaled(55,24,9,4)
+    MoveScaled(27,29,9,4)
   }
   { lblMiercoles Label
-    MoveScaled(44,24,9,4)
+    MoveScaled(27,25,9,4)
     Text = ("Miércoles")
   }
   { txtHorasJueves TextBox
-    MoveScaled(55,34,9,4)
+    MoveScaled(39,29,9,4)
   }
   { lblJueves Label
-    MoveScaled(44,34,9,4)
+    MoveScaled(40,25,9,4)
     Text = ("Jueves")
   }
   { txtHorasViernes TextBox
-    MoveScaled(55,43,9,4)
+    MoveScaled(51,29,9,4)
   }
   { lblViernes Label
-    MoveScaled(44,43,9,4)
+    MoveScaled(51,25,9,4)
     Text = ("Viernes")
   }
   { txtHorasSabado TextBox
-    MoveScaled(55,52,9,4)
+    MoveScaled(62,29,9,4)
     Background = &HFF9F9F&
   }
   { lblSabado Label
-    MoveScaled(44,52,9,4)
+    MoveScaled(63,25,9,4)
     Text = ("Sábado")
   }
   { txtHorasDomingo TextBox
-    MoveScaled(55,61,9,4)
+    MoveScaled(74,29,9,4)
     Background = &HFF9F9F&
   }
   { lblDomingo Label
-    MoveScaled(44,61,9,4)
+    MoveScaled(74,25,9,4)
     Text = ("Domingo")
   }
   { lblMes Label
-    MoveScaled(4,37,14,4)
+    MoveScaled(55,5,14,4)
     Text = ("Mes")
   }
   { cmbMes ComboBox
-    MoveScaled(3,42,15,4)
+    MoveScaled(54,10,15,4)
   }
   { lblDias Label
-    MoveScaled(42,2,8,4)
+    MoveScaled(3,20,8,4)
     Background = Color.Background
     Text = ("Días")
   }
   { lblMes2 Label
-    MoveScaled(22,37,14,4)
+    MoveScaled(74,5,14,4)
     Text = ("Año")
   }
   { lblDesde Label
-    MoveScaled(8,8,14,4)
+    MoveScaled(4,5,14,4)
     Text = ("Desde")
   }
   { lblHasta Label
-    MoveScaled(9,17,14,4)
+    MoveScaled(29,5,14,4)
     Text = ("Hasta")
   }
   { btnAdd Button
-    MoveScaled(72,45,20,7)
+    MoveScaled(1,43,20,7)
+    Enabled = False
     Text = ("Añadir")
     Picture = Picture["images/add_20.png"]
   }
   { btnBorrar Button
-    MoveScaled(72,53,20,7)
+    MoveScaled(22,43,20,7)
+    Enabled = False
     Text = ("Borrar")
     Picture = Picture["images/borrar_20.png"]
   }
   { btnLimpiar Button
-    MoveScaled(72,61,20,7)
+    MoveScaled(85,43,20,7)
+    Enabled = False
     Text = ("Limpiar")
     Picture = Picture["images/limpiar_20.png"]
   }
   { btnActivar Button
-    MoveScaled(96,45,20,7)
+    MoveScaled(43,43,20,7)
     Enabled = False
     Text = ("Activar")
     Picture = Picture["images/activar.png"]
   }
   { btnDuplicar Button
-    MoveScaled(96,53,20,7)
+    MoveScaled(64,43,20,7)
+    Enabled = False
     Text = ("Duplicar")
     Picture = Picture["images/duplicar_20.png"]
   }
   { btnSalir2 Button
-    MoveScaled(96,61,20,7)
+    MoveScaled(111,43,20,7)
     Text = ("Salir")
     Picture = Picture["images/salir.png"]
+  }
+  { Panel5 Panel
+    MoveScaled(88,22,36,17)
+    Foreground = Color.Black
+    Border = Border.Plain
+  }
+  { lblTotal Label
+    MoveScaled(100,23,13,4)
+    Text = ("Total Semana")
+  }
+  { txtHorasTotal TextBox
+    MoveScaled(98,27,15,8)
+    Font = Font["30"]
+    Background = &HBFCFFF&
+    Alignment = Align.Center
   }
 }
