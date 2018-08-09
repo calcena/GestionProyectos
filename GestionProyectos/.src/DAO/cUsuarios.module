@@ -1,5 +1,7 @@
 ' Gambas module file
 
+' Gambas module file
+
 Private conn As Connection
 Private bResultado As Boolean
 Private iContador As String
@@ -32,8 +34,9 @@ Public Function GetUsers(sFiltro As String, sEstado As String) As Result
   
 End
 
-Public Sub GetGrid(ByRef objGridView As GridView, rstResultado As Result) 
+Public Function GetGrid(objGrid As GridView, rstResultado As Result) As GridView 
   
+  Dim objGridView As GridView = objGrid
   Dim i As Integer = 0
   
   objGridView.Columns.Count = rstResultado.Fields.Count 
@@ -83,6 +86,6 @@ Public Sub GetGrid(ByRef objGridView As GridView, rstResultado As Result)
     rstResultado.MoveNext
   Loop
   
-  ' Return objResultado
+  Return objGridView
   
 End
