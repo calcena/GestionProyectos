@@ -1,84 +1,84 @@
 # Gambas Form File 3.0
 
 { Form Form
-  MoveScaled(0,0,135,64)
+  MoveScaled(0,0,154,69)
   { btnAdd Button
-    MoveScaled(2,55,20,7)
+    MoveScaled(2,61,20,7)
     Enabled = False
     Text = ("Añadir")
     Picture = Picture["images/add_20.png"]
   }
   { btnBorrar Button
-    MoveScaled(23,55,20,7)
+    MoveScaled(23,61,20,7)
     Enabled = False
     Text = ("Borrar")
     Picture = Picture["images/borrar_20.png"]
   }
   { btnLimpiar Button
-    MoveScaled(86,55,20,7)
+    MoveScaled(86,61,20,7)
     Enabled = False
     Text = ("Limpiar")
     Picture = Picture["images/limpiar_20.png"]
   }
   { btnActivar Button
-    MoveScaled(44,55,20,7)
+    MoveScaled(44,61,20,7)
     Enabled = False
     Text = ("Activar")
     Picture = Picture["images/activar.png"]
   }
   { btnDuplicar Button
-    MoveScaled(65,55,20,7)
+    MoveScaled(65,61,20,7)
     Enabled = False
     Text = ("Duplicar")
     Picture = Picture["images/duplicar_20.png"]
   }
   { btnSalir2 Button
-    MoveScaled(114,55,20,7)
+    MoveScaled(114,61,20,7)
     Text = ("Salir")
     Picture = Picture["images/salir.png"]
   }
   { txtCodigo TextBox
-    MoveScaled(73,11,24,4)
+    MoveScaled(99,11,24,4)
   }
   { lblCodigoUsuario Label
-    MoveScaled(73,7,24,4)
+    MoveScaled(99,7,24,4)
     Text = ("Código usuario")
   }
   { lblPass Label
-    MoveScaled(100,7,24,4)
+    MoveScaled(126,7,24,4)
     Text = ("Contraseña")
   }
   { txtNombre TextBox
-    MoveScaled(73,20,24,4)
+    MoveScaled(99,20,24,4)
   }
   { lblNombre Label
-    MoveScaled(73,16,24,4)
+    MoveScaled(99,16,24,4)
     Text = ("Nombre")
   }
   { cmbRol ComboBox
-    MoveScaled(73,48,22,4)
+    MoveScaled(99,48,22,4)
     ReadOnly = True
   }
   { lblRol Label
-    MoveScaled(73,44,24,4)
+    MoveScaled(99,44,24,4)
     Text = ("Rol")
   }
   { txtApellido1 TextBox
-    MoveScaled(73,29,52,4)
+    MoveScaled(99,29,52,4)
   }
   { lblapellido1 Label
-    MoveScaled(73,25,24,4)
+    MoveScaled(99,25,24,4)
     Text = ("Apellido paterno")
   }
   { txtApellido2 TextBox
-    MoveScaled(73,38,52,4)
+    MoveScaled(99,38,52,4)
   }
   { lblApellido2 Label
-    MoveScaled(73,34,24,4)
+    MoveScaled(99,34,24,4)
     Text = ("Apellido materno")
   }
   { grvUsuarios GridView
-    MoveScaled(1,8,71,45)
+    MoveScaled(1,8,96,45)
     Mode = Select.Single
     Grid = False
   }
@@ -94,6 +94,19 @@
     Alignment = Align.Center
   }
   { txtPass TextBox
-    MoveScaled(100,11,24,4)
+    MoveScaled(126,11,24,4)
+  }
+  { swbEstado SwitchButton
+    MoveScaled(41,55,8,4)
+  }
+  { lblTodos Label
+    MoveScaled(28,55,11,4)
+    Text = ("Todos")
+    Alignment = Align.Right
+  }
+  { lblActivos Label
+    MoveScaled(50,55,11,4)
+    Text = ("Activos")
+    Alignment = Align.Left
   }
 }

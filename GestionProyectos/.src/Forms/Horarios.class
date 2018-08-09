@@ -12,8 +12,6 @@ Public Sub Form_Open()
   
   ComboMeses()
   
-  txtHorasTotal.Text = CInt(txtHorasLunes.Text) + CInt(txtHorasMartes.Text) + CInt(txtHorasMiercoles.Text) + CInt(txtHorasJueves.Text) + CInt(txtHorasViernes.Text) + CInt(txtHorasSabado.Text) + CInt(txtHorasDomingo.Text)
-  
 End
 
 Public Sub tplMeses_MouseDown()
@@ -30,19 +28,66 @@ End
 
 Public Sub txtHorasLunes_Change()
   
-  txtHorasTotal.Text = Recalcular()
+  Recalcular()
   
 End
 
-Public Function Recalcular() As Float
+Public Sub txtHorasMartes_Change()
   
-  Dim HorasLunes As Float 
-  Dim HorasMartes As Float
+  Recalcular()
   
-  Dim resultado As Float
+End
+
+Public Sub txtHorasMiercoles_Change()
   
-  resultado = HorasLunes + HorasMartes 
-  Return CStr(resultado)
+  Recalcular()
+  
+End
+
+Public Sub txtHorasJueves_Change()
+  
+  Recalcular()
+  
+End
+
+Public Sub txtHorasViernes_Change()
+  
+  Recalcular()
+  
+End
+
+Public Sub txtHorasSabado_Change()
+  
+  Recalcular()
+  
+End
+
+Public Sub txtHorasDomingo_Change()
+  
+  Recalcular()
+  
+End
+
+Public Sub Recalcular()
+  
+  txtHorasTotal.Value = CFloat(txtHorasLunes.Value) + CFloat(txtHorasMartes.Value) + CFloat(txtHorasMiercoles.Value) + CFloat(txtHorasJueves.Value) + CFloat(txtHorasViernes.Value) + CFloat(txtHorasSabado.Value) + CFloat(txtHorasDomingo.Value)
+  
+  If txtHorasTotal.value < 40 Then 
+    txtHorasTotal.Background = Color.RGB(0, 167, 253)
+  Else If txtHorasTotal.value = 40
+    txtHorasTotal.Background = Color.RGB(71, 200, 119)   
+  Else
+    txtHorasTotal.Background = Color.Red
+    lblStatus.text = "Se exceden las horas semanales"
+    Return
+  End If
+  
+  ' Se evalua si Sabado o Domingo se incluye horario
+  If txtHorasSabado.value > 0 Or txtHorasDomingo.value > 0 Then
+    lblStatus.text = "Hay horarios indicados en días festivos!"
+  Else 
+    lblStatus.text = Null
+  End If
   
 End
 

@@ -1,6 +1,8 @@
 ' Gambas class file
 
 Private rstResultado As Result
+Private sFiltro As String = "%"
+Private sEstado As String = "%"
 
 Public Sub btnSalir2_Click()
   
@@ -10,10 +12,15 @@ Public Sub btnSalir2_Click()
 End
 
 Public Sub Form_Open()
+  ' Cargamos el ResultSet con los filtros
   
-  picDuplicado.Picture = gConst.picDuplicado
+  rstResultado = cUsuarios.GetUsers(sFiltro, sEstado)
+  ' obtenemos los registro para pintar el grid
+  cUsuarios.GetGrid(grvUsuarios, rstResultado)
+  
+  'picDuplicado.Picture = gConst.picDuplicado
   ComboRoles()
-
+  
 End
 
 Public Sub ComboRoles()
@@ -30,5 +37,18 @@ Public Sub ComboRoles()
     
     rstResultado.MoveNext  
   Loop
+  
+End
+
+Public Sub txtFiltroUsuarios_KeyRelease()
+  
+  sFiltro = txtFiltroUsuarios.Text
+  
+  rstResultado = cUsuarios.GetUsers(sFiltro, sEstado)
+  ' obtenemos los registro para pintar el grid
+  cUsuarios.GetGrid(grvUsuarios, rstResultado)
+  'TODO: No funciona la forma de filtrar el Grid pasado por referencia
+  grvUsuarios.Clear
+  rstResultado = Null
   
 End

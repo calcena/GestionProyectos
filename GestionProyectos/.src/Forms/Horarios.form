@@ -3,7 +3,7 @@
 { Form Form
   MoveScaled(0,0,132,53)
   { Panel1 Panel
-    MoveScaled(2,22,85,17)
+    MoveScaled(2,21,85,14)
     Foreground = Color.Black
     Border = Border.Plain
   }
@@ -38,55 +38,32 @@
     MoveScaled(102,5,14,4)
     Text = ("Año completo")
   }
-  { txtHorasLunes TextBox
-    MoveScaled(4,29,9,4)
-  }
   { lblLunes Label
-    MoveScaled(5,25,9,4)
+    MoveScaled(5,24,9,4)
     Text = ("Lunes")
   }
-  { txtHorasMartes TextBox
-    MoveScaled(16,29,9,4)
-  }
   { lblMartes Label
-    MoveScaled(16,25,9,4)
+    MoveScaled(16,24,9,4)
     Text = ("Martes")
   }
-  { txtHorasMiercoles TextBox
-    MoveScaled(27,29,9,4)
-  }
   { lblMiercoles Label
-    MoveScaled(27,25,9,4)
+    MoveScaled(27,24,9,4)
     Text = ("Miércoles")
   }
-  { txtHorasJueves TextBox
-    MoveScaled(39,29,9,4)
-  }
   { lblJueves Label
-    MoveScaled(40,25,9,4)
+    MoveScaled(40,24,9,4)
     Text = ("Jueves")
   }
-  { txtHorasViernes TextBox
-    MoveScaled(51,29,9,4)
-  }
   { lblViernes Label
-    MoveScaled(51,25,9,4)
+    MoveScaled(51,24,9,4)
     Text = ("Viernes")
   }
-  { txtHorasSabado TextBox
-    MoveScaled(62,29,9,4)
-    Background = &HFF9F9F&
-  }
   { lblSabado Label
-    MoveScaled(63,25,9,4)
+    MoveScaled(63,24,9,4)
     Text = ("Sábado")
   }
-  { txtHorasDomingo TextBox
-    MoveScaled(74,29,9,4)
-    Background = &HFF9F9F&
-  }
   { lblDomingo Label
-    MoveScaled(74,25,9,4)
+    MoveScaled(74,24,9,4)
     Text = ("Domingo")
   }
   { lblMes Label
@@ -97,7 +74,7 @@
     MoveScaled(54,10,15,4)
   }
   { lblDias Label
-    MoveScaled(3,20,8,4)
+    MoveScaled(3,19,8,4)
     Background = Color.Background
     Text = ("Días")
   }
@@ -149,18 +126,53 @@
     Picture = Picture["images/salir.png"]
   }
   { Panel5 Panel
-    MoveScaled(88,22,36,17)
+    MoveScaled(88,21,36,14)
     Foreground = Color.Black
     Border = Border.Plain
   }
   { lblTotal Label
-    MoveScaled(100,23,13,4)
+    MoveScaled(100,21,13,4)
     Text = ("Total Semana")
   }
-  { txtHorasTotal TextBox
-    MoveScaled(98,27,15,8)
-    Font = Font["30"]
-    Background = &HBFCFFF&
+  { txtHorasLunes ValueBox
+    MoveScaled(4,28,9,4)
     Alignment = Align.Center
+  }
+  { txtHorasMartes ValueBox
+    MoveScaled(16,28,9,4)
+    Alignment = Align.Center
+  }
+  { txtHorasMiercoles ValueBox
+    MoveScaled(27,28,9,4)
+    Alignment = Align.Center
+  }
+  { txtHorasJueves ValueBox
+    MoveScaled(39,28,9,4)
+    Alignment = Align.Center
+  }
+  { txtHorasViernes ValueBox
+    MoveScaled(51,28,9,4)
+    Alignment = Align.Center
+  }
+  { txtHorasSabado ValueBox
+    MoveScaled(62,28,9,4)
+    Background = &HFF9F9F&
+    Alignment = Align.Center
+  }
+  { txtHorasDomingo ValueBox
+    MoveScaled(74,28,9,4)
+    Background = &HFF9F9F&
+    Alignment = Align.Center
+  }
+  { txtHorasTotal ValueBox
+    MoveScaled(98,25,15,8)
+    Font = Font["30"]
+    Alignment = Align.Center
+  }
+  { lblStatus Label
+    MoveScaled(75,17,49,4)
+    Font = Font["Bold"]
+    Foreground = Color.Red
+    Alignment = Align.Right
   }
 }
