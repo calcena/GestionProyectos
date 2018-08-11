@@ -81,10 +81,25 @@ Public Function InsOkLog(iUsuario As Integer, sFecha As String, sHora As String,
   
 End
 
-Public Function LogsFilter(ByRef gdvLogs As GridView, sFecha As String, sMensaje As String, sEstado As String) As Result
+Public Function LogsFilter(sFecha As String, sMensaje As String, sEstado As String) As Result
+  
+  Dim sSql As String = Null
+  
+  sSql = "SELECT "
+  sSql &= "ID_LOG, "
+  sSql &= "FECHA, "
+  sSql &= "HORA, "
+  sSql &= "PANTALLA, "
+  sSql &= "MENSAJE, "
+  sSql &= "ESTADO "
+  sSql &= "FROM LOGS "
+  sSql &= "WHERE FECHA LIKE '%" & sFecha & "%' "
+  sSql &= "AND (PANTALLA Like '%" & sMensaje & "%' "
+  sSql &= "OR MENSAJE LIKE '%" & sMensaje & "%') "
+  sSql &= "AND ESTADO LIKE '%" & sEstado & "%'"
   
   conn = gConexion.ConectarDB()
-  rstResultado = conn.Exec("SELECT ID_LOG,FECHA,HORA,PANTALLA,MENSAJE,ESTADO FROM LOGS WHERE (FECHA LIKE '%" & sFecha & "%' OR PANTALLA LIKE '%" & sMensaje & "%' OR MENSAJE LIKE '%" & sMensaje & "%')")
+  rstResultado = conn.Exec(sSql)
   
   Return rstResultado
   
@@ -117,40 +132,58 @@ End
 
 Public Function GetLogs(ByRef objGridView As GridView, rstResultado As Result) As GridView
   
-  Dim objResultado As GridView
   Dim i As Integer = 0
+  Dim n As Integer = 0  
   
-  objGridView.Columns.Count = rstResultado.Fields.Count - 1
-  objGridView.Header = rstResultado.Fields.Count - 1
+  objGridView.Columns.Count = rstResultado.Fields.Count 
   
   objGridView.Columns[0].width = 0
   objGridView.Columns[0].Resizable = False
-  objGridView.Columns[1].width = 100
+  'objGridView.Columns[1].width = 100
   objGridView.Columns[1].Resizable = False
-  objGridView.Columns[2].width = 425
+  objGridView.Columns[1].Expand = True
+  'objGridView.Columns[2].width = 100
   objGridView.Columns[2].Resizable = False
-  objGridView.Columns[3].width = 25
+  objGridView.Columns[2].Expand = True
+  'objGridView.Columns[3].width = 100
   objGridView.Columns[3].Resizable = False
-  objGridView.Columns[4].width = 25
+  objGridView.Columns[3].Expand = True
+  'objGridView.Columns[4].width = 100
   objGridView.Columns[4].Resizable = False
-  objGridView.Columns[5].width = 25
+  objGridView.Columns[4].Expand = True
+  'objGridView.Columns[5].width = 100
+  objGridView.Columns[5].Expand = True
   objGridView.Columns[5].Resizable = False 
   ':::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+  
+  objGridView.Rows.Count = 0
   
   rstResultado.MoveFirst
   
   Do While rstResultado.Available
-    objGridView.Rows.Insert(i, 1)
+    objGridView.Rows.count = rstResultado.Count
+    
     objGridView[i, 0].Text = rstResultado!ID_LOG
     objGridView[i, 1].Text = rstResultado!FECHA
     objGridView[i, 2].Text = rstResultado!HORA
     objGridView[i, 3].Text = rstResultado!PANTALLA
     objGridView[i, 4].Text = rstResultado!MENSAJE
-    objGridView[i, 5].Text = rstResultado!ESTADO     
+    
+    Select rstResultado!ESTADO
+      Case "1"
+        objGridView[i, 5].Picture = gConst.picActivo 
+      Case "2"
+        objGridView[i, 5].Picture = gConst.picWarn 
+      Case "3"
+        objGridView[i, 5].Picture = gConst.picWarn 
+      Case "4"
+        objGridView[i, 5].Picture = gConst.picCritical
+    End Select
+    
     i += 1
     rstResultado.MoveNext
   Loop
   
-  Return objResultado
+  Return objGridView
   
 End

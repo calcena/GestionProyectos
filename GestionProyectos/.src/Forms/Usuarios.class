@@ -14,9 +14,7 @@ End
 Public Sub Form_Open()
   ' Cargamos el ResultSet con los filtros
   
-  rstResultado = cUsuarios.GetUsers(sFiltro, sEstado)
-  ' obtenemos los registro para pintar el grid  
-  grvUsuarios = cUsuarios.GetGrid(grvUsuarios, rstResultado)
+  CargarGrid()
   
   ComboRoles()
   
@@ -42,23 +40,25 @@ End
 Public Sub txtFiltroUsuarios_KeyRelease()
   
   sFiltro = txtFiltroUsuarios.Text
-  
-  rstResultado = cUsuarios.GetUsers(sFiltro, sEstado)
-  
-  grvUsuarios = cUsuarios.GetGrid(grvUsuarios, rstResultado)
+  CargarGrid()
   
 End
 
-Public Sub Recargar()
+Public Sub GetRows() 
   
-  Dim n As Integer = 0
+  Dim resultado As String 
   
-  For n = 0 To grvUsuarios.Columns.Count - 1
-    grvUsuarios.Columns[n].title = rstResultado.Fields[n].name 'Para el ejemplo ponemos como cabecera el nombre del campo 
-    grvUsuarios.Columns[n].Expand = True 'las columnas de ancho variable para que se ajusten al ancho disponible
-  Next
+  resultado = CStr(rstResultado.Count)
+  lblRegistros.Text = "Registros: " & resultado 
   
-  grvUsuarios.columns.count = rstResultado.fields.count  'Tantas filas y columnas como registros y campos
-  grvUsuarios.Rows.Count = rstResultado.Count
+End
+
+Public Sub CargarGrid()  
   
-End 
+  rstResultado = cUsuarios.GetUsers(sFiltro, sEstado)
+  ' obtenemos los registro para pintar el grid  
+  grvUsuarios = cUsuarios.GetGrid(grvUsuarios, rstResultado)
+  
+  GetRows()
+  
+End

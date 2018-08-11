@@ -1,7 +1,5 @@
 ' Gambas module file
 
-' Gambas module file
-
 Private conn As Connection
 Private bResultado As Boolean
 Private iContador As String
@@ -9,15 +7,15 @@ Private rstResultado As Result
 
 Public Function GetUsers(sFiltro As String, sEstado As String) As Result
   
-  Dim rstResultado As Result
+  Dim rstResultado As Result = Null
   Dim sSql As String = Null
   
   sSql = "SELECT "
   sSql &= "U.ID_USUARIO, "
   sSql &= "U.COD_USUARIO, "
   sSql &= "U.NOMBRE, "
-  sSql &= "U.APELLIDO1, "
-  sSql &= "U.APELLIDO2, "
+  sSql &= "U.APELLIDO1 , "
+  sSql &= "U.APELLIDO2 , "
   sSql &= "R.NOMBRE RNOMBRE, "
   sSql &= "U.ES_BAJA "
   sSql &= "FROM USUARIOS U "
@@ -34,40 +32,31 @@ Public Function GetUsers(sFiltro As String, sEstado As String) As Result
   
 End
 
-Public Function GetGrid(objGrid As GridView, rstResultado As Result) As GridView 
+Public Function GetGrid(ByRef objGridView As GridView, rstResultado As Result) As GridView 
   
-  Dim objGridView As GridView = objGrid
   Dim i As Integer = 0
+  Dim n As Integer = 0  
+  Dim j As Integer = 0
   
   objGridView.Columns.Count = rstResultado.Fields.Count 
-  objGridView.Header = rstResultado.Fields.Count
   
-  objGridView.Columns[0].width = 0
-  objGridView.Columns[0].Resizable = False
-  objGridView.Columns[1].Title = "COD_USUARIO"
-  objGridView.Columns[1].width = 100
-  objGridView.Columns[1].Resizable = False
-  objGridView.Columns[2].Title = "NOMBRE"
-  objGridView.Columns[2].width = 125
-  objGridView.Columns[2].Resizable = False
-  objGridView.Columns[3].Title = "APELLIDO1"
-  objGridView.Columns[3].width = 125
-  objGridView.Columns[3].Resizable = False
-  objGridView.Columns[4].Title = "APELLIDO2"
-  objGridView.Columns[4].width = 125
-  objGridView.Columns[4].Resizable = False
-  objGridView.Columns[5].Title = "ROL"
-  objGridView.Columns[5].width = 125
-  objGridView.Columns[5].Resizable = False
-  objGridView.Columns[6].width = 25
-  objGridView.Columns[6].Resizable = False
+  For j = 0 To objGridView.Columns.Count - 1
+    If j = 0 Then 
+      objGridView.Columns[j].width = 0    
+    Else  
+      objGridView.Columns[j].Title = rstResultado.Fields[j].Name
+      objGridView.Columns[j].Expand = True
+      objGridView.Columns[j].Resizable = False
+    Endif    
+    
+  Next
+  '::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::   
+  objGridView.Rows.Count = 0
   
-  '::::::::::::::::::::::::::::::::::::::::::::::::::::
-  
-  rstResultado.MoveFirst
-  
+  rstResultado.MoveFirst  
   Do While rstResultado.Available
-    objGridView.Rows.Insert(i, 1)
+    objGridView.Rows.Count = rstResultado.Count
+    
     objGridView[i, 0].Text = rstResultado!ID_USUARIO
     objGridView[i, 1].Text = rstResultado!COD_USUARIO
     objGridView[i, 2].Text = rstResultado!NOMBRE
@@ -76,16 +65,14 @@ Public Function GetGrid(objGrid As GridView, rstResultado As Result) As GridView
     objGridView[i, 5].Text = rstResultado!RNOMBRE
     
     If rstResultado!ES_BAJA = "+" Then
-      objGridView[i, 6].Picture = gConst.picBaja     
-      
+      objGridView[i, 6].Picture = gConst.picBaja
     Else
       objGridView[i, 6].Picture = gConst.picActivo
     End If
     
-    i += 1
+    Inc i
     rstResultado.MoveNext
   Loop
-  
   Return objGridView
   
 End

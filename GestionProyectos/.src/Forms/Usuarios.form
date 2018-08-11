@@ -81,6 +81,8 @@
     MoveScaled(1,8,96,45)
     Mode = Select.Single
     Grid = False
+    Header = GridView.Horizontal
+    ScrollBar = Scroll.Vertical
   }
   { txtFiltroUsuarios TextBox
     MoveScaled(1,3,29,4)
@@ -108,5 +110,8 @@
     MoveScaled(50,55,11,4)
     Text = ("Activos")
     Alignment = Align.Left
+  }
+  { lblRegistros Label
+    MoveScaled(1,54,31,4)
   }
 }

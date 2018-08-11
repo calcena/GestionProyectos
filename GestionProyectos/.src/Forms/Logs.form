@@ -2,8 +2,11 @@
 
 { Form Form
   MoveScaled(0,0,108,71)
-  { GridView1 GridView
+  { grvLogs GridView
     MoveScaled(1,6,105,56)
+    Mode = Select.Single
+    Grid = False
+    Header = GridView.Horizontal
   }
   { txtFecha TextBox
     MoveScaled(1,1,16,4)
@@ -18,5 +21,8 @@
   }
   { cmbPrioridad ComboBox
     MoveScaled(90,1,16,4)
+  }
+  { lblRegistros Label
+    MoveScaled(1,63,48,4)
   }
 }

@@ -1,5 +1,10 @@
 ' Gambas class file
 
+Private rstResultado As Result = Null
+Private sFecha As String = "%"
+Private sDescripcion As String = "%"
+Private sPrioridad As String = "%"
+
 Public Sub btnLimpiar_Click()
   
   ' Borramos los filtros entrados
@@ -7,16 +12,83 @@ Public Sub btnLimpiar_Click()
   txtDescripcion.Text = Null
   cmbPrioridad.index = 0
   
+  sFecha = "%"
+  sDescripcion = "%"
+  sPrioridad = "%"
+  
+  rstResultado = cLogs.LogsFilter(sFecha, sDescripcion, sPrioridad)
+  
+  grvLogs = cLogs.GetLogs(grvLogs, rstResultado)
+  
+  GetRows()
+  
 End
 
 Public Sub Form_Open()
   
   Me.Title = "Logs"
-  cmbPrioridad.Clear
-  cmbPrioridad.Add("Todos", 0)
-  cmbPrioridad.Add("Ok", 1)
-  cmbPrioridad.Add("Ko", 2)
-  cmbPrioridad.Add("Warning", 3) 
-  cmbPrioridad.Add("Critical", 4)
+  ' cmbPrioridad.Clear
+  cmbPrioridad.tag = New Integer[]
+  cmbPrioridad.Add("Todos")
+  cmbPrioridad.tag.add(0)
+  cmbPrioridad.Add("Ok")
+  cmbPrioridad.tag.add(1)  
+  cmbPrioridad.Add("Ko")
+  cmbPrioridad.tag.add(2)
+  cmbPrioridad.Add("Warning") 
+  cmbPrioridad.tag.add(3)
+  cmbPrioridad.Add("Critical")
+  cmbPrioridad.tag.add(4)
+  ' Se llama al metodo de carga del grid
+  CargarGrid()
+  
+End
+
+Public Sub txtFecha_KeyRelease()
+  
+  sFecha = txtFecha.Text
+  
+  ' Se llama al metodo de carga del grid
+  CargarGrid()
+  
+End
+
+Public Sub txtDescripcion_KeyRelease()
+  
+  sDescripcion = txtDescripcion.Text
+  
+  ' Se llama al metodo de carga del grid
+  CargarGrid() 
+  
+End
+
+Public Sub cmbPrioridad_Change()
+  
+  sPrioridad = cmbPrioridad.Tag[cmbPrioridad.index]
+  ' Filtramos en caso de ser todos
+  If sPrioridad = "0" Then
+    sPrioridad = "%"
+  Endif
+  ' Se llama al metodo de carga del grid
+  CargarGrid()
+  
+End
+
+Public Sub GetRows() 
+  
+  Dim resultado As String 
+  
+  resultado = CStr(rstResultado.Count)
+  lblRegistros.Text = "Registros: " & resultado 
+  
+End
+
+Public Sub CargarGrid()
+  
+  rstResultado = cLogs.LogsFilter(sFecha, sDescripcion, sPrioridad)
+  
+  grvLogs = cLogs.GetLogs(grvLogs, rstResultado)
+  
+  GetRows()
   
 End

@@ -1,0 +1,70 @@
+' Gambas module file
+
+Private conn As Connection
+Private bResultado As Boolean
+Private iContador As String
+Private rstResultado As Result
+
+Public Function GetValues(sFiltro As String) As Result
+  
+  Dim sSql As String = Null
+  
+  sSql = "SELECT "
+  sSql &= "VALOR1, "
+  sSql &= "VALOR2, "
+  sSql &= "VALOR3, "
+  sSql &= "VALOR4 "
+  sSql &= "FROM TEST "
+  sSql &= "WHERE (VALOR1 LIKE '%" & sFiltro & "%' "
+  sSql &= "OR VALOR2 Like '%" & sFiltro & "%' "
+  sSql &= "OR VALOR3 LIKE '%" & sFiltro & "%' "
+  sSql &= "OR VALOR4 LIKE '%" & sFiltro & "%') "
+  sSql &= "LIMIT 80000 "  
+  
+  conn = gConexion.ConectarDB()
+  rstResultado = conn.Exec(sSql)
+  
+  Return rstResultado
+  
+End
+
+Public Function GetGrid(ByRef objGridView As GridView, rstResultado As Result) As GridView
+  
+  Dim i As Integer = 0
+  Dim n As Integer = 0  
+  
+  objGridView.Columns.Count = rstResultado.Fields.Count 
+  
+  objGridView.Columns[0].width = 0
+  objGridView.Columns[0].Resizable = False
+  'objGridView.Columns[1].width = 100
+  objGridView.Columns[1].Resizable = False
+  objGridView.Columns[1].Expand = True
+  'objGridView.Columns[2].width = 100
+  objGridView.Columns[2].Resizable = False
+  objGridView.Columns[2].Expand = True
+  'objGridView.Columns[3].width = 100
+  objGridView.Columns[3].Resizable = False
+  objGridView.Columns[3].Expand = True
+  
+  ':::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+  
+  objGridView.Rows.Count = 0
+  
+  rstResultado.MoveFirst
+  
+  Do While rstResultado.Available
+    objGridView.Rows.count = rstResultado.Count
+    
+    objGridView[i, 0].Text = rstResultado!VALOR1
+    objGridView[i, 1].Text = rstResultado!VALOR2
+    objGridView[i, 2].Text = rstResultado!VALOR3
+    objGridView[i, 3].Text = rstResultado!VALOR4
+    
+    i += 1
+    rstResultado.MoveNext
+  Loop
+  
+  Return objGridView
+  
+End
