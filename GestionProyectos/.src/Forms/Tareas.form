@@ -1,7 +1,7 @@
 # Gambas Form File 3.0
 
 { Form Form
-  MoveScaled(0,0,173,88)
+  MoveScaled(0,0,173,95)
   { txtFiltro TextBox
     MoveScaled(4,7,30,4)
   }
@@ -28,7 +28,11 @@
   }
   { txtCodTarea TextBox
     MoveScaled(120,15,24,4)
+    Font = Font["Bold"]
+    Background = &HA7C3DF&
+    Alignment = Align.Center
     ReadOnly = True
+    Border = False
   }
   { dbFechaFinalizacion DateBox
     MoveScaled(154,46,16,4)
@@ -58,34 +62,46 @@
     MoveScaled(4,48,30,36)
   }
   { btnAdd Button
-    MoveScaled(124,55,20,7)
+    MoveScaled(22,86,20,7)
     Text = ("Añadir")
     Picture = Picture["images/add_20.png"]
   }
   { btnBorrar Button
-    MoveScaled(124,63,20,7)
+    MoveScaled(43,86,20,7)
     Text = ("Borrar")
     Picture = Picture["images/borrar_20.png"]
   }
   { btnLimpiar Button
-    MoveScaled(124,71,20,7)
+    MoveScaled(108,86,20,7)
     Text = ("Limpiar")
     Picture = Picture["images/limpiar_20.png"]
   }
   { btnActivar Button
-    MoveScaled(147,55,20,7)
+    MoveScaled(65,86,20,7)
     Enabled = False
     Text = ("Activar")
     Picture = Picture["images/activar.png"]
   }
   { btnDuplicar Button
-    MoveScaled(147,63,20,7)
+    MoveScaled(87,86,20,7)
     Text = ("Duplicar")
     Picture = Picture["images/duplicar_20.png"]
   }
   { btnSalir2 Button
-    MoveScaled(147,71,20,7)
+    MoveScaled(151,85,20,7)
     Text = ("Salir")
     Picture = Picture["images/salir.png"]
+  }
+  { btnAceptar Button
+    MoveScaled(131,72,16,4)
+    Visible = False
+    Text = ("  Aceptar")
+    Picture = Picture["images/aceptar.png"]
+  }
+  { btnCancelar Button
+    MoveScaled(150,72,16,4)
+    Visible = False
+    Text = ("  Cancelar")
+    Picture = Picture["images/cancel_20.png"]
   }
 }

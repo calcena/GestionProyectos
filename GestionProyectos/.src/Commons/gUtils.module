@@ -1,6 +1,9 @@
 ' Gambas module file
 
 Private sResultado As String
+Private conn As Connection
+Private sSql As String = Null
+Private rstResultado As Result = Null
 
 Public Function FechaConFormato(dFecha As Date) As String
   
@@ -17,6 +20,152 @@ Public Function HoraConFormato(tTiempo As Date) As String
   Dim sHora As String = CStr(tTiempo)
   
   sResultado = Mid$(sHora, 1, 8)
+  
+  Return sResultado
+  
+End
+
+Public Function GetCodigo(sEntidad As String) As String
+  
+  Dim iNum As Integer 
+  Dim sRetorno As String
+  Dim anyo As String = "/" & Mid$(CStr(Year(Now)), 3, 4)
+  Dim ceros As Integer 
+  
+  conn = gConexion.ConectarDB()
+  
+  Select sEntidad
+    Case "CLI" ' Numeracion para CLIENTES
+      sSql = "SELECT NUM_CLI FROM CONFIGURACIONES" 
+      rstResultado = conn.Exec(sSql)
+      rstResultado.MoveFirst
+      Do While rstResultado.Available
+        iNum = rstResultado!NUM_CLI
+        rstResultado.MoveNext
+      Loop
+      ' contamos los ceros que tenemos que añadir
+      Select Len(CStr(iNum))
+        Case "4"
+          ' asignamos el numerador antes de aumentarlo
+          sResultado = "CLI-0" & iNum & anyo 
+        Case "3"
+          sResultado = "CLI-00" & iNum & anyo 
+        Case "2"
+          sResultado = "CLI-000" & iNum & anyo 
+        Case "1"
+          sResultado = "CLI-0000" & iNum & anyo 
+        Case "0"
+          sResultado = "CLI-" & iNum & anyo 
+      End Select
+      
+      Inc iNum
+      sSql = "UPDATE CONFIGURACIONES SET NUM_CLI=" & iNum & " WHERE ID_CONFIGURACION = 1"
+      conn.Exec(sSql)
+    Case "USU" ' Numeracion para USUARIOS
+      sSql = "SELECT NUM_USU FROM CONFIGURACIONES" 
+      rstResultado = conn.Exec(sSql)
+      rstResultado.MoveFirst
+      Do While rstResultado.Available
+        iNum = rstResultado!NUM_USU
+        rstResultado.MoveNext
+      Loop
+      ' contamos los ceros que tenemos que añadir
+      Select Len(CStr(iNum))
+        Case "4"
+          ' asignamos el numerador antes de aumentarlo
+          sResultado = "USU-0" & iNum & anyo 
+        Case "3"
+          sResultado = "USU-00" & iNum & anyo 
+        Case "2"
+          sResultado = "USU-000" & iNum & anyo 
+        Case "1"
+          sResultado = "USU-0000" & iNum & anyo 
+        Case "0"
+          sResultado = "USU-" & iNum & anyo 
+      End Select
+      
+      Inc iNum
+      sSql = "UPDATE CONFIGURACIONES SET NUM_USU=" & iNum & " WHERE ID_CONFIGURACION = 1"
+      conn.Exec(sSql)
+    Case "PRO" ' Numeracion para PROYECTOS
+      sSql = "SELECT NUM_PRO FROM CONFIGURACIONES" 
+      rstResultado = conn.Exec(sSql)
+      rstResultado.MoveFirst
+      Do While rstResultado.Available
+        iNum = rstResultado!NUM_PRO
+        rstResultado.MoveNext
+      Loop
+      ' contamos los ceros que tenemos que añadir
+      Select Len(CStr(iNum))
+        Case "4"
+          ' asignamos el numerador antes de aumentarlo
+          sResultado = "PRO-0" & iNum & anyo 
+        Case "3"
+          sResultado = "PRO-00" & iNum & anyo 
+        Case "2"
+          sResultado = "PRO-000" & iNum & anyo 
+        Case "1"
+          sResultado = "PRO-0000" & iNum & anyo 
+        Case "0"
+          sResultado = "CLI-" & iNum & anyo 
+      End Select
+      
+      Inc iNum
+      sSql = "UPDATE CONFIGURACIONES SET NUM_PRO=" & iNum & " WHERE ID_CONFIGURACION = 1"
+      conn.Exec(sSql)
+    Case "REQ" ' Numeracion para REQUERIMIENTOS
+      sSql = "SELECT NUM_REQ FROM CONFIGURACIONES" 
+      rstResultado = conn.Exec(sSql)
+      rstResultado.MoveFirst
+      Do While rstResultado.Available
+        iNum = rstResultado!NUM_REQ
+        rstResultado.MoveNext
+      Loop
+      ' contamos los ceros que tenemos que añadir
+      Select Len(CStr(iNum))
+        Case "4"
+          ' asignamos el numerador antes de aumentarlo
+          sResultado = "REQ-0" & iNum & anyo 
+        Case "3"
+          sResultado = "REQ-00" & iNum & anyo 
+        Case "2"
+          sResultado = "REQ-000" & iNum & anyo 
+        Case "1"
+          sResultado = "REQ-0000" & iNum & anyo 
+        Case "0"
+          sResultado = "REQ-" & iNum & anyo 
+      End Select
+      
+      Inc iNum
+      sSql = "UPDATE CONFIGURACIONES SET NUM_REQ=" & iNum & " WHERE ID_CONFIGURACION = 1"
+      conn.Exec(sSql)
+    Case "TAR" ' Numeracion para TAREAS
+      sSql = "SELECT NUM_TAR FROM CONFIGURACIONES" 
+      rstResultado = conn.Exec(sSql)
+      rstResultado.MoveFirst
+      Do While rstResultado.Available
+        iNum = rstResultado!NUM_TAR
+        rstResultado.MoveNext
+      Loop
+      ' contamos los ceros que tenemos que añadir
+      Select Len(CStr(iNum))
+        Case "4"
+          ' asignamos el numerador antes de aumentarlo
+          sResultado = "TAR-0" & iNum & anyo 
+        Case "3"
+          sResultado = "TAR-00" & iNum & anyo 
+        Case "2"
+          sResultado = "TAR-000" & iNum & anyo 
+        Case "1"
+          sResultado = "TAR-0000" & iNum & anyo 
+        Case "0"
+          sResultado = "TAR-" & iNum & anyo 
+      End Select
+      
+      Inc iNum
+      sSql = "UPDATE CONFIGURACIONES SET NUM_TAR=" & iNum & " WHERE ID_CONFIGURACION = 1"
+      conn.Exec(sSql)
+  End Select
   
   Return sResultado
   

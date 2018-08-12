@@ -4,7 +4,6 @@
   MoveScaled(0,0,154,69)
   { btnAdd Button
     MoveScaled(2,61,20,7)
-    Enabled = False
     Text = ("Añadir")
     Picture = Picture["images/add_20.png"]
   }
@@ -33,12 +32,17 @@
     Picture = Picture["images/duplicar_20.png"]
   }
   { btnSalir2 Button
-    MoveScaled(114,61,20,7)
+    MoveScaled(132,61,20,7)
     Text = ("Salir")
     Picture = Picture["images/salir.png"]
   }
   { txtCodigo TextBox
-    MoveScaled(99,11,24,4)
+    MoveScaled(99,11,20,4)
+    Font = Font["Bold"]
+    Background = &HA7C3DF&
+    Alignment = Align.Center
+    ReadOnly = True
+    Border = False
   }
   { lblCodigoUsuario Label
     MoveScaled(99,7,24,4)
@@ -113,5 +117,24 @@
   }
   { lblRegistros Label
     MoveScaled(1,54,31,4)
+  }
+  { btnAceptar Button
+    MoveScaled(100,55,16,4)
+    Visible = False
+    Text = ("  Aceptar")
+    Picture = Picture["images/aceptar.png"]
+  }
+  { btnCancelar Button
+    MoveScaled(119,55,16,4)
+    Visible = False
+    Text = ("  Cancelar")
+    Picture = Picture["images/cancel_20.png"]
+  }
+  { lblPass2 Label
+    MoveScaled(126,16,24,4)
+    Text = ("Repita Contraseña")
+  }
+  { txtPass2 TextBox
+    MoveScaled(126,20,24,4)
   }
 }

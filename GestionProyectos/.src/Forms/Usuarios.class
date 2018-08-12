@@ -62,3 +62,62 @@ Public Sub CargarGrid()
   GetRows()
   
 End
+
+Public Sub btnAdd_Click()
+  
+  ' se hacen visible los botones de Aceptar y Cancelar acción
+  btnAceptar.Visible = True
+  btnCancelar.visible = True
+  btnAdd.Enabled = False
+  txtCodigo.Text = gUtils.GetCodigo("USU")
+  
+End
+
+Public Sub btnAceptar_Click()
+  
+  If Len(Trim(txtNombre.text)) = 0 Or Len(Trim(txtApellido1.text)) = 0 Or Len(Trim(txtApellido2.text)) = 0 Or Len(Trim(txtPass.text)) = 0 Or Len(Trim(txtPass2.text)) = 0 Then 
+    'nombre
+    If Len(Trim(txtNombre.text)) = 0 Then 
+      txtNombre.Background = Color.Red
+    Else
+      txtNombre.Background = Color.white
+    End If 
+    'apellido1
+    If Len(Trim(txtApellido1.text)) = 0 Then 
+      txtApellido1.Background = Color.Red
+    Else
+      txtApellido1.Background = Color.white
+    End If
+    'apellido2
+    If Len(Trim(txtApellido2.text)) = 0 Then 
+      txtApellido2.Background = Color.Red
+    Else
+      txtApellido2.Background = Color.White
+    End If
+    'password
+    If Len(Trim(txtPass.text)) = 0 Then 
+      txtPass.Background = Color.Red
+    Else
+      txtPass.Background = Color.white
+    End If
+    'repetir password
+    If Len(Trim(txtPass2.text)) = 0 Then 
+      txtPass2.Background = Color.Red
+    Else
+      txtPass2.Background = Color.white      
+    End If
+    ' Aviso por pantalla al usuario
+    Message.Warning("Debe cumplimentar los datos marcados en rojo")
+  Else 
+    
+    btnLimpiar_Click()
+    btnAceptar.visible = False
+    btnCancelar.visible = False
+    
+  Endif
+  
+End
+
+Public Sub btnLimpiar_Click()
+  
+End

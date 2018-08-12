@@ -26,7 +26,6 @@
   }
   { btnAdd Button
     MoveScaled(3,57,20,7)
-    Enabled = False
     Text = ("Añadir")
     Picture = Picture["images/add_20.png"]
   }

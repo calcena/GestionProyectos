@@ -58,11 +58,10 @@ End
 
 Public Function GetGrid(ByRef objGridView As GridView, rstResultado As Result) As GridView
   
-  Dim objResultado As GridView
   Dim i As Integer = 0
   
-  objGridView.Columns.Count = rstResultado.Fields.Count - 1
-  objGridView.Header = rstResultado.Fields.Count - 1
+  objGridView.Columns.Count = rstResultado.Fields.Count
+  objGridView.Header = rstResultado.Fields.Count 
   
   objGridView.Columns[0].width = 0
   objGridView.Columns[0].Resizable = False
@@ -75,10 +74,13 @@ Public Function GetGrid(ByRef objGridView As GridView, rstResultado As Result) A
   
   '::::::::::::::::::::::::::::::::::::::::::::::::::::
   
+  objGridView.Rows.Count = 0
+  
+  objGridView.Rows.Count = rstResultado.Count
   rstResultado.MoveFirst
   
   Do While rstResultado.Available
-    objGridView.Rows.Insert(i, 1)
+    
     objGridView[i, 0].Text = rstResultado!ID_TAREA
     objGridView[i, 1].Text = rstResultado!COD_TAREA
     objGridView[i, 2].Text = rstResultado!DESCRIPCION
@@ -94,6 +96,6 @@ Public Function GetGrid(ByRef objGridView As GridView, rstResultado As Result) A
     rstResultado.MoveNext
   Loop
   
-  Return objResultado
+  Return objGridView
   
 End

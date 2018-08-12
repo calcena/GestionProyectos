@@ -137,23 +137,42 @@ Public Sub txtFiltro2_KeyRelease()
   sFiltroTask = txtFiltro2.Text
   
   rstResultado = cTareas.GetTaskByFilter(sFiltroTask)
-  'CargarGrid()
+  
   grvTareas = cTareas.GetGrid(grvTareas, rstResultado)
   
 End
 
 Public Sub btnAdd_Click()
   
+  btnAceptar.Visible = True
+  btnCancelar.visible = True
+  
+  btnAdd.Enabled = False
+  
+  txtCodTarea.Text = gUtils.GetCodigo("TAR")
+  
+End
+
+Public Sub lsvProyectos_Click()
+  '
+  
+  gEstructuras.setIdProyecto(lsvProyectos.Key)
+  
+End
+
+Public Sub lsvRequeremientos_Click()
+  '
+  
+  gEstructuras.setIdRequerimiento(lsvRequeremientos.key)
+  
+End
+
+Public Sub btnAceptar_Click()
+  
   ' Comprobación de valores entrados datos obligatorios
   
   If Len(Trim(txtCodTarea.Text)) = 0 Or Len(Trim(txtDescripcion.Text)) = 0 Or Len(Trim(txtHorasPrevistas.text)) = 0 Or Len(Trim(dbFechaFinalizacion.Text)) = 0 Then  
-    '   'Codigo de Tarea
-    If Len(Trim(txtCodTarea.Text)) = 0 Then 
-      txtCodTarea.Background = Color.Red
-    Else 
-      txtCodTarea.Background = Color.White
-    End If
-    '   ' Descripción 
+    ' Descripción 
     If Len(Trim(txtDescripcion.Text)) = 0 Then 
       txtDescripcion.Background = Color.Red
     Else 
@@ -180,19 +199,5 @@ Public Sub btnAdd_Click()
     txtHorasPrevistas.Background = Color.White
     dbFechaFinalizacion.Background = Color.White
   End If
-  
-End
-
-Public Sub lsvProyectos_Click()
-  '
-
-  gEstructuras.setIdProyecto(lsvProyectos.Key)
-  
-End
-
-Public Sub lsvRequeremientos_Click()
-  '
-
-  gEstructuras.setIdRequerimiento(lsvRequeremientos.key)
   
 End

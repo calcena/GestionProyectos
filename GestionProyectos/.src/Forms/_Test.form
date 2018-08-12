@@ -15,4 +15,7 @@
   { TextBox2 TextBox
     MoveScaled(55,52,24,4)
   }
+  { Button1 Button
+    MoveScaled(55,58,24,4)
+  }
 }
