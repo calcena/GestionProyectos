@@ -13,7 +13,6 @@
   }
   { btnAdd Button
     MoveScaled(3,67,20,7)
-    Enabled = False
     Text = ("Añadir")
     Picture = Picture["images/add_20.png"]
   }
@@ -37,14 +36,18 @@
   }
   { txtCodigo TextBox
     MoveScaled(99,14,22,4)
+    Font = Font["Bold"]
+    Background = &HA7C3DF&
+    Alignment = Align.Center
     ReadOnly = True
+    Border = False
   }
   { lblDescripcion Label
     MoveScaled(99,20,24,4)
     Text = ("Descripcion")
   }
   { btnAplicar3 Button
-    MoveScaled(117,52,27,7)
+    MoveScaled(130,45,26,7)
     Text = ("Seleccionar Archivo")
     Picture = Picture["images/sel_archivo_20.png"]
   }
@@ -95,5 +98,25 @@
   { picDuplicado PictureBox
     MoveScaled(62,4,41,5)
     Alignment = Align.Center
+  }
+  { lblVersion Label
+    MoveScaled(99,45,11,4)
+    Text = ("Versión")
+  }
+  { txtVersion TextBox
+    MoveScaled(109,45,13,4)
+    Alignment = Align.Right
+  }
+  { btnAceptar Button
+    MoveScaled(108,55,16,4)
+    Visible = False
+    Text = ("  Aceptar")
+    Picture = Picture["images/aceptar.png"]
+  }
+  { btnCancelar Button
+    MoveScaled(127,55,16,4)
+    Visible = False
+    Text = ("  Cancelar")
+    Picture = Picture["images/cancel_20.png"]
   }
 }

@@ -189,15 +189,28 @@ Public Sub lsvProyectos_Click()
 End
 
 Public Sub btnAdd_Click()
+  'Hacemos visible los botones de Aceptar y Cancelar
+  
+  btnAceptar.Visible = True
+  btnCancelar.Visible = True
+  btnAdd.Enabled = False
+  
+  txtCodigo.Text = gUtils.GetCodigo("REQ")
+  
+End
+
+Public Sub btnSalir2_Click()
+  
+  Me.Close()
+  MenuPrincipal.Show()
+  
+End
+
+Public Sub btnAceptar_Click()
+  
+  btnAdd.Enabled = True
   
   If Len(Trim(txtCodigo.Text)) = 0 Or Len(Trim(txaDescripcion.Text)) = 0 Then
-    
-    If Len(Trim(txtCodigo.Text)) = 0 Then 
-      txtCodigo.Background = Color.Red
-    Else 
-      txtCodigo.Background = Color.White
-    End If
-    
     If Len(Trim(txaDescripcion.Text)) = 0 Then 
       txaDescripcion.Background = Color.Red
     Else 
@@ -211,12 +224,5 @@ Public Sub btnAdd_Click()
     txaDescripcion.Background = Color.White
     
   Endif
-  
-End
-
-Public Sub btnSalir2_Click()
-  
-  Me.Close()
-  MenuPrincipal.Show()
   
 End

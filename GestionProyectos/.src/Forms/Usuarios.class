@@ -121,3 +121,18 @@ End
 Public Sub btnLimpiar_Click()
   
 End
+
+Public Sub swbEstado_Click()
+  ' Pulsamos el switch button
+
+  If swbEstado.value = "T" Then 
+    ' Activos
+    sFiltro = "-"
+    CargarGrid()
+  Else
+    'Todos
+    sFiltro = "%"
+    CargarGrid()
+  Endif
+  
+End

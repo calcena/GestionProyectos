@@ -11,6 +11,8 @@ Public Sub Form_Open()
   Dim n As Integer = 0
   
   Me.Title = "Tareas"
+  ' Reiniciamos las horas previstas a 0 
+  txtHorasPrevistas.Text = 0
   
   IniBuscadores()
   
@@ -93,44 +95,6 @@ Public Sub InicializarGrid()
   
 End
 
-' Public Sub CargarGrid()
-'   
-
-'   grvTareas.Columns.Count = rstResultado.Fields.Count - 1
-'   grvTareas.Header = rstResultado.Fields.Count - 1
-'   
-'   grvTareas.Columns[0].width = 0
-'   grvTareas.Columns[0].Resizable = False
-'   grvTareas.Columns[1].width = 100
-'   grvTareas.Columns[1].Resizable = False
-'   grvTareas.Columns[2].width = 425
-'   grvTareas.Columns[2].Resizable = False
-'   grvTareas.Columns[3].width = 25
-'   grvTareas.Columns[3].Resizable = False
-'   
-'   '::::::::::::::::::::::::::::::::::::::::::::::::::::
-'   
-'   rstResultado.MoveFirst
-'   
-'   Do While rstResultado.Available
-'     grvTareas.Rows.Insert(i, 1)
-'     grvTareas[i, 0].Text = rstResultado!ID_TAREA
-'     grvTareas[i, 1].Text = rstResultado!COD_TAREA
-'     grvTareas[i, 2].Text = rstResultado!DESCRIPCION
-'     If rstResultado!ES_BAJA = "+" Then
-'       grvTareas[i, 3].Picture = gConst.picBaja      
-'     Else If rstResultado!ES_CERRADO = "+"
-'       grvTareas[i, 3].Picture = gConst.picCerrado
-'     Else
-'       grvTareas[i, 3].Picture = gConst.picActivo
-'     End If
-'     
-'     i += 1
-'     rstResultado.MoveNext
-'   Loop
-'   
-' End
-
 'Funcion que para cargar el Grid con la parte escrita en el buscador 
 Public Sub txtFiltro2_KeyRelease()
   
@@ -170,7 +134,6 @@ End
 Public Sub btnAceptar_Click()
   
   ' Comprobación de valores entrados datos obligatorios
-  
   If Len(Trim(txtCodTarea.Text)) = 0 Or Len(Trim(txtDescripcion.Text)) = 0 Or Len(Trim(txtHorasPrevistas.text)) = 0 Or Len(Trim(dbFechaFinalizacion.Text)) = 0 Then  
     ' Descripción 
     If Len(Trim(txtDescripcion.Text)) = 0 Then 
@@ -178,26 +141,26 @@ Public Sub btnAceptar_Click()
     Else 
       txtDescripcion.Background = Color.White
     End If
-    '   ' Horas previstas
+    ' Horas previstas
     If Len(Trim(txtHorasPrevistas.Text)) = 0 Then 
       txtHorasPrevistas.Background = Color.Red
     Else 
       txtHorasPrevistas.Background = Color.White
     End If
-    '   ' Fecha finalización
+    ' Fecha finalización
     If Len(Trim(dbFechaFinalizacion.Text)) = 0 Then 
       dbFechaFinalizacion.Background = Color.Red
     Else 
       dbFechaFinalizacion.Background = Color.White
-      
     End If
     ' Aviso por pantalla al usuario
     Message.Warning("Debe cumplimentar los datos marcados en rojo")
   Else
-    txtCodTarea.Background = Color.White
-    txtDescripcion.Background = Color.White
-    txtHorasPrevistas.Background = Color.White
-    dbFechaFinalizacion.Background = Color.White
+    
   End If
+  
+End
+
+Public Sub btnLimpiar_Click()
   
 End
