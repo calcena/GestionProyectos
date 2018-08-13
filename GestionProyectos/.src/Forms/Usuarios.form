@@ -119,13 +119,13 @@
     MoveScaled(1,54,31,4)
   }
   { btnAceptar Button
-    MoveScaled(100,55,16,4)
+    MoveScaled(110,54,16,4)
     Visible = False
     Text = ("  Aceptar")
     Picture = Picture["images/aceptar.png"]
   }
   { btnCancelar Button
-    MoveScaled(119,55,16,4)
+    MoveScaled(129,54,16,4)
     Visible = False
     Text = ("  Cancelar")
     Picture = Picture["images/cancel_20.png"]

@@ -27,7 +27,7 @@ End
 Public Sub Form_Open()
   
   Me.Title = "Logs"
-  ' cmbPrioridad.Clear
+  cmbPrioridad.Clear
   cmbPrioridad.tag = New Integer[]
   cmbPrioridad.Add("Todos")
   cmbPrioridad.tag.add(0)

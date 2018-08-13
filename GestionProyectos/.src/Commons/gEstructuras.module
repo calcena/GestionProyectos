@@ -4,6 +4,7 @@ Private _idProyecto As Integer
 Private _idRequerimiento As Integer
 Private _idTarea As Integer
 Private _idCliente As Integer
+Private _idSeleccion As Integer = 0
 ' Log de último Status en el sistema :::::::::::::::
 Private _idUsuario As Integer = 0
 Private _NomUsuario As String = Null
@@ -57,6 +58,18 @@ End
 Public Sub setIdCliente(Value As Integer)
   
   _idCliente = Value
+  
+End
+
+Public Function getIdSeleccion() As Integer
+  
+  Return _idSeleccion
+  
+End
+
+Public Sub setIdSeleccion(Value As Integer)
+  
+  _idSeleccion = Value
   
 End
 

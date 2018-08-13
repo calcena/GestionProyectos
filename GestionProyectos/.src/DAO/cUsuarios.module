@@ -76,3 +76,68 @@ Public Function GetGrid(ByRef objGridView As GridView, rstResultado As Result) A
   Return objGridView
   
 End
+
+Public Function AddUsuario(codUsuario As String) As Boolean
+  
+  Dim sSql As String = Null
+  Dim resultado As Boolean = False
+  Dim dAhora As String = gUtils.FechaConFormato(Now) & " " & gUtils.HoraConFormato(Now)
+  
+  sSql = "INSERT INTO USUARIOS "
+  sSql &= "(COD_USUARIO,ID_ROL,ES_BAJA,FECHA_BAJA,FECHA_MODIF) "
+  sSql &= "VALUES "
+  sSql &= "('" & codUsuario & "',0,'+','" & dAhora & "','" & dAhora & "')"
+  Try conn.Exec(sSql)
+  
+  resultado = True
+  If Error Then
+    resultado = False 
+    
+  Endif
+  
+  Return resultado
+  
+End
+
+Public Function EditUsuario(codUsuario As String, psw As String, nombre As String, apellido1 As String, apellido2 As String, idRol As Integer) As Boolean
+  
+  Dim sSql As String = Null
+  Dim resultado As Boolean = False
+  Dim dAhora As String = gUtils.FechaConFormato(Now) & " " & gUtils.HoraConFormato(Now)
+  
+  sSql = "UPDATE USUARIOS "
+  sSql &= "SET "
+  sSql &= "PASSWORD='" & psw & "' ,"
+  sSql &= "NOMBRE='" & nombre & "' ,"
+  sSql &= "APELLIDO1='" & apellido1 & "',"
+  sSql &= "APELLIDO2='" & apellido2 & "',"
+  sSql &= "ID_ROL=" & idRol & ","
+  sSql &= "ES_BAJA='-' ,"
+  sSql &= "FECHA_BAJA= null ,"
+  sSql &= "FECHA_MODIF='" & dAhora & "' "
+  sSql &= "WHERE COD_USUARIO = '" & codUsuario & "'"
+  
+  Try conn.Exec(sSql)  
+  
+  resultado = True
+  
+  If Error Then 
+    resultado = False
+  Endif
+  
+  Return resultado
+  
+End
+
+Public Function GetSelectedUser(idUser As Integer) As Result
+  
+  Dim sSql As String = Null
+  
+  sSql = "SELECT * "
+  sSql &= "FROM USUARIOS "
+  sSql &= "WHERE ID_USUARIO =" & idUser 
+  
+  rstResultado = conn.Exec(sSql)
+  Return rstResultado
+  
+End

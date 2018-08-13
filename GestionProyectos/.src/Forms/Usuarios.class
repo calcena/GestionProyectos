@@ -28,10 +28,14 @@ Public Sub ComboRoles()
   
   rstResultado.MoveFirst
   
+  cmbRol.tag = New Integer[]
+  
+  cmbRol.Add("- Todos -")
+  cmbRol.tag.add(0)
   Do While rstResultado.Available
     
-    cmbRol.Add(rstResultado!NOMBRE, rstResultado!ID_ROL)
-    
+    cmbRol.Add(rstResultado!NOMBRE)
+    cmbRol.tag.add(rstResultado!ID_ROL)  
     rstResultado.MoveNext  
   Loop
   
@@ -70,6 +74,9 @@ Public Sub btnAdd_Click()
   btnCancelar.visible = True
   btnAdd.Enabled = False
   txtCodigo.Text = gUtils.GetCodigo("USU")
+  
+  ' Creamos un nuevo registro
+  cUsuarios.AddUsuario(txtCodigo.Text)
   
 End
 
@@ -110,6 +117,8 @@ Public Sub btnAceptar_Click()
     Message.Warning("Debe cumplimentar los datos marcados en rojo")
   Else 
     
+    cUsuarios.EditUsuario(txtCodigo.Text, txtPass.Text, txtNombre.Text, txtApellido1.Text, txtApellido2.Text, cmbRol.Tag[cmbRol.index])
+    
     btnLimpiar_Click()
     btnAceptar.visible = False
     btnCancelar.visible = False
@@ -120,11 +129,19 @@ End
 
 Public Sub btnLimpiar_Click()
   
+  txtCodigo.Text = Null
+  txtNombre.Text = Null
+  txtApellido1.Text = Null
+  txtApellido2.Text = Null
+  txtPass.Text = Null
+  txtPass2.text = Null
+  cmbRol.index = 0 
+  
 End
 
 Public Sub swbEstado_Click()
   ' Pulsamos el switch button
-
+  
   If swbEstado.value = "T" Then 
     ' Activos
     sFiltro = "-"
@@ -133,6 +150,47 @@ Public Sub swbEstado_Click()
     'Todos
     sFiltro = "%"
     CargarGrid()
+  Endif
+  
+End
+
+Public Sub txtNombre_LostFocus()
+  
+  ActivarLimpiar()
+  
+End
+
+Public Sub ActivarLimpiar()
+  ' 
+  
+  If Len(txtNombre.text) > 0 And Len(txtApellido1.text) > 0 And Len(txtapellido2.text) > 0 And Len(txtPass.text) > 0 And Len(txtpass2.text) > 0 Then
+    btnLimpiar.Enabled = True
+  Else
+    btnLimpiar.Enabled = False
+  Endif
+  
+End
+
+Public Sub grvUsuarios_Click()
+  ' Guardamos el ID seleccionado
+  
+  gEstructuras.setIdSeleccion(grvUsuarios[grvUsuarios.Row, 0].text)
+  ' Recogemos los datos del item seleccionado para modo edición
+  rstResultado = cUsuarios.GetSelectedUser(gEstructuras.getIdSeleccion())
+  
+  If rstResultado.Available Then
+    rstResultado.MoveFirst
+    
+    Do While rstResultado.Available
+      txtCodigo.Text = rstResultado!COD_USUARIO
+      txtNombre.Text = rstResultado!NOMBRE
+      txtPass.Text = rstResultado!PASSWORD
+      txtApellido1.text = rstResultado!APELLIDO1
+      txtApellido2.Text = rstResultado!APELLIDO2      
+      'cmbRol.Tag = rstResultado!ID_ROL
+      rstResultado.MoveNext
+    Loop
+    
   Endif
   
 End

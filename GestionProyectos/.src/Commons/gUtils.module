@@ -19,7 +19,7 @@ Public Function HoraConFormato(tTiempo As Date) As String
   
   Dim sHora As String = CStr(tTiempo)
   
-  sResultado = Mid$(sHora, 1, 8)
+  sResultado = Mid$(sHora, 12, 8)
   
   Return sResultado
   
