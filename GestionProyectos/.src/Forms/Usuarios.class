@@ -3,6 +3,8 @@
 Private rstResultado As Result
 Private sFiltro As String = "%"
 Private sEstado As String = "%"
+Private sAccion As String = Null
+Private iRespuesta As Integer
 
 Public Sub btnSalir2_Click()
   
@@ -68,6 +70,9 @@ Public Sub CargarGrid()
 End
 
 Public Sub btnAdd_Click()
+  ' Informamos la variable global como adición
+  
+  sAccion = "add"
   
   ' se hacen visible los botones de Aceptar y Cancelar acción
   btnAceptar.Visible = True
@@ -116,19 +121,40 @@ Public Sub btnAceptar_Click()
     ' Aviso por pantalla al usuario
     Message.Warning("Debe cumplimentar los datos marcados en rojo")
   Else 
-    
-    cUsuarios.EditUsuario(txtCodigo.Text, txtPass.Text, txtNombre.Text, txtApellido1.Text, txtApellido2.Text, cmbRol.Tag[cmbRol.index])
+    ' Se evalua la acción si es añadir o editar
+    Select Case sAccion
+        
+      Case "add"
+        
+      Case "edit"
+        cUsuarios.EditUsuario(txtCodigo.Text, txtPass.Text, txtNombre.Text, txtApellido1.Text, txtApellido2.Text, cmbRol.Tag[cmbRol.index])    
+      Case "del"
+        ' Si=1 | No= 2
+        iRespuesta = Message.Question("¿Quiere eliminar el registro?", "Sí", "No")
+        
+        If iRespuesta = 1 Then
+          'Afirmativo
+          'Realizamos la Baja lógica del registro según el identificador
+          cUsuarios.DelUsuario(gEstructuras.getIdSeleccion())
+        Else
+          'Negativo
+          'Cancelamos la acción a realizar
+          
+        Endif
+        
+    End Select
     
     btnLimpiar_Click()
     btnAceptar.visible = False
     btnCancelar.visible = False
-    
+    btnBorrar.Enabled = False  
   Endif
   
 End
 
 Public Sub btnLimpiar_Click()
-  
+  ' Borrado de los TextBox
+
   txtCodigo.Text = Null
   txtNombre.Text = Null
   txtApellido1.Text = Null
@@ -144,13 +170,16 @@ Public Sub swbEstado_Click()
   
   If swbEstado.value = "T" Then 
     ' Activos
-    sFiltro = "-"
+    sEstado = "-"
     CargarGrid()
+    
   Else
     'Todos
-    sFiltro = "%"
+    sEstado = "%"
     CargarGrid()
   Endif
+  ' limpiamos los campos de entrada
+  btnLimpiar_Click()
   
 End
 
@@ -187,10 +216,20 @@ Public Sub grvUsuarios_Click()
       txtPass.Text = rstResultado!PASSWORD
       txtApellido1.text = rstResultado!APELLIDO1
       txtApellido2.Text = rstResultado!APELLIDO2      
-      'cmbRol.Tag = rstResultado!ID_ROL
+      cmbRol.Index = cmbRol.Tag.Find(rstResultado!ID_ROL)
       rstResultado.MoveNext
     Loop
+    'Activamos el botón de Borrar
+    btnBorrar.Enabled = True
     
   Endif
+  
+End
+
+Public Sub btnBorrar_Click()
+  
+  sAccion = "del"
+  btnAceptar.visible = True
+  btnCancelar.Visible = True
   
 End

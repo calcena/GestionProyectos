@@ -4,6 +4,7 @@ Private conn As Connection
 Private bResultado As Boolean
 Private iContador As String
 Private rstResultado As Result
+Private dAhora As String = gUtils.FechaConFormato(Now) & " " & gUtils.HoraConFormato(Now)
 
 Public Function GetUsers(sFiltro As String, sEstado As String) As Result
   
@@ -103,7 +104,7 @@ Public Function EditUsuario(codUsuario As String, psw As String, nombre As Strin
   
   Dim sSql As String = Null
   Dim resultado As Boolean = False
-  Dim dAhora As String = gUtils.FechaConFormato(Now) & " " & gUtils.HoraConFormato(Now)
+  'Dim dAhora As String = gUtils.FechaConFormato(Now) & " " & gUtils.HoraConFormato(Now)
   
   sSql = "UPDATE USUARIOS "
   sSql &= "SET "
@@ -135,6 +136,21 @@ Public Function GetSelectedUser(idUser As Integer) As Result
   
   sSql = "SELECT * "
   sSql &= "FROM USUARIOS "
+  sSql &= "WHERE ID_USUARIO =" & idUser 
+  
+  rstResultado = conn.Exec(sSql)
+  Return rstResultado
+  
+End
+
+Public Function DelUsuario(idUser As Integer) As Result
+  
+  Dim sSql As String = Null
+  
+  sSql = "UPDATE USUARIOS "
+  sSql &= "SET ES_BAJA='+', "
+  sSql &= "FECHA_BAJA='" & dAhora & "', "
+  sSql &= "FECHA_MODIF='" & dAhora & "'"
   sSql &= "WHERE ID_USUARIO =" & idUser 
   
   rstResultado = conn.Exec(sSql)
