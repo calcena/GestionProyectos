@@ -5,133 +5,137 @@ Private sFiltro As String = "%"
 Private sEstado As String = "%"
 Private sAccion As String = Null
 Private iRespuesta As Integer
+Private sEs_Baja As String = Null
 
 Public Sub btnSalir2_Click()
-  
+
   Me.Close()
   MenuPrincipal.Show()
-  
+
 End
 
 Public Sub Form_Open()
   ' Cargamos el ResultSet con los filtros
-  
+
   CargarGrid()
-  
+
   ComboRoles()
-  
+
 End
 
 Public Sub ComboRoles()
-  
+
   cmbRol.Clear()
-  
+
   rstResultado = cRoles.GetAllRoles()
-  
+
   rstResultado.MoveFirst
-  
+
   cmbRol.tag = New Integer[]
-  
+
   cmbRol.Add("- Todos -")
   cmbRol.tag.add(0)
   Do While rstResultado.Available
-    
+
     cmbRol.Add(rstResultado!NOMBRE)
-    cmbRol.tag.add(rstResultado!ID_ROL)  
-    rstResultado.MoveNext  
+    cmbRol.tag.add(rstResultado!ID_ROL)
+    rstResultado.MoveNext
   Loop
-  
+
 End
 
 Public Sub txtFiltroUsuarios_KeyRelease()
-  
+
   sFiltro = txtFiltroUsuarios.Text
   CargarGrid()
-  
+
 End
 
-Public Sub GetRows() 
-  
-  Dim resultado As String 
-  
+Public Sub GetRows()
+
+  Dim resultado As String
+
   resultado = CStr(rstResultado.Count)
-  lblRegistros.Text = "Registros: " & resultado 
-  
+  lblRegistros.Text = "Registros: " & resultado
+
 End
 
-Public Sub CargarGrid()  
-  
+Public Sub CargarGrid()
+
   rstResultado = cUsuarios.GetUsers(sFiltro, sEstado)
-  ' obtenemos los registro para pintar el grid  
+  ' obtenemos los registro para pintar el grid
   grvUsuarios = cUsuarios.GetGrid(grvUsuarios, rstResultado)
-  
+
   GetRows()
-  
+
 End
 
 Public Sub btnAdd_Click()
   ' Informamos la variable global como adición
-  
+
   sAccion = "add"
-  
+
   ' se hacen visible los botones de Aceptar y Cancelar acción
   btnAceptar.Visible = True
   btnCancelar.visible = True
   btnAdd.Enabled = False
   txtCodigo.Text = gUtils.GetCodigo("USU")
-  
+
   ' Creamos un nuevo registro
   cUsuarios.AddUsuario(txtCodigo.Text)
-  
+
 End
 
 Public Sub btnAceptar_Click()
-  
-  If Len(Trim(txtNombre.text)) = 0 Or Len(Trim(txtApellido1.text)) = 0 Or Len(Trim(txtApellido2.text)) = 0 Or Len(Trim(txtPass.text)) = 0 Or Len(Trim(txtPass2.text)) = 0 Then 
+
+  If Len(Trim(txtNombre.text)) = 0 Or Len(Trim(txtApellido1.text)) = 0 Or Len(Trim(txtApellido2.text)) = 0 Or Len(Trim(txtPass.text)) = 0 Then
     'nombre
-    If Len(Trim(txtNombre.text)) = 0 Then 
+    If Len(Trim(txtNombre.text)) = 0 Then
       txtNombre.Background = Color.Red
     Else
       txtNombre.Background = Color.white
-    End If 
+    End If
     'apellido1
-    If Len(Trim(txtApellido1.text)) = 0 Then 
+    If Len(Trim(txtApellido1.text)) = 0 Then
       txtApellido1.Background = Color.Red
     Else
       txtApellido1.Background = Color.white
     End If
     'apellido2
-    If Len(Trim(txtApellido2.text)) = 0 Then 
+    If Len(Trim(txtApellido2.text)) = 0 Then
       txtApellido2.Background = Color.Red
     Else
       txtApellido2.Background = Color.White
     End If
     'password
-    If Len(Trim(txtPass.text)) = 0 Then 
+    If Len(Trim(txtPass.text)) = 0 Then
       txtPass.Background = Color.Red
     Else
       txtPass.Background = Color.white
     End If
-    'repetir password
-    If Len(Trim(txtPass2.text)) = 0 Then 
-      txtPass2.Background = Color.Red
-    Else
-      txtPass2.Background = Color.white      
-    End If
+
     ' Aviso por pantalla al usuario
     Message.Warning("Debe cumplimentar los datos marcados en rojo")
-  Else 
+  Else
     ' Se evalua la acción si es añadir o editar
     Select Case sAccion
-        
-      Case "add"
-        
-      Case "edit"
-        cUsuarios.EditUsuario(txtCodigo.Text, txtPass.Text, txtNombre.Text, txtApellido1.Text, txtApellido2.Text, cmbRol.Tag[cmbRol.index])    
+      Case "add" And "edit"
+
+        If Len(Trim(txtPass2.text)) = 0 Then
+          txtPass2.Background = Color.Red
+          ' Aviso por pantalla al usuario
+          Message.Warning("Debe cumplimentar los datos marcados en rojo")
+
+        Else
+          txtPass2.Background = Color.white
+        End If
+
+        cUsuarios.EditUsuario(txtCodigo.Text, txtPass.Text, txtNombre.Text, txtApellido1.Text, txtApellido2.Text, cmbRol.Tag[cmbRol.index])
+
       Case "del"
         ' Si=1 | No= 2
         iRespuesta = Message.Question("¿Quiere eliminar el registro?", "Sí", "No")
-        
+
         If iRespuesta = 1 Then
           'Afirmativo
           'Realizamos la Baja lógica del registro según el identificador
@@ -139,17 +143,17 @@ Public Sub btnAceptar_Click()
         Else
           'Negativo
           'Cancelamos la acción a realizar
-          
+
         Endif
-        
+
     End Select
-    
+
     btnLimpiar_Click()
     btnAceptar.visible = False
     btnCancelar.visible = False
-    btnBorrar.Enabled = False  
+    btnBorrar.Enabled = False
   Endif
-  
+
 End
 
 Public Sub btnLimpiar_Click()
@@ -161,18 +165,18 @@ Public Sub btnLimpiar_Click()
   txtApellido2.Text = Null
   txtPass.Text = Null
   txtPass2.text = Null
-  cmbRol.index = 0 
-  
+  cmbRol.index = 0
+
 End
 
 Public Sub swbEstado_Click()
   ' Pulsamos el switch button
-  
-  If swbEstado.value = "T" Then 
+
+  If swbEstado.value = "T" Then
     ' Activos
     sEstado = "-"
     CargarGrid()
-    
+
   Else
     'Todos
     sEstado = "%"
@@ -180,56 +184,65 @@ Public Sub swbEstado_Click()
   Endif
   ' limpiamos los campos de entrada
   btnLimpiar_Click()
-  
+
 End
 
 Public Sub txtNombre_LostFocus()
-  
+
   ActivarLimpiar()
-  
+
 End
 
 Public Sub ActivarLimpiar()
-  ' 
-  
+  '
+
   If Len(txtNombre.text) > 0 And Len(txtApellido1.text) > 0 And Len(txtapellido2.text) > 0 And Len(txtPass.text) > 0 And Len(txtpass2.text) > 0 Then
     btnLimpiar.Enabled = True
   Else
     btnLimpiar.Enabled = False
   Endif
-  
+
 End
 
 Public Sub grvUsuarios_Click()
   ' Guardamos el ID seleccionado
-  
+
   gEstructuras.setIdSeleccion(grvUsuarios[grvUsuarios.Row, 0].text)
+  sAccion = "edit"
+
   ' Recogemos los datos del item seleccionado para modo edición
   rstResultado = cUsuarios.GetSelectedUser(gEstructuras.getIdSeleccion())
-  
+
   If rstResultado.Available Then
     rstResultado.MoveFirst
-    
+
     Do While rstResultado.Available
       txtCodigo.Text = rstResultado!COD_USUARIO
       txtNombre.Text = rstResultado!NOMBRE
       txtPass.Text = rstResultado!PASSWORD
       txtApellido1.text = rstResultado!APELLIDO1
-      txtApellido2.Text = rstResultado!APELLIDO2      
+      txtApellido2.Text = rstResultado!APELLIDO2
       cmbRol.Index = cmbRol.Tag.Find(rstResultado!ID_ROL)
+      sEs_Baja = rstResultado!ES_BAJA
       rstResultado.MoveNext
     Loop
-    'Activamos el botón de Borrar
-    btnBorrar.Enabled = True
-    
-  Endif
-  
+
+    If sEs_Baja = "-" Then
+      'Activamos el botón de Borrar
+      btnBorrar.Enabled = True
+      btnActivar.Enabled = False
+    Else
+      btnBorrar.Enabled = False
+      btnActivar.Enabled = True
+    End If
+  End If
+
 End
 
 Public Sub btnBorrar_Click()
-  
+
   sAccion = "del"
   btnAceptar.visible = True
   btnCancelar.Visible = True
-  
+
 End
