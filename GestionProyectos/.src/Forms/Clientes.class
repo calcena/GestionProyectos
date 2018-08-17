@@ -6,100 +6,145 @@ Private picActivo As Picture = Picture.Load("images/alta.png")
 Private picBaja As Picture = Picture.Load("images/baja.png")
 Private picCerrado As Picture = Picture.Load("images/cerrado.png")
 Private picWarn As Picture = Picture.Load("images/warning.png")
-
-Private iSelect As Integer = 0
-Private sFiltro As String = "%"
+' variables seleccion del Cliente :::::::::::::::::::::::::::::::::::::
+Private iSelectCli As Integer = 0
+' variables seleccion del Proyecto ::::::::::::::::::::::::::::::::::::
+Private iSelectPro As Integer = 0
+' variables para filtro Clientes ::::::::::::::::::::::::::::::::::::::
+Private sFiltroCli As String = "%"
+Private sEstadoCli As String = "%"
+' variables para filtro Proyecto ::::::::::::::::::::::::::::::::::::::
+Private sFiltroPro As String = "%"
+Private sEstadoPro As String = "%"
+'
+Private sAccion As String = Null
 
 Public Sub Form_Open()
-  
+
   Me.Title = "Clientes  "
-  
-  CargaGrid(sFiltro)
-  
-  lsvProyectos.Clear()
-  
+  swbEstado.value = "T"
+
+  CargarGrid()
+
+  FiltroProyectos()
+  CargarEstadosProyectos()
+
 End
 
 Public Sub ObtenerProyectosId(iSelect As Integer)
-  
-  rstResultado = cProyectos.FiltrarProyectosId(iSelect)
+
+  rstResultado = cProyectos.FiltrarProyectosId(iSelectCli)
   rstResultado.MoveFirst
   lsvProyectos.Clear
-  Do While rstResultado.Available 
-    
+  Do While rstResultado.Available
+    ' Proyecto Cerrado |Cliente Alta
     If rstResultado!P_CERRADO = "+" And rstResultado!C_BAJA = "-" Then
       lsvProyectos.Add(rstResultado!ID_PROYECTO, " - " & rstResultado!COD_PROYECTO, picCerrado)
+      ' Proyecto Baja | Cliente Alta
     Else If rstResultado!P_BAJA = "+" And rstResultado!C_BAJA = "-" Then
       lsvProyectos.Add(rstResultado!ID_PROYECTO, " - " & rstResultado!COD_PROYECTO, picBaja)
+      ' Cliente Baja
     Else If rstResultado!C_BAJA = "+" Then
       lsvProyectos.Add(rstResultado!ID_PROYECTO, " - " & rstResultado!COD_PROYECTO, picWarn)
     Else
+      ' Proyecto activo por deferencia
       lsvProyectos.Add(rstResultado!ID_PROYECTO, " - " & rstResultado!COD_PROYECTO, picActivo)
     Endif
-    
+
     rstResultado.MoveNext
   Loop
-  
+
 End
 
-Public Sub CargaGrid(sFiltro As String)
-  
-  Dim i As Integer = 0
-  
-  GridView1.Clear
-  
-  rstResultado = cClientes.FiltrarClientes(sFiltro)
-  
-  GridView1.Columns.Count = rstResultado.Fields.Count 
-  GridView1.Header = rstResultado.Fields.Count
-  GridView1.Columns[0].Title = "ID_CLIENTE"
-  GridView1.Columns[1].Title = "COD_CLIENTE"
-  GridView1.Columns[2].Title = "NOMBRE"
-  GridView1.Columns[3].Title = "POBLACIÓN"
-  GridView1.Columns[4].Title = ""
-  GridView1.Columns[0].width = 0
-  GridView1.Columns[0].Resizable = False
-  GridView1.Columns[1].width = 100
-  GridView1.Columns[1].Resizable = False
-  GridView1.Columns[2].width = 290
-  GridView1.Columns[2].Resizable = False
-  GridView1.Columns[3].width = 150
-  GridView1.Columns[3].Resizable = False
-  GridView1.Columns[4].width = 25
-  GridView1.Columns[4].Alignment = 3
-  GridView1.Columns[4].Resizable = False
-  
-  '::::::::::::::::::::::::::::::::::::::::::::::::::::
-  
-  rstResultado.MoveFirst
-  
-  Do While rstResultado.Available
-    GridView1.Rows.Insert(i, 1)
-    GridView1[i, 0].Text = rstResultado!ID_CLIENTE
-    GridView1[i, 1].Text = rstResultado!COD_CLIENTE
-    GridView1[i, 2].Text = rstResultado!NOMBRE
-    GridView1[i, 3].Text = rstResultado!POBLACION
-    If rstResultado!ES_BAJA = "-" Then
-      GridView1[i, 4].Picture = picActivo     
-    Else      
-      GridView1[i, 4].Picture = picBaja 
-    End If
-    i += 1
-    rstResultado.MoveNext
-  Loop
-  
+Public Sub CargarGrid()
+
+  rstResultado = cClientes.GetClients(sFiltroCli, sEstadoCli)
+  ' obtenemos los registro para pintar el grid
+  grvClientes = cClientes.GetGrid(grvClientes, rstResultado)
+
+  GetRows()
+
 End
 
-Public Sub GridView1_Click()
-  
-  iSelect = CInt(GridView1[gridview1.Row, 0].text)
-  ObtenerProyectosId(iSelect)  
-  
+Public Sub grvClientes_Click()
+
+  iSelectCli = CInt(grvClientes[grvClientes.Row, 0].text)
+  ObtenerProyectosId(iSelectCli)
+
 End
 
 Public Sub txtFiltroProyectos_KeyRelease()
-  
-  sFiltro = txtFiltroProyectos.Text
-  CargaGrid(sFiltro)
-  
+
+  sFiltroPro = txtFiltroProyectos.Text
+  FiltroProyectos()
+
+End
+
+Public Sub txtFiltroClientes_KeyRelease()
+
+  sFiltroCli = txtFiltroClientes.Text
+
+  CargarGrid()
+
+End
+
+Public Sub GetRows()
+
+  Dim resultado As String
+
+  resultado = CStr(rstResultado.Count)
+  lblRegistros.Text = "Registros: " & resultado
+
+End
+
+
+Public Sub btnAdd_Click()
+  ' Informamos la variable global como adición
+
+  sAccion = "add"
+
+  ' se hacen visible los botones de Aceptar y Cancelar acción
+  btnAceptar.Visible = True
+  btnCancelar.visible = True
+  btnAdd.Enabled = False
+  txtCodigo.Text = gUtils.GetCodigo("CLI")
+
+  ' Creamos un nuevo registro
+  cClientes.AddCliente(txtCodigo.Text)
+
+End
+
+
+Public Sub FiltroProyectos()
+
+  rstResultado = cProyectos.FiltrarProyectos(sFiltroPro, sEstadoPro)
+  rstResultado.MoveFirst
+  lsvProyectos.Clear
+  Do While rstResultado.Available
+    ' Proyectos cerrados con clientes Activos
+    If rstResultado!P_CERRADO = "+" And rstResultado!C_BAJA = "-" Then
+      lsvProyectos.Add(rstResultado!ID_PROYECTO, " - " & rstResultado!COD_PROYECTO, picCerrado)
+      ' Proyectos que están de Baja con el clientes Activo
+    Else If rstResultado!P_BAJA = "+" And rstResultado!C_BAJA = "-" Then
+      lsvProyectos.Add(rstResultado!ID_PROYECTO, " - " & rstResultado!COD_PROYECTO, picBaja)
+      ' Clientes de Baja
+    Else If rstResultado!C_BAJA = "+" Then
+      lsvProyectos.Add(rstResultado!ID_PROYECTO, " - " & rstResultado!COD_PROYECTO, picWarn)
+      ' El resto se consideran activos
+    Else
+      lsvProyectos.Add(rstResultado!ID_PROYECTO, " - " & rstResultado!COD_PROYECTO, picActivo)
+    Endif
+
+    rstResultado.MoveNext
+  Loop
+
+End
+
+
+
+Public Sub btnSalir2_Click()
+
+  Me.Close()
+  MenuPrincipal.Show()
+
 End

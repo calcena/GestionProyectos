@@ -7,10 +7,10 @@ Private rstResultado As Result
 Private dAhora As String = gUtils.FechaConFormato(Now) & " " & gUtils.HoraConFormato(Now)
 
 Public Function GetUsers(sFiltro As String, sEstado As String) As Result
-  
+
   Dim rstResultado As Result = Null
   Dim sSql As String = Null
-  
+
   sSql = "SELECT "
   sSql &= "U.ID_USUARIO, "
   sSql &= "U.COD_USUARIO, "
@@ -24,88 +24,87 @@ Public Function GetUsers(sFiltro As String, sEstado As String) As Result
   sSql &= "ON U.ID_ROL = R.ID_ROL "
   sSql &= "WHERE (U.COD_USUARIO LIKE '%" & sFiltro & "%' OR U.NOMBRE LIKE '%" & sFiltro & "%' OR U.APELLIDO1 LIKE '%" & sFiltro & "%' OR U.APELLIDO2 LIKE '%" & sFiltro & "%' OR R.NOMBRE LIKE '%" & sFiltro & "%')"
   sSql &= "AND U.ES_BAJA LIKE '" & sEstado & "'"
-  
+
   conn = gConexion.ConectarDB()
-  
+
   rstResultado = conn.Exec(sSql)
-  
-  Return rstResultado 
-  
+
+  Return rstResultado
+
 End
 
-Public Function GetGrid(ByRef objGridView As GridView, rstResultado As Result) As GridView 
-  
+Public Function GetGrid(ByRef objGridView As GridView, rstResultado As Result) As GridView
+
   Dim i As Integer = 0
-  Dim n As Integer = 0  
+  Dim n As Integer = 0
   Dim j As Integer = 0
-  
-  objGridView.Columns.Count = rstResultado.Fields.Count 
-  
+
+  objGridView.Columns.Count = rstResultado.Fields.Count
+
   For j = 0 To objGridView.Columns.Count - 1
-    If j = 0 Then 
-      objGridView.Columns[j].width = 0    
-    Else  
+    If j = 0 Then
+      objGridView.Columns[j].width = 0
+    Else
       objGridView.Columns[j].Title = rstResultado.Fields[j].Name
       objGridView.Columns[j].Expand = True
       objGridView.Columns[j].Resizable = False
-    Endif    
-    
+    Endif
+
   Next
-  '::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::   
+  '::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
   objGridView.Rows.Count = 0
-  
-  rstResultado.MoveFirst  
+
+  rstResultado.MoveFirst
   Do While rstResultado.Available
     objGridView.Rows.Count = rstResultado.Count
-    
+
     objGridView[i, 0].Text = rstResultado!ID_USUARIO
     objGridView[i, 1].Text = rstResultado!COD_USUARIO
     objGridView[i, 2].Text = rstResultado!NOMBRE
     objGridView[i, 3].Text = rstResultado!APELLIDO1
     objGridView[i, 4].Text = rstResultado!APELLIDO2
     objGridView[i, 5].Text = rstResultado!RNOMBRE
-    
+
     If rstResultado!ES_BAJA = "+" Then
       objGridView[i, 6].Picture = gConst.picBaja
     Else
       objGridView[i, 6].Picture = gConst.picActivo
     End If
-    
+
     Inc i
     rstResultado.MoveNext
   Loop
   Return objGridView
-  
+
 End
 
 Public Function AddUsuario(codUsuario As String) As Boolean
-  
+
   Dim sSql As String = Null
   Dim resultado As Boolean = False
   Dim dAhora As String = gUtils.FechaConFormato(Now) & " " & gUtils.HoraConFormato(Now)
-  
+
   sSql = "INSERT INTO USUARIOS "
   sSql &= "(COD_USUARIO,ID_ROL,ES_BAJA,FECHA_BAJA,FECHA_MODIF) "
   sSql &= "VALUES "
   sSql &= "('" & codUsuario & "',0,'+','" & dAhora & "','" & dAhora & "')"
   Try conn.Exec(sSql)
-  
+
   resultado = True
   If Error Then
-    resultado = False 
-    
+    resultado = False
+
   Endif
-  
+
   Return resultado
-  
+
 End
 
 Public Function EditUsuario(codUsuario As String, psw As String, nombre As String, apellido1 As String, apellido2 As String, idRol As Integer) As Boolean
-  
+
   Dim sSql As String = Null
   Dim resultado As Boolean = False
-  'Dim dAhora As String = gUtils.FechaConFormato(Now) & " " & gUtils.HoraConFormato(Now)
-  
+
   sSql = "UPDATE USUARIOS "
   sSql &= "SET "
   sSql &= "PASSWORD='" & psw & "' ,"
@@ -117,43 +116,58 @@ Public Function EditUsuario(codUsuario As String, psw As String, nombre As Strin
   sSql &= "FECHA_BAJA= null ,"
   sSql &= "FECHA_MODIF='" & dAhora & "' "
   sSql &= "WHERE COD_USUARIO = '" & codUsuario & "'"
-  
-  Try conn.Exec(sSql)  
-  
+
+  Try conn.Exec(sSql)
+
   resultado = True
-  
-  If Error Then 
+
+  If Error Then
     resultado = False
   Endif
-  
+
   Return resultado
-  
+
 End
 
 Public Function GetSelectedUser(idUser As Integer) As Result
-  
+
   Dim sSql As String = Null
-  
+
   sSql = "SELECT * "
   sSql &= "FROM USUARIOS "
-  sSql &= "WHERE ID_USUARIO =" & idUser 
-  
+  sSql &= "WHERE ID_USUARIO =" & idUser
+
   rstResultado = conn.Exec(sSql)
   Return rstResultado
-  
+
 End
 
-Public Function DelUsuario(idUser As Integer) As Result
-  
+Public Sub DelUsuario(idUser As Integer)
+
   Dim sSql As String = Null
-  
+  Dim resultado As Integer = 0
+
   sSql = "UPDATE USUARIOS "
   sSql &= "SET ES_BAJA='+', "
   sSql &= "FECHA_BAJA='" & dAhora & "', "
-  sSql &= "FECHA_MODIF='" & dAhora & "'"
-  sSql &= "WHERE ID_USUARIO =" & idUser 
-  
-  rstResultado = conn.Exec(sSql)
-  Return rstResultado
-  
+  sSql &= "FECHA_MODIF='" & dAhora & "' "
+  sSql &= "WHERE ID_USUARIO =" & idUser & ";"
+
+  conn.Exec(sSql)
+
+End
+
+Public Sub ActivarUsuario(idUser As Integer)
+
+  Dim sSql As String = Null
+  Dim resultado As Integer = 0
+
+  sSql = "UPDATE USUARIOS "
+  sSql &= "SET ES_BAJA='-', "
+  sSql &= "FECHA_BAJA=null, "
+  sSql &= "FECHA_MODIF='" & dAhora & "' "
+  sSql &= "WHERE ID_USUARIO =" & idUser
+
+  conn.Exec(sSql)
+
 End

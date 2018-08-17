@@ -1,9 +1,9 @@
 ' Gambas module file
 
-Private _idProyecto As Integer 
-Private _idRequerimiento As Integer
-Private _idTarea As Integer
-Private _idCliente As Integer
+Private _idProyecto As Integer = 0
+Private _idRequerimiento As Integer = 0
+Private _idTarea As Integer = 0
+Private _idCliente As Integer = 0
 Private _idSeleccion As Integer = 0
 ' Log de último Status en el sistema :::::::::::::::
 Private _idUsuario As Integer = 0
@@ -14,101 +14,101 @@ Private _LastSession As String = Null
 Private _iconLastSession As String = Null
 
 Public Function getIdProyecto() As Integer
-  
+
   Return _idProyecto
-  
+
 End
 
 Public Sub setIdProyecto(Value As Integer)
-  
+
   _idProyecto = Value
-  
+
 End
 
 Public Function getIdRequerimiento() As Integer
-  
+
   Return _idRequerimiento
-  
+
 End
 
 Public Sub setIdRequerimiento(Value As Integer)
-  
+
   _idRequerimiento = Value
-  
+
 End
 
 Public Function getIdTarea() As Integer
-  
+
   Return _idTarea
-  
+
 End
 
 Public Sub setIdTarea(Value As Integer)
-  
+
   _idTarea = Value
-  
+
 End
 
 Public Function getIdCliente() As Integer
-  
-  Return _idCliente 
-  
+
+  Return _idCliente
+
 End
 
 Public Sub setIdCliente(Value As Integer)
-  
+
   _idCliente = Value
-  
+
 End
 
 Public Function getIdSeleccion() As Integer
-  
+
   Return _idSeleccion
-  
+
 End
 
 Public Sub setIdSeleccion(Value As Integer)
-  
+
   _idSeleccion = Value
-  
+
 End
 
 ' Detalles de usuario logado::::::::::::::::::::::::::::::::::::::::::::::::
 
 Public Sub setUserLogged(idUsuario As Integer, nombreUser As String, idRol As Integer, Rol As String)
-  
+
   Dim lastSession As New String[]
-  
-  lastSession = cLogs.getLastSession(idUsuario) 
+
+  lastSession = cLogs.getLastSession(idUsuario)
   _idUsuario = idUsuario
   _NomUsuario = nombreUser
   _idRol = idRol
   _Rol = Rol
   _iconLastSession = lastSession[0]
   _LastSession = lastSession[1]
-  
+
 End
 
 Public Function getIconSession() As String
-  
+
   Return _iconLastSession
-  
+
 End
 
 Public Function getIdUsuario() As Integer
-  
+
   Return _idUsuario
-  
+
 End
 
 Public Function getUserLogged() As String
-  
+
   Return "Usuario: " & _NomUsuario & " - Rol: " & _Rol
-  
+
 End
 
 Public Function getLastSession() As String
-  
+
   Return _LastSession
-  
+
 End

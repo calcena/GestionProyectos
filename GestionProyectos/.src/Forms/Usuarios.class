@@ -7,6 +7,7 @@ Private sAccion As String = Null
 Private iRespuesta As Integer
 Private sEs_Baja As String = Null
 
+
 Public Sub btnSalir2_Click()
 
   Me.Close()
@@ -15,6 +16,11 @@ Public Sub btnSalir2_Click()
 End
 
 Public Sub Form_Open()
+
+  'Cargamos la imagen de duplicado en su contenedor
+  picDuplicado.Picture = gConst.picDuplicado
+  'Iniciamos el formulario con los registros activos
+  swbEstado.Value = "T"
   ' Cargamos el ResultSet con los filtros
 
   CargarGrid()
@@ -119,19 +125,51 @@ Public Sub btnAceptar_Click()
   Else
     ' Se evalua la acción si es añadir o editar
     Select Case sAccion
-      Case "add" And "edit"
+      Case "add"
 
         If Len(Trim(txtPass2.text)) = 0 Then
           txtPass2.Background = Color.Red
           ' Aviso por pantalla al usuario
           Message.Warning("Debe cumplimentar los datos marcados en rojo")
-
+          Return
         Else
-          txtPass2.Background = Color.white
+          If Not ComprobarPass(txtPass.Text, txtPass2.Text) Then
+            txtPass2.Background = Color.Red
+            Message.Error("Las contraseñas no coinciden")
+            Return
+          Else
+            txtPass2.Background = Color.white
+          End If
+
         End If
 
         cUsuarios.EditUsuario(txtCodigo.Text, txtPass.Text, txtNombre.Text, txtApellido1.Text, txtApellido2.Text, cmbRol.Tag[cmbRol.index])
+        cLogs.InsOkLog(gEstructuras.getIdUsuario(), gUtils.FechaConFormato(Now), gUtils.HoraConFormato(Now), "Usuarios", "Usuario: " & txtCodigo.text & " añadido al sistema.")
+      Case "edit"
+        If Len(Trim(txtPass2.text)) = 0 Then
+          txtPass2.Background = Color.Red
+          ' Aviso por pantalla al usuario
+          Message.Warning("Debe cumplimentar los datos marcados en rojo")
+          Return
+        Else
+          If Not ComprobarPass(txtPass.Text, txtPass2.Text) Then
+            txtPass2.Background = Color.Red
+            Message.Error("Las contraseñas no coinciden")
+            Return
+          Else
+            txtPass2.Background = Color.white
 
+            If ContieneDuplicado() Then
+              Return
+            End If
+          End If
+
+
+
+        End If
+
+        cUsuarios.EditUsuario(txtCodigo.Text, txtPass.Text, txtNombre.Text, txtApellido1.Text, txtApellido2.Text, cmbRol.Tag[cmbRol.index])
+        cLogs.InsOkLog(gEstructuras.getIdUsuario(), gUtils.FechaConFormato(Now), gUtils.HoraConFormato(Now), "Usuarios", "Usuario: " & txtCodigo.text & " modificado en el sistema.")
       Case "del"
         ' Si=1 | No= 2
         iRespuesta = Message.Question("¿Quiere eliminar el registro?", "Sí", "No")
@@ -140,9 +178,14 @@ Public Sub btnAceptar_Click()
           'Afirmativo
           'Realizamos la Baja lógica del registro según el identificador
           cUsuarios.DelUsuario(gEstructuras.getIdSeleccion())
+          cLogs.InsOkLog(gEstructuras.getIdUsuario, gUtils.FechaConFormato(Now), gUtils.HoraConFormato(Now), "Usuarios", "Usuario: " & txtCodigo.text & " dado de baja en el sistema.")
+          CargarGrid()
         Else
           'Negativo
           'Cancelamos la acción a realizar
+          btnAceptar.Visible = False
+          btnCancelar.Visible = False
+          btnLimpiar_Click()
 
         Endif
 
@@ -152,7 +195,13 @@ Public Sub btnAceptar_Click()
     btnAceptar.visible = False
     btnCancelar.visible = False
     btnBorrar.Enabled = False
-  Endif
+    btnDuplicar.Enabled = False
+    picDuplicado.Visible = False
+    'Reiniciamos la variable global de la acción realizada
+    sAccion = Null
+  End If
+
+  CargarGrid()
 
 End
 
@@ -227,22 +276,135 @@ Public Sub grvUsuarios_Click()
       rstResultado.MoveNext
     Loop
 
+
+
     If sEs_Baja = "-" Then
       'Activamos el botón de Borrar
       btnBorrar.Enabled = True
       btnActivar.Enabled = False
+      btnDuplicar.Enabled = True
     Else
       btnBorrar.Enabled = False
       btnActivar.Enabled = True
+      btnDuplicar.Enabled = False
     End If
   End If
+
+
+  btnAceptar.Visible = True
+  btnCancelar.Visible = True
+
 
 End
 
 Public Sub btnBorrar_Click()
+  'Pulsamos el boton de borrar y marcamos la variable local para borrar
 
   sAccion = "del"
   btnAceptar.visible = True
   btnCancelar.Visible = True
+
+End
+
+Public Sub btnActivar_Click()
+  'Activamos un usuario que esté de baja
+
+  cUsuarios.ActivarUsuario(gEstructuras.getIdSeleccion())
+  'Cargamos nuevamente el Grid con los valores
+  CargarGrid()
+  ' Borramos los datos de los textboxes
+  btnLimpiar_Click()
+  ' Inactivamos botones
+  btnActivar.Enabled = False
+  btnBorrar.Enabled = False
+
+End
+
+Public Sub btnDuplicar_Click()
+  ' Duplicamos el item seleccionado
+
+  sAccion = "edit"
+  'Asignamos nuevo código para el ducplicado
+  txtCodigo.Text = gUtils.GetCodigo("USU")
+
+  ' Creamos el registro nuevo
+  cUsuarios.AddUsuario(txtCodigo.Text)
+
+  ' Completamos los datos según el item seleccionado
+  rstResultado = cUsuarios.GetSelectedUser(gEstructuras.getIdSeleccion())
+
+  rstResultado.MoveFirst
+
+  Do While rstResultado.Available
+    txtNombre.Text = rstResultado!NOMBRE & " [Duplicado]"
+    txtPass.Text = rstResultado!PASSWORD
+    txtApellido1.text = rstResultado!APELLIDO1 & " [Duplicado]"
+    txtApellido2.Text = rstResultado!APELLIDO2 & " [Duplicado]"
+    cmbRol.Index = cmbRol.Tag.Find(rstResultado!ID_ROL)
+    sEs_Baja = rstResultado!ES_BAJA
+    rstResultado.MoveNext
+  Loop
+
+
+  'Hacemos visible la imagen de duplicado
+  picDuplicado.Visible = True
+  ' Mostramos el botón de aceptar y cancelar
+  btnAceptar.visible = True
+  btnCancelar.Visible = True
+
+
+End
+
+Public Sub btnCancelar_Click()
+  ' Deseccionamos el item marcado en el GridView
+
+  grvUsuarios.UnSelectAll()
+  ' Reiniciamos el identificador del item seleccionado
+  gEstructuras.setIdSeleccion(0)
+
+  Reiniciar()
+
+End
+
+
+Public Function ComprobarPass(pass1 As String, pass2 As String) As Boolean
+
+  Dim resultado As Boolean = False
+
+  If pass1 = pass2 Then
+    resultado = True
+
+  Endif
+
+  Return resultado
+
+End
+
+Public Function ContieneDuplicado() As Boolean
+
+  Dim resultado As Boolean = False
+
+  If InStr(txtNombre.Text, "[Duplicado]") > 0 Or InStr(txtApellido1.Text, "[Duplicado]") > 0 Or InStr(txtApellido2.Text, "[Duplicado]") > 0 Then
+
+    Message.Error("Los datos contienen la palabra [Duplicado]")
+    resultado = True
+
+  End If
+
+  Return resultado
+
+End
+
+Public Sub Reiniciar()
+
+  btnAceptar.Visible = False
+  btnCancelar.visible = False
+  btnAdd.Enabled = True
+  btnBorrar.enabled = False
+  btnLimpiar.Enabled = False
+  btnActivar.enabled = False
+  btnDuplicar.Enabled = False
+
+  btnLimpiar_Click()
 
 End

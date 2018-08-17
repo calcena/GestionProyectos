@@ -1,11 +1,11 @@
 # Gambas Form File 3.0
 
 { Form Form
-  MoveScaled(0,0,167,66)
+  MoveScaled(0,0,167,72)
   { lsvProyectos ListView
     MoveScaled(1,9,29,45)
   }
-  { GridView1 GridView
+  { grvClientes GridView
     MoveScaled(31,9,79,45)
     Mode = Select.Single
     Grid = False
@@ -25,69 +25,138 @@
     Text = ("Buscador")
   }
   { btnAdd Button
-    MoveScaled(3,57,20,7)
+    MoveScaled(3,64,20,7)
     Text = ("Añadir")
     Picture = Picture["images/add_20.png"]
   }
   { btnBorrar Button
-    MoveScaled(24,57,20,7)
+    MoveScaled(24,64,20,7)
     Enabled = False
     Text = ("Borrar")
     Picture = Picture["images/borrar_20.png"]
   }
   { btnLimpiar Button
-    MoveScaled(87,57,20,7)
+    MoveScaled(87,64,20,7)
     Enabled = False
     Text = ("Limpiar")
     Picture = Picture["images/limpiar_20.png"]
   }
   { btnActivar Button
-    MoveScaled(45,57,20,7)
+    MoveScaled(45,64,20,7)
     Enabled = False
     Text = ("Activar")
     Picture = Picture["images/activar.png"]
   }
   { btnDuplicar Button
-    MoveScaled(66,57,20,7)
+    MoveScaled(66,64,20,7)
     Enabled = False
     Text = ("Duplicar")
     Picture = Picture["images/duplicar_20.png"]
   }
   { btnSalir2 Button
-    MoveScaled(145,57,20,7)
+    MoveScaled(145,64,20,7)
     Text = ("Salir")
     Picture = Picture["images/salir.png"]
   }
   { txtCodigo TextBox
-    MoveScaled(113,5,24,4)
+    MoveScaled(113,4,20,4)
+    Background = &HA7C3DF&
+    Alignment = Align.Center
+    ReadOnly = True
   }
   { lblCodigoCliente Label
-    MoveScaled(113,1,24,4)
+    MoveScaled(113,0,24,4)
     Text = ("Código cliente")
   }
   { txtNombre TextBox
-    MoveScaled(113,14,24,4)
+    MoveScaled(113,13,52,4)
   }
   { lblNombre Label
-    MoveScaled(113,10,24,4)
+    MoveScaled(113,9,24,4)
     Text = ("Nombre")
   }
-  { txtApellido1 TextBox
-    MoveScaled(113,23,52,4)
+  { txtDireccion TextBox
+    MoveScaled(113,21,52,4)
   }
   { lblapellido1 Label
-    MoveScaled(113,19,24,4)
+    MoveScaled(113,17,24,4)
     Text = ("Dirección")
   }
-  { txtApellido2 TextBox
-    MoveScaled(113,32,52,4)
+  { txtCodPostal TextBox
+    MoveScaled(113,28,14,4)
   }
-  { lblApellido2 Label
-    MoveScaled(113,28,24,4)
-    Text = ("Apellido materno")
+  { lblCP Label
+    MoveScaled(113,25,10,4)
+    Text = ("C.P.")
   }
   { picDuplicado PictureBox
     MoveScaled(62,4,41,5)
     Alignment = Align.Center
+  }
+  { lblRegistros Label
+    MoveScaled(1,59,40,4)
+  }
+  { txtPoblacion TextBox
+    MoveScaled(128,28,37,4)
+  }
+  { lblPoblacion Label
+    MoveScaled(128,25,24,4)
+    Text = ("Población")
+  }
+  { lblProvincia Label
+    MoveScaled(113,32,12,4)
+    Text = ("Provincia")
+  }
+  { txtProvincia TextBox
+    MoveScaled(113,35,27,4)
+  }
+  { lblTelefono1 Label
+    MoveScaled(141,32,24,4)
+    Text = ("Teléfono 1")
+  }
+  { txtTelf1 TextBox
+    MoveScaled(141,35,24,4)
+  }
+  { lblTelefono2 Label
+    MoveScaled(113,39,24,4)
+    Text = ("Teléfono 2")
+  }
+  { txtTelf2 TextBox
+    MoveScaled(113,42,24,4)
+  }
+  { lblTelefono3 Label
+    MoveScaled(113,46,24,4)
+    Text = ("E-mail")
+  }
+  { txtEmail TextBox
+    MoveScaled(113,49,52,4)
+  }
+  { btnAceptar Button
+    MoveScaled(123,54,16,4)
+    Visible = False
+    Text = ("  Aceptar")
+    Picture = Picture["images/aceptar.png"]
+  }
+  { btnCancelar Button
+    MoveScaled(142,54,16,4)
+    Visible = False
+    Text = ("  Cancelar")
+    Picture = Picture["images/cancel_20.png"]
+  }
+  { cmbEstadoPro ComboBox
+    MoveScaled(4,55,21,4)
+  }
+  { swbEstado SwitchButton
+    MoveScaled(64,55,8,4)
+  }
+  { lblTodos Label
+    MoveScaled(51,55,11,4)
+    Text = ("Todos")
+    Alignment = Align.Right
+  }
+  { lblActivos Label
+    MoveScaled(73,55,11,4)
+    Text = ("Activos")
+    Alignment = Align.Left
   }
 }

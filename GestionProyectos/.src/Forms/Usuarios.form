@@ -97,21 +97,22 @@
   }
   { picDuplicado PictureBox
     MoveScaled(31,2,41,5)
+    Visible = False
     Alignment = Align.Center
   }
   { txtPass TextBox
     MoveScaled(126,11,24,4)
   }
   { swbEstado SwitchButton
-    MoveScaled(41,55,8,4)
+    MoveScaled(41,54,8,4)
   }
   { lblTodos Label
-    MoveScaled(28,55,11,4)
+    MoveScaled(28,54,11,4)
     Text = ("Todos")
     Alignment = Align.Right
   }
   { lblActivos Label
-    MoveScaled(50,55,11,4)
+    MoveScaled(50,54,11,4)
     Text = ("Activos")
     Alignment = Align.Left
   }

@@ -8,14 +8,101 @@ Private iContador As String
 Private rstResultado As Result
 
 ' Funcion que nos devuelve el ID i COD_PROYECTO segun texto entrado
-Public Function FiltrarClientes(sFiltro As String) As Result
-  
-  Dim rstResultado As Result
-  
+Public Function GetClients(sFiltro As String, sEstado As String) As Result
+
+  Dim rstResultado As Result = Null
+  Dim sSql As String = Null
+
+  sSql = "SELECT "
+  sSql &= "ID_CLIENTE, "
+  sSql &= "COD_CLIENTE, "
+  sSql &= "NOMBRE, "
+  sSql &= "POBLACION, "
+  sSql &= "ES_BAJA "
+  sSql &= "FROM CLIENTES "
+  sSql &= "WHERE (COD_CLIENTE  LIKE '%" & Upper(sFiltro) & "%' "
+  sSql &= "OR NOMBRE LIKE '%" & sFiltro & "%' "
+  sSql &= "OR POBLACION LIKE '%" & sFiltro & "%')"
+  sSql &= "AND ES_BAJA LIKE '" & sEstado & "'"
   conn = gConexion.ConectarDB()
-  
-  rstResultado = conn.Exec("SELECT ID_CLIENTE,COD_CLIENTE,NOMBRE,POBLACION,ES_BAJA FROM CLIENTES WHERE (COD_CLIENTE  LIKE '%" & Upper(sFiltro) & "%' OR NOMBRE LIKE '%" & sFiltro & "%' OR POBLACION LIKE '%" & sFiltro & "%')")
-  
-  Return rstResultado 
-  
+
+  rstResultado = conn.Exec(sSql)
+
+  Return rstResultado
+
 End
+
+Public Function GetGrid(ByRef objGridView As GridView, rstResultado As Result) As GridView
+
+  Dim i As Integer = 0
+
+  objGridView.Columns.Count = rstResultado.Fields.Count
+
+
+
+  objGridView.Columns.Count = rstResultado.Fields.Count
+  objGridView.Header = rstResultado.Fields.Count
+  objGridView.Columns[0].Title = "ID_CLIENTE"
+  objGridView.Columns[1].Title = "COD_CLIENTE"
+  objGridView.Columns[2].Title = "NOMBRE"
+  objGridView.Columns[3].Title = "POBLACIÓN"
+  objGridView.Columns[4].Title = ""
+  objGridView.Columns[0].width = 0
+  objGridView.Columns[0].Resizable = False
+  objGridView.Columns[1].width = 100
+  objGridView.Columns[1].Resizable = False
+  objGridView.Columns[2].width = 290
+  objGridView.Columns[2].Resizable = False
+  objGridView.Columns[3].width = 150
+  objGridView.Columns[3].Resizable = False
+  objGridView.Columns[4].width = 25
+  objGridView.Columns[4].Alignment = 3
+  objGridView.Columns[4].Resizable = False
+
+  '::::::::::::::::::::::::::::::::::::::::::::::::::::
+  objGridView.Rows.Count = 0
+
+  rstResultado.MoveFirst
+
+  Do While rstResultado.Available
+    objGridView.Rows.Insert(i, 1)
+    objGridView[i, 0].Text = rstResultado!ID_CLIENTE
+    objGridView[i, 1].Text = rstResultado!COD_CLIENTE
+    objGridView[i, 2].Text = rstResultado!NOMBRE
+    objGridView[i, 3].Text = rstResultado!POBLACION
+    If rstResultado!ES_BAJA = "-" Then
+      objGridView[i, 4].Picture = gConst.picActivo
+    Else
+      objGridView[i, 4].Picture = gConst.picBaja
+    End If
+    i += 1
+    rstResultado.MoveNext
+  Loop
+  Return objGridView
+
+End
+
+Public Function AddCliente(codUsuario As String) As Boolean
+
+  Dim sSql As String = Null
+  Dim resultado As Boolean = False
+  Dim dAhora As String = gUtils.FechaConFormato(Now) & " " & gUtils.HoraConFormato(Now)
+
+  sSql = "INSERT INTO CLIENTES "
+  sSql &= "(COD_CLIENTE,ES_BAJA,FECHA_BAJA,FECHA_MODIF) "
+  sSql &= "VALUES "
+  sSql &= "('" & codUsuario & "','+','" & dAhora & "','" & dAhora & "')"
+  Try conn.Exec(sSql)
+
+  resultado = True
+  If Error Then
+    resultado = False
+
+  Endif
+
+  Return resultado
+
+End
+
+
+
