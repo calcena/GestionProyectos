@@ -15,8 +15,10 @@ Private sFiltroCli As String = "%"
 Private sEstadoCli As String = "%"
 ' variables para filtro Proyecto ::::::::::::::::::::::::::::::::::::::
 Private sFiltroPro As String = "%"
-Private sEstadoPro As String = "%"
-'
+Private sBajaPro As String = "%"
+Private sCerradoPro As String = "%"
+Private sIdProyecto As String = "%"
+'Acción que se realiza en el formulario
 Private sAccion As String = Null
 
 Public Sub Form_Open()
@@ -27,6 +29,7 @@ Public Sub Form_Open()
   CargarGrid()
 
   FiltroProyectos()
+  ' Carga inicial de los items del comboBox de Estados de un proyecto
   CargarEstadosProyectos()
 
 End
@@ -58,18 +61,28 @@ End
 
 Public Sub CargarGrid()
 
-  rstResultado = cClientes.GetClients(sFiltroCli, sEstadoCli)
+  rstResultado = cClientes.GetClients(sFiltroCli, sIdProyecto, sEstadoCli)
   ' obtenemos los registro para pintar el grid
   grvClientes = cClientes.GetGrid(grvClientes, rstResultado)
-
+  'Método para traer los items seleccionados en el GridView
   GetRows()
 
 End
 
 Public Sub grvClientes_Click()
+  ' Guardamos la variable local de la acción realizada
+
+  sAccion = "edit"
+
 
   iSelectCli = CInt(grvClientes[grvClientes.Row, 0].text)
+  'Obtenemos los proyectos según el cliente seleccioando
   ObtenerProyectosId(iSelectCli)
+
+  btnLimpiar.Enabled = True
+
+
+
 
 End
 
@@ -103,6 +116,8 @@ Public Sub btnAdd_Click()
 
   sAccion = "add"
 
+  btnLimpiar.Enabled = True
+
   ' se hacen visible los botones de Aceptar y Cancelar acción
   btnAceptar.Visible = True
   btnCancelar.visible = True
@@ -117,7 +132,7 @@ End
 
 Public Sub FiltroProyectos()
 
-  rstResultado = cProyectos.FiltrarProyectos(sFiltroPro, sEstadoPro)
+  rstResultado = cProyectos.FiltrarProyectos(sFiltroPro, sBajaPro, sCerradoPro)
   rstResultado.MoveFirst
   lsvProyectos.Clear
   Do While rstResultado.Available
@@ -146,5 +161,88 @@ Public Sub btnSalir2_Click()
 
   Me.Close()
   MenuPrincipal.Show()
+
+End
+
+
+
+Public Sub CargarEstadosProyectos()
+
+  cmbEstadoPro.Tag = New Integer[]
+  cmbEstadoPro.Clear
+  cmbEstadoPro.Add("Todos")
+  cmbEstadoPro.Tag.Add(0)
+  cmbEstadoPro.Add("Activos")
+  cmbEstadoPro.Tag.Add(1)
+  cmbEstadoPro.Add("Cerrados")
+  cmbEstadoPro.Tag.Add(2)
+  cmbEstadoPro.Add("Baja")
+  cmbEstadoPro.Tag.Add(3)
+
+End
+
+Public Sub cmbEstadoPro_Change()
+
+  Select Case cmbEstadoPro.Text
+    Case "Todos"
+      sCerradoPro = "%"
+      sBajaPro = "%"
+    Case "Activos"
+      sCerradoPro = "-"
+      sBajaPro = "-"
+    Case "Cerrados"
+      sCerradoPro = "+"
+      sBajaPro = "%"
+    Case "Baja"
+      sCerradoPro = "%"
+      sBajaPro = "+"
+  End Select
+
+  FiltroProyectos()
+
+
+End
+
+Public Sub swbEstado_Click()
+
+  If swbEstado.value = "T" Then
+    sEstadoCli = "-"
+  Else
+    sEstadoCli = "%"
+  Endif
+  CargarGrid()
+
+End
+
+Public Sub txtFiltroClientes_GotFocus()
+
+  'Desmarcar el grid de clientes
+  grvClientes.UnSelectAll()
+  'Desmarcar el listView de proyectos
+  lsvProyectos.UnselectAll()
+  '
+  sFiltroCli = "%"
+  sFiltroPro = "%"
+  'Se reinicia la variable de estructura para la aplicación
+  gEstructuras.setIdProyecto(0)
+  sIdProyecto = "%"
+
+  ' Recargamos el gridview
+  CargarGrid()
+
+
+
+End
+
+Public Sub lsvProyectos_Click()
+  'Guardamos el id de proyecto en la estructura
+
+  gEstructuras.setIdProyecto(lsvProyectos.key)
+
+  sIdProyecto = gEstructuras.getIdProyecto()
+  'Recargamos el gridView
+  CargarGrid()
+
+  btnLimpiar.Enabled = True
 
 End

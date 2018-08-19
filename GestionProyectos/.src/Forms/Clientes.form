@@ -144,7 +144,7 @@
     Picture = Picture["images/cancel_20.png"]
   }
   { cmbEstadoPro ComboBox
-    MoveScaled(4,55,21,4)
+    MoveScaled(8,55,13,4)
   }
   { swbEstado SwitchButton
     MoveScaled(64,55,8,4)

@@ -1,29 +1,35 @@
 ' Gambas module file
 
-' Modulo Clase Clientes
-
 Private conn As Connection
 Private bResultado As Boolean
 Private iContador As String
 Private rstResultado As Result
 
 ' Funcion que nos devuelve el ID i COD_PROYECTO segun texto entrado
-Public Function GetClients(sFiltro As String, sEstado As String) As Result
+Public Function GetClients(sFiltro As String, sIdProyecto As String, sEstado As String) As Result
 
   Dim rstResultado As Result = Null
   Dim sSql As String = Null
 
   sSql = "SELECT "
-  sSql &= "ID_CLIENTE, "
-  sSql &= "COD_CLIENTE, "
-  sSql &= "NOMBRE, "
-  sSql &= "POBLACION, "
-  sSql &= "ES_BAJA "
-  sSql &= "FROM CLIENTES "
-  sSql &= "WHERE (COD_CLIENTE  LIKE '%" & Upper(sFiltro) & "%' "
-  sSql &= "OR NOMBRE LIKE '%" & sFiltro & "%' "
-  sSql &= "OR POBLACION LIKE '%" & sFiltro & "%')"
-  sSql &= "AND ES_BAJA LIKE '" & sEstado & "'"
+  sSql &= "C.ID_CLIENTE, "
+  sSql &= "C.COD_CLIENTE, "
+  sSql &= "C.NOMBRE, "
+  sSql &= "C.POBLACION, "
+  sSql &= "C.ES_BAJA "
+  sSql &= "FROM CLIENTES C "
+  sSql &= "LEFT JOIN PROYECTOS P "
+  sSql &= "ON C.ID_CLIENTE = P.ID_CLIENTE "
+  sSql &= "WHERE (C.COD_CLIENTE  LIKE '%" & Upper(sFiltro) & "%' "
+  sSql &= "OR C.NOMBRE LIKE '%" & sFiltro & "%' "
+  sSql &= "OR C.POBLACION LIKE '%" & sFiltro & "%') "
+  sSql &= "AND C.ES_BAJA LIKE '" & sEstado & "' "
+  If sIdProyecto <> "%" And sIdProyecto <> "0" Then
+    sSql &= "AND P.ID_PROYECTO like '" & sIdProyecto & "' "
+  Endif
+
+  sSql &= "GROUP BY C.ID_CLIENTE"
+
   conn = gConexion.ConectarDB()
 
   rstResultado = conn.Exec(sSql)

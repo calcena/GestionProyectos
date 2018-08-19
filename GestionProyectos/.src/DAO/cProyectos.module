@@ -6,30 +6,48 @@ Private iContador As String
 Private rstResultado As Result
 
 ' Funcion que nos devuelve el ID i COD_PROYECTO segun texto entrado
-Public Function FiltrarProyectos(sFiltro As String, sTipo As String) As Result
-  
+Public Function FiltrarProyectos(sFiltro As String, sBaja As String, sCerrado As String) As Result
+
+  Dim sSql As String = Null
   Dim rstResultado As Result
-  
+
   conn = gConexion.ConectarDB()
-  
-  rstResultado = conn.Exec("SELECT P.ID_PROYECTO,P.COD_PROYECTO,P.ES_BAJA AS P_BAJA,P.ES_CERRADO AS P_CERRADO,C.ES_BAJA AS C_BAJA FROM PROYECTOS P INNER JOIN CLIENTES C ON P.ID_CLIENTE = C.ID_CLIENTE WHERE (P.COD_PROYECTO  LIKE '%" & Upper(sFiltro) & "%' OR C.COD_CLIENTE LIKE '%" & sFiltro & "%' OR C.NOMBRE LIKE '%" & sFiltro & "%' OR P.DESCRIPCION LIKE '%" & sFiltro & "%') AND P.ES_BAJA LIKE '" & sTipo & "'")
-  
-  Return rstResultado 
-  
+
+  sSql = "SELECT "
+  sSql &= "P.ID_PROYECTO, "
+  sSql &= "P.COD_PROYECTO, "
+  sSql &= "P.ES_BAJA AS P_BAJA, "
+  sSql &= "P.ES_CERRADO AS P_CERRADO, "
+  sSql &= "C.ES_BAJA AS C_BAJA "
+  sSql &= "FROM PROYECTOS P "
+  sSql &= "INNER JOIN CLIENTES C "
+  sSql &= "ON P.ID_CLIENTE = C.ID_CLIENTE "
+  sSql &= "WHERE (P.COD_PROYECTO  LIKE '%" & Upper(sFiltro) & "%' "
+  sSql &= "OR C.COD_CLIENTE LIKE '%" & sFiltro & "%' "
+  sSql &= "OR C.NOMBRE LIKE '%" & sFiltro & "%' "
+  sSql &= "OR P.DESCRIPCION LIKE '%" & sFiltro & "%') "
+  sSql &= "AND P.ES_BAJA LIKE '" & sBaja & "' "
+  sSql &= "AND P.ES_CERRADO LIKE '" & sCerrado & "'"
+
+
+  rstResultado = conn.Exec(sSql)
+
+  Return rstResultado
+
 End
 
 Public Function FiltrarProyectosId(sId As String) As Result
-  
+
   Dim rstResultado As Result
-  
+
   conn = gConexion.ConectarDB()
-  
+
   rstResultado = conn.Exec("SELECT P.ID_PROYECTO,P.COD_PROYECTO,P.ES_BAJA AS P_BAJA,P.ES_CERRADO AS P_CERRADO,C.ES_BAJA AS C_BAJA FROM PROYECTOS P INNER JOIN CLIENTES C ON P.ID_CLIENTE = C.ID_CLIENTE WHERE C.ID_CLIENTE = '" & sId & "'")
-  
-  Return rstResultado 
-  
+
+  Return rstResultado
+
 End
 
 Public Function FiltrarRequerimientos(sFiltro As String) As Result
-  
+
 End
