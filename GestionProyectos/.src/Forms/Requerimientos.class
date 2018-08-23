@@ -9,50 +9,52 @@ Private picWarn As Picture = Picture.Load("images/warning.png")
 Private picCalendar As Picture = Picture.Load("images/calendar_20.png")
 Private sFiltroPro As String = "%"
 Private sFiltroReq As String = "%"
+Private sBajaPro As String = "%"
+Private sCerradoPro As String = "%"
 Private sTipo As String = "%"
 
 Public Sub Form_Open()
-  
+
   Me.Title = "Requerimientos"
-  
+
   txtCodigo.Select
-  
+
   EnviarFiltro()
   ' Requerimientos
   rstResultado = cRequerimientos.GetReqByProy(sFiltroReq)
   CargaGrid()
-  
+
 End
 
 Public Sub txtFiltroProy_KeyRelease()
-  
+
   sFiltroPro = txtFiltroProy.Text
-  
+
   EnviarFiltro()
-  
+
 End
 
 Public Sub SwitchButton1_Click()
-  
-  If SwitchButton1.Value = "T" Then 
-    sTipo = "-"    
-  Else    
-    sTipo = "%"    
+
+  If SwitchButton1.Value = "T" Then
+    sBajaPro = "-"
+  Else
+    sBajaPro = "%"
   Endif
-  
+
   EnviarFiltro()
-  
+
 End
 
 Public Sub EnviarFiltro()
-  
-  rstResultado = cProyectos.FiltrarProyectos(sFiltroPro, sTipo)
+
+  rstResultado = cProyectos.FiltrarProyectos(sFiltroPro, sBajaPro, sCerradoPro)
   rstResultado.MoveFirst
   lsvProyectos.Clear
-  Do While rstResultado.Available 
+  Do While rstResultado.Available
     ' Proyectos cerrados con clientes Activos
     If rstResultado!P_CERRADO = "+" And rstResultado!C_BAJA = "-" Then
-      lsvProyectos.Add(rstResultado!ID_PROYECTO, " - " & rstResultado!COD_PROYECTO, picCerrado)      
+      lsvProyectos.Add(rstResultado!ID_PROYECTO, " - " & rstResultado!COD_PROYECTO, picCerrado)
       ' Proyectos que están de Baja con el clientes Activo
     Else If rstResultado!P_BAJA = "+" And rstResultado!C_BAJA = "-" Then
       lsvProyectos.Add(rstResultado!ID_PROYECTO, " - " & rstResultado!COD_PROYECTO, picBaja)
@@ -63,20 +65,20 @@ Public Sub EnviarFiltro()
     Else
       lsvProyectos.Add(rstResultado!ID_PROYECTO, " - " & rstResultado!COD_PROYECTO, picActivo)
     Endif
-    
+
     rstResultado.MoveNext
   Loop
-  
+
 End
 
-' 
+'
 Public Sub FiltroRequerimientos()
-  
+
   rstResultado = cProyectos.FiltrarRequerimientos(sFiltroReq, sTipo)
   rstResultado.MoveFirst
   lsvProyectos.Clear
-  Do While rstResultado.Available 
-    
+  Do While rstResultado.Available
+
     If rstResultado!P_CERRADO = "+" And rstResultado!C_BAJA = "-" Then
       lsvProyectos.Add(rstResultado!ID_PROYECTO, " - " & rstResultado!COD_PROYECTO, gConst.picCerrado)
     Else If rstResultado!P_BAJA = "+" And rstResultado!C_BAJA = "-" Then
@@ -86,34 +88,34 @@ Public Sub FiltroRequerimientos()
     Else
       lsvProyectos.Add(rstResultado!ID_PROYECTO, " - " & rstResultado!COD_PROYECTO, gConst.picActivo)
     Endif
-    
+
     rstResultado.MoveNext
   Loop
-  
+
 End
 
 Public Sub btnLimpiar_Click()
-  
-  ' Reiniciamos los filtros 
+
+  ' Reiniciamos los filtros
   SwitchButton1.value = ""
-  
+
 End
 
 Public Sub txtFiltroReq_KeyRelease()
-  
+
   sFiltroReq = txtFiltroReq.Text
-  
+
   rstResultado = cRequerimientos.GetReqByProy(sFiltroReq)
   CargaGrid()
-  
+
 End
 
 Public Sub CargaGrid()
-  
+
   Dim i As Integer = 0
-  
+
   GridView1.Clear
-  
+
   GridView1.Columns.Count = rstResultado.Fields.Count - 1
   GridView1.Header = rstResultado.Fields.Count - 1
   GridView1.Columns[0].Title = "ID_REQUERIMIENTO"
@@ -121,7 +123,7 @@ Public Sub CargaGrid()
   GridView1.Columns[2].Title = "COD_REQ."
   GridView1.Columns[3].Title = "DESCRIPCION"
   GridView1.Columns[4].Title = ""
-  
+
   GridView1.Columns[0].width = 0
   GridView1.Columns[0].Resizable = False
   GridView1.Columns[1].width = 100
@@ -133,11 +135,11 @@ Public Sub CargaGrid()
   GridView1.Columns[4].width = 25
   GridView1.Columns[4].Alignment = 3
   GridView1.Columns[4].Resizable = False
-  
+
   '::::::::::::::::::::::::::::::::::::::::::::::::::::
-  
+
   rstResultado.MoveFirst
-  
+
   Do While rstResultado.Available
     GridView1.Rows.Insert(i, 1)
     GridView1[i, 0].Text = rstResultado!ID_REQUERIMIENTO
@@ -145,84 +147,84 @@ Public Sub CargaGrid()
     GridView1[i, 2].Text = rstResultado!COD_REQUERIMIENTO
     GridView1[i, 3].Text = rstResultado!DESCRIPCION
     If rstResultado!ES_BAJA = "+" Then
-      GridView1[i, 4].Picture = picBaja      
+      GridView1[i, 4].Picture = picBaja
     Else If rstResultado!ES_CERRADO = "+"
       GridView1[i, 4].Picture = picCerrado
     Else
       GridView1[i, 4].Picture = picActivo
     End If
-    
+
     i += 1
     rstResultado.MoveNext
   Loop
-  
+
 End
 
 Public Sub lsvProyectos_Select()
-  
+
   rstResultado = cRequerimientos.GetReqById(CInt(lsvProyectos.Key))
   CargaGrid()
-  
+
 End
 
 Public Sub txtFiltroReq_GotFocus()
-  
+
   txtFiltroProy.Clear
   sFiltroPro = "%"
   EnviarFiltro()
-  
+
 End
 
 Public Sub txtFiltroProy_GotFocus()
-  
+
   txtFiltroReq.Clear
   sFiltroReq = "%"
   rstResultado = cRequerimientos.GetReqByProy(sFiltroReq)
   CargaGrid()
-  
+
 End
 
 Public Sub lsvProyectos_Click()
-  
+
   gEstructuras.setIdProyecto(lsvProyectos.key)
-  
+
 End
 
 Public Sub btnAdd_Click()
   'Hacemos visible los botones de Aceptar y Cancelar
-  
+
   btnAceptar.Visible = True
   btnCancelar.Visible = True
   btnAdd.Enabled = False
-  
+
   txtCodigo.Text = gUtils.GetCodigo("REQ")
-  
+
 End
 
 Public Sub btnSalir2_Click()
-  
+
   Me.Close()
   MenuPrincipal.Show()
-  
+
 End
 
 Public Sub btnAceptar_Click()
-  
+
   btnAdd.Enabled = True
-  
+
   If Len(Trim(txtCodigo.Text)) = 0 Or Len(Trim(txaDescripcion.Text)) = 0 Then
-    If Len(Trim(txaDescripcion.Text)) = 0 Then 
+    If Len(Trim(txaDescripcion.Text)) = 0 Then
       txaDescripcion.Background = Color.Red
-    Else 
+    Else
       txaDescripcion.Background = Color.White
     End If
     ' Aviso por pantalla al usuario
     Message.Warning("Debe cumplimentar los datos marcados en rojo")
-    
+
   Else
     txtCodigo.Background = Color.White
     txaDescripcion.Background = Color.White
-    
+
   Endif
-  
+
 End

@@ -57,7 +57,7 @@ Public Function GetGrid(ByRef objGridView As GridView, rstResultado As Result) A
   objGridView.Columns[0].Resizable = False
   objGridView.Columns[1].width = 100
   objGridView.Columns[1].Resizable = False
-  objGridView.Columns[2].width = 290
+  objGridView.Columns[2].width = 270
   objGridView.Columns[2].Resizable = False
   objGridView.Columns[3].width = 150
   objGridView.Columns[3].Resizable = False
