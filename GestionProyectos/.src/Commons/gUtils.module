@@ -7,20 +7,29 @@ Private rstResultado As Result = Null
 
 Public Function FechaConFormato(dFecha As Date) As String
 
-  Dim sFecha As String = CStr(dFecha)
+  Dim sFecha As String = dFecha
+  Dim sDia As String = Day(dFecha)
+  Dim sMes As String = Month(dFecha)
+  Dim sAny As String = Year(dFecha)
 
-  sResultado = Mid$(sFecha, 1, 10)
+  If Len(sMes) = 1 Then
+    sMes = "0" & sMes
+  End If
+
+  sResultado = sDia & "/" & sMes & "/" & sAny
 
   Return sResultado
 
 End
 
-Public Function HoraConFormato(tTiempo As Date) As String
+Public Function HoraConFormato(dTiempo As Date) As String
 
-  Dim sHora As String = tTiempo
+  Dim sHora As String = Hour(dTiempo)
+  Dim sMinuto As String = Minute(dTiempo)
+  Dim sSegundo As String = Second(dTiempo)
 
+  sResultado = sHora & ":" & sMinuto & ":" & sSegundo
 
-  sResultado = Mid$(sHora, 12, 8)
 
   Return sResultado
 

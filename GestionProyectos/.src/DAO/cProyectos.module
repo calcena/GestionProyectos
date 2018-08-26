@@ -51,3 +51,24 @@ End
 Public Function FiltrarRequerimientos(sFiltro As String) As Result
 
 End
+
+
+
+Public Function AddProyecto(codProyecto As String) As Boolean
+
+  Dim sSql As String = Null
+  Dim resultado As Boolean = False
+  Dim dAhora As String = gUtils.FechaConFormato(Now) & " " & gUtils.HoraConFormato(Now)
+
+  sSql = "INSERT INTO PROYECTOS "
+  sSql &= "(ID_CLIENTE,COD_PROYECTO,ES_BAJA,FECHA_BAJA,MOTIVO_BAJA,FECHA_MODIF) "
+  sSql &= "VALUES "
+  sSql &= "(0,'" & codProyecto & "','+','" & dAhora & "','" & gConst.BajaCreacion & "','" & dAhora & "')"
+
+  conn = gConexion.ConectarDB()
+
+  conn.Exec(sSql)
+
+  conn.Close
+
+End

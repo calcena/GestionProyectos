@@ -167,7 +167,7 @@ Public Sub ActivarUsuario(idUser As Integer)
   sSql &= "FECHA_BAJA=null, "
   sSql &= "FECHA_MODIF='" & dAhora & "' "
   sSql &= "WHERE ID_USUARIO =" & idUser
-
+  conn = gConexion.ConectarDB()
   conn.Exec(sSql)
 
 End

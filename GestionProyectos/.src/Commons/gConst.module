@@ -18,3 +18,8 @@ Public picLogo As Picture = Picture.Load("images/logo.png")
 ' ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 ' Constantes para los Storeds Procedures
 Public STP_GETUSUARIOS As String = "STP_GETUSUARIOS"
+
+
+'::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+'Consantes de Aplicación
+Public BajaCreacion As String = "Baja temporal por creación de nuevo registro."

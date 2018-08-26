@@ -1,35 +1,38 @@
 # Gambas Form File 3.0
 
 { Form Form
-  MoveScaled(0,0,174,62)
+  MoveScaled(0,0,152,73)
   { btnAdd Button
-    MoveScaled(153,4,20,7)
+    MoveScaled(1,64,20,7)
     Text = ("Añadir")
     Picture = Picture["images/add_20.png"]
   }
   { btnBorrar Button
-    MoveScaled(153,12,20,7)
+    MoveScaled(22,64,20,7)
+    Enabled = False
     Text = ("Borrar")
     Picture = Picture["images/borrar_20.png"]
   }
   { btnSalir2 Button
-    MoveScaled(153,53,20,7)
+    MoveScaled(131,63,20,7)
     Text = ("Salir")
     Picture = Picture["images/salir.png"]
   }
   { btnLimpiar Button
-    MoveScaled(153,20,20,7)
+    MoveScaled(85,64,20,7)
+    Enabled = False
     Text = ("Limpiar")
     Picture = Picture["images/limpiar_20.png"]
   }
   { btnActivar Button
-    MoveScaled(153,28,20,7)
+    MoveScaled(43,64,20,7)
     Enabled = False
     Text = ("Activar")
     Picture = Picture["images/activar.png"]
   }
   { btnDuplicar Button
-    MoveScaled(153,36,20,7)
+    MoveScaled(64,64,20,7)
+    Enabled = False
     Text = ("Duplicar")
     Picture = Picture["images/duplicar_20.png"]
   }
@@ -58,7 +61,11 @@
   }
   { txtProyecto TextBox
     MoveScaled(99,10,20,4)
+    Font = Font["Bold"]
+    Background = &HA7D1DF&
+    Alignment = Align.Center
     ReadOnly = True
+    Border = False
   }
   { lblProyecto Label
     MoveScaled(99,6,20,4)
@@ -69,26 +76,41 @@
     Text = ("Descripción")
   }
   { txtDescripcion TextArea
-    MoveScaled(99,18,52,16)
+    MoveScaled(99,18,52,24)
   }
   { txtHorasPrevistas TextBox
-    MoveScaled(99,38,17,4)
+    MoveScaled(99,46,17,4)
   }
   { txtHorasImputadas TextBox
-    MoveScaled(134,38,17,4)
+    MoveScaled(134,46,17,4)
     Background = &HA7D1DF&
     ReadOnly = True
   }
   { lblHorasPrevistas Label
-    MoveScaled(99,34,17,4)
+    MoveScaled(99,42,17,4)
     Text = ("Horas Previstas")
   }
   { lblHorasImputadas Label
-    MoveScaled(134,34,17,4)
+    MoveScaled(134,42,17,4)
     Text = ("Horas Imputadas")
   }
   { picDuplicado PictureBox
     MoveScaled(60,5,37,5)
     Alignment = Align.Center
+  }
+  { lblRegistros Label
+    MoveScaled(1,59,31,4)
+  }
+  { btnCancelar Button
+    MoveScaled(128,55,16,4)
+    Visible = False
+    Text = ("  Cancelar")
+    Picture = Picture["images/cancel_20.png"]
+  }
+  { btnAceptar Button
+    MoveScaled(109,55,16,4)
+    Visible = False
+    Text = ("  Aceptar")
+    Picture = Picture["images/aceptar.png"]
   }
 }

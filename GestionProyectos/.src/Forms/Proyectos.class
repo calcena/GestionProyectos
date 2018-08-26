@@ -1,9 +1,135 @@
 ' Gambas class file
 
+Private sAccion As String = Null
+Private iRespuesta As Integer
+
 Public Sub Form_Open()
-  
+
 End
 
 Public Sub lblDescripcion_MouseDown()
-  
+
+End
+
+Public Sub btnAdd_Click()
+
+  ' Informamos la variable global como adición
+
+  sAccion = "add"
+
+  btnAceptar.Visible = True
+  btnCancelar.Visible = True
+
+
+  txtProyecto.Text = gUtils.GetCodigo("PRO")
+  ' Creamos un nuevo registro
+  cProyectos.AddProyecto(txtProyecto.Text)
+
+End
+
+Public Sub btnAceptar_Click()
+
+  Select Case sAccion
+    Case "add"
+
+      If Len(Trim(txtDescripcion.text)) = 0 Then
+        txtDescripcion.Background = Color.Red
+        ' Aviso por pantalla al usuario
+        Message.Warning("Debe cumplimentar los datos marcados en rojo")
+        Return
+      Else
+        txtDescripcion.Background = Color.white
+      End If
+
+      If Len(Trim(txtHorasPrevistas.text)) = 0 Then
+        txtHorasPrevistas.Background = Color.Red
+        ' Aviso por pantalla al usuario
+        Message.Warning("Debe cumplimentar los datos marcados en rojo")
+        Return
+      Else
+        txtHorasPrevistas.Background = Color.white
+      End If
+
+      cProyectos.EditProyecto(txtProyecto.Text, txtDescripcion.Text, txtHorasPrevistas.Text)
+      cLogs.InsOkLog(gEstructuras.getIdUsuario(), gUtils.FechaConFormato(Now), gUtils.HoraConFormato(Now), "Proyectos", "Proyecto: " & txtProyecto.text & " añadido al sistema.")
+    Case "edit"
+      If Len(Trim(txtDescripcion.text)) = 0 Then
+        txtDescripcion.Background = Color.Red
+        ' Aviso por pantalla al usuario
+        Message.Warning("Debe cumplimentar los datos marcados en rojo")
+        Return
+      Else
+        txtDescripcion.Background = Color.white
+      End If
+
+      If Len(Trim(txtHorasPrevistas.text)) = 0 Then
+        txtHorasPrevistas.Background = Color.Red
+        ' Aviso por pantalla al usuario
+        Message.Warning("Debe cumplimentar los datos marcados en rojo")
+        Return
+      Else
+        txtHorasPrevistas.Background = Color.white
+      End If
+
+      If ContieneDuplicado() Then
+        Return
+      End If
+
+
+      cUsuarios.EditProyecto(txtProyecto.Text, txtDescripcion.Text, txtHorasPrevistas.Text)
+      cLogs.InsOkLog(gEstructuras.getIdUsuario(), gUtils.FechaConFormato(Now), gUtils.HoraConFormato(Now), "Proyectos", "Proyecto: " & txtProyecto.text & " modificado en el sistema.")
+    Case "del"
+      ' Si=1 | No= 2
+      iRespuesta = Message.Question("¿Quiere eliminar el registro?", "Sí", "No")
+
+      If iRespuesta = 1 Then
+        'Afirmativo
+        'Realizamos la Baja lógica del registro según el identificador
+        cProyectos.DelProyecto(gEstructuras.getIdSeleccion())
+        cLogs.InsOkLog(gEstructuras.getIdUsuario, gUtils.FechaConFormato(Now), gUtils.HoraConFormato(Now), "Proyectos", "Proyecto: " & txtProyecto.text & " dado de baja en el sistema.")
+        'CargarGrid()
+      Else
+        'Negativo
+        'Cancelamos la acción a realizar
+        btnAceptar.Visible = False
+        btnCancelar.Visible = False
+        'btnLimpiar_Click()
+
+      Endif
+
+  End Select
+
+  'btnLimpiar_Click()
+  btnAceptar.visible = False
+  btnCancelar.visible = False
+  btnBorrar.Enabled = False
+  btnDuplicar.Enabled = False
+  picDuplicado.Visible = False
+  'Reiniciamos la variable global de la acción realizada
+  sAccion = Null
+
+End
+
+Public Sub btnBorrar_Click()
+  'Pulsamos el boton de borrar y marcamos la variable local para borrar
+
+  sAccion = "del"
+  btnAceptar.visible = True
+  btnCancelar.Visible = True
+
+End
+
+Public Function ContieneDuplicado() As Boolean
+
+  Dim resultado As Boolean = False
+
+  If InStr(txtDescripcion.Text, "[Duplicado]" > 0) > 0 Then
+
+    Message.Error("Los datos contienen la palabra [Duplicado]")
+    resultado = True
+
+  End If
+
+  Return resultado
+
 End
