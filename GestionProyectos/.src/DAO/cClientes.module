@@ -5,6 +5,36 @@ Private bResultado As Boolean
 Private iContador As String
 Private rstResultado As Result
 
+
+Public Function ListViewClientes(sFiltro As String, sBaja As String) As Result
+
+  Dim sSql As String = Null
+  Dim rstResultado As Result
+
+  conn = gConexion.ConectarDB()
+
+  sSql = "SELECT "
+  sSql &= "ID_CLIENTE, "
+  sSql &= "COD_CLIENTE, "
+  sSql &= "NOMBRE, "
+  sSql &= "ES_BAJA "
+  sSql &= "FROM CLIENTES "
+  sSql &= "WHERE (COD_CLIENTE  LIKE '%" & Upper(sFiltro) & "%' "
+  sSql &= "OR NOMBRE LIKE '%" & sFiltro & "%' "
+  sSql &= "OR DIRECCION LIKE '%" & sFiltro & "%' "
+  sSql &= "OR POBLACION LIKE '%" & sFiltro & "%') "
+  sSql &= "AND ES_BAJA LIKE '" & sBaja & "' "
+
+  rstResultado = conn.Exec(sSql)
+
+  Return rstResultado
+
+End
+
+
+
+
+
 ' Funcion que nos devuelve el ID i COD_PROYECTO segun texto entrado
 Public Function GetClients(sFiltro As String, sIdProyecto As String, sEstado As String) As Result
 

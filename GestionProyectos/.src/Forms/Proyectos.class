@@ -2,8 +2,19 @@
 
 Private sAccion As String = Null
 Private iRespuesta As Integer
+Private sFiltroCli As String = "%"
+Private sBajaCli As String = "%"
+Private rstResultado As Result = Null
 
 Public Sub Form_Open()
+
+  Me.Title = "Proyectos"
+  'Inicializamos el valor a Activos
+  swbEstado.value = "T"
+  sBajaCli = "-"
+  ' Cargamos los datos de los clientes Activos
+  ListViewClientes()
+
 
 End
 
@@ -19,7 +30,6 @@ Public Sub btnAdd_Click()
 
   btnAceptar.Visible = True
   btnCancelar.Visible = True
-
 
   txtProyecto.Text = gUtils.GetCodigo("PRO")
   ' Creamos un nuevo registro
@@ -139,5 +149,52 @@ Public Sub btnSalir2_Click()
   Me.Close()
   MenuPrincipal.Show()
 
+
+End
+
+Public Sub ListViewClientes()
+
+  rstResultado = cClientes.ListViewClientes(sFiltroCli, sBajaCli)
+  rstResultado.MoveFirst
+  lsvClientes.Clear
+  Do While rstResultado.Available
+    ' Clientes que están de Baja con el clientes Activo
+    If rstResultado!ES_BAJA = "+" Then
+      lsvClientes.Add(rstResultado!ID_CLIENTE, " - " & rstResultado!COD_CLIENTE, gConst.picBaja)
+      ' El resto se consideran activos
+    Else
+      lsvClientes.Add(rstResultado!ID_CLIENTE, " - " & rstResultado!COD_CLIENTE, gConst.picActivo)
+    Endif
+
+    rstResultado.MoveNext
+  Loop
+
+End
+
+
+Public Sub lblActivos_MouseDown()
+
+
+
+End
+
+Public Sub swbEstado_Click()
+
+  If swbEstado.value = "T"
+    sBajaCli = "-"
+  Else
+    sBajaCli = "%"
+  Endif
+
+  ListViewClientes()
+
+
+End
+
+Public Sub txtFiltroCli_KeyRelease()
+  ' Recogemos en la variable el contenido del Texto de Búsqueda
+
+  sFiltroCli = txtFiltroCli.Text
+  ListViewClientes()
 
 End
