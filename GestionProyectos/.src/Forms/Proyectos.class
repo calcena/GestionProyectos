@@ -133,3 +133,11 @@ Public Function ContieneDuplicado() As Boolean
   Return resultado
 
 End
+
+Public Sub btnSalir2_Click()
+
+  Me.Close()
+  MenuPrincipal.Show()
+
+
+End
