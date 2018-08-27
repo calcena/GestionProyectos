@@ -3,25 +3,25 @@
 { Form Form
   MoveScaled(0,0,167,72)
   { lsvProyectos ListView
-    MoveScaled(1,9,29,45)
+    MoveScaled(1,9,23,45)
   }
   { grvClientes GridView
-    MoveScaled(31,9,79,45)
+    MoveScaled(25,9,79,45)
     Mode = Select.Single
     Grid = False
   }
   { txtFiltroProyectos TextBox
-    MoveScaled(1,4,29,4)
+    MoveScaled(1,4,23,4)
   }
   { lblProyectos Label
     MoveScaled(2,1,24,4)
     Text = ("Buscador")
   }
   { txtFiltroClientes TextBox
-    MoveScaled(31,4,29,4)
+    MoveScaled(25,4,29,4)
   }
   { lblProyectos2 Label
-    MoveScaled(32,1,24,4)
+    MoveScaled(26,1,24,4)
     Text = ("Buscador")
   }
   { btnAdd Button
@@ -143,9 +143,6 @@
     Text = ("  Cancelar")
     Picture = Picture["images/cancel_20.png"]
   }
-  { cmbEstadoPro ComboBox
-    MoveScaled(8,55,13,4)
-  }
   { swbEstado SwitchButton
     MoveScaled(64,55,8,4)
   }
@@ -158,5 +155,9 @@
     MoveScaled(73,55,11,4)
     Text = ("Activos")
     Alignment = Align.Left
+  }
+  { cmbEstadoPro ComboBox
+    MoveScaled(8,55,13,4)
+    ReadOnly = True
   }
 }

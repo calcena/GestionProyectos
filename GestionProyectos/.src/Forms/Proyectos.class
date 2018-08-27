@@ -3,8 +3,12 @@
 Private sAccion As String = Null
 Private iRespuesta As Integer
 Private sFiltroCli As String = "%"
+Private sFiltroPro As String = "%"
 Private sBajaCli As String = "%"
 Private rstResultado As Result = Null
+Private sIdCliente As String = "%"
+Private sEstadoBaja As String = "-"
+Private sEstadoCerrado As String = "-"
 
 Public Sub Form_Open()
 
@@ -12,8 +16,13 @@ Public Sub Form_Open()
   'Inicializamos el valor a Activos
   swbEstado.value = "T"
   sBajaCli = "-"
-  ' Cargamos los datos de los clientes Activos
+  'Cargamos los datos de los clientes Activos
   ListViewClientes()
+  '
+  CargarEstadosProyectos()
+
+  '
+  CargarGrid()
 
 
 End
@@ -198,3 +207,79 @@ Public Sub txtFiltroCli_KeyRelease()
   ListViewClientes()
 
 End
+
+Public Sub lsvClientes_Click()
+
+  'Guardamos el id de proyecto en la estructura
+  gEstructuras.setIdCliente(lsvClientes.key)
+  '
+  sIdCliente = gEstructuras.getIdCliente()
+  'Recargamos el gridView
+  CargarGrid()
+
+  btnLimpiar.Enabled = True
+
+End
+
+Public Sub CargarGrid()
+
+  'cargamos en el resultset los proyectos
+  rstResultado = cProyectos.GetProjects(sFiltroPro, sIdCliente, sEstadoBaja, sEstadoCerrado)
+  ' obtenemos los registro para pintar el grid
+  grvProyectos = cProyectos.GetGrid(grvProyectos, rstResultado)
+  'Método para traer los items seleccionados en el GridView
+  GetRows()
+
+End
+
+Public Sub GetRows()
+
+  Dim resultado As String
+
+  resultado = CStr(rstResultado.Count)
+  lblRegistros.Text = "Registros: " & resultado
+
+End
+
+Public Sub CargarEstadosProyectos()
+
+  cmbEstadoPro.Tag = New Integer[]
+  cmbEstadoPro.Clear
+  cmbEstadoPro.Add("Todos")
+  cmbEstadoPro.Tag.Add(0)
+  cmbEstadoPro.Add("Activos")
+  cmbEstadoPro.Tag.Add(1)
+  cmbEstadoPro.Add("Cerrados")
+  cmbEstadoPro.Tag.Add(2)
+  cmbEstadoPro.Add("Baja")
+  cmbEstadoPro.Tag.Add(3)
+
+End
+
+
+
+
+' Public Sub FiltroProyectos()
+'
+'   rstResultado = cProyectos.FiltrarProyectos(sFiltroPro, sBajaPro, sCerradoPro)
+'   rstResultado.MoveFirst
+'   lsvProyectos.Clear
+'   Do While rstResultado.Available
+'     ' Proyectos cerrados con clientes Activos
+'     If rstResultado!P_CERRADO = "+" And rstResultado!C_BAJA = "-" Then
+'       lsvProyectos.Add(rstResultado!ID_PROYECTO, " - " & rstResultado!COD_PROYECTO, gConst.picCerrado)
+'       ' Proyectos que están de Baja con el clientes Activo
+'     Else If rstResultado!P_BAJA = "+" And rstResultado!C_BAJA = "-" Then
+'       lsvProyectos.Add(rstResultado!ID_PROYECTO, " - " & rstResultado!COD_PROYECTO, gConst.picBaja)
+'       ' Clientes de Baja
+'     Else If rstResultado!C_BAJA = "+" Then
+'       lsvProyectos.Add(rstResultado!ID_PROYECTO, " - " & rstResultado!COD_PROYECTO, gConst.picWarn)
+'       ' El resto se consideran activos
+'     Else
+'       lsvProyectos.Add(rstResultado!ID_PROYECTO, " - " & rstResultado!COD_PROYECTO, gConst.picActivo)
+'     Endif
+'
+'     rstResultado.MoveNext
+'   Loop
+'
+' End

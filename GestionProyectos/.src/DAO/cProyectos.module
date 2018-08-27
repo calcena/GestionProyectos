@@ -72,3 +72,89 @@ Public Function AddProyecto(codProyecto As String) As Boolean
   conn.Close
 
 End
+
+Public Function GetGrid(ByRef objGridView As GridView, rstResultado As Result) As GridView
+
+  Dim i As Integer = 0
+
+  objGridView.Columns.Count = rstResultado.Fields.Count - 1
+  objGridView.Header = rstResultado.Fields.Count
+  objGridView.Columns[0].Title = "ID_PROYECTO"
+  objGridView.Columns[1].Title = "COD.CLI"
+  objGridView.Columns[2].Title = "COD.PROY"
+  objGridView.Columns[3].Title = "DESCRIPCIÓN"
+  objGridView.Columns[4].Title = "H.EST."
+  objGridView.Columns[5].Title = ""
+  objGridView.Columns[0].width = 0
+  objGridView.Columns[0].Resizable = False
+  objGridView.Columns[1].width = 100
+  objGridView.Columns[1].Resizable = False
+  objGridView.Columns[2].width = 100
+  objGridView.Columns[2].Resizable = False
+  objGridView.Columns[3].width = 200
+  objGridView.Columns[3].Resizable = False
+  objGridView.Columns[4].width = 50
+  objGridView.Columns[4].Resizable = False
+  objGridView.Columns[5].width = 25
+  objGridView.Columns[5].Alignment = 3
+  objGridView.Columns[5].Resizable = False
+  '::::::::::::::::::::::::::::::::::::::::::::::::::::
+  objGridView.Rows.Count = 0
+
+  rstResultado.MoveFirst
+
+  Do While rstResultado.Available
+    objGridView.Rows.Insert(i, 1)
+    objGridView[i, 0].Text = rstResultado!ID_PROYECTO
+    objGridView[i, 1].Text = rstResultado!COD_CLIENTE
+    objGridView[i, 2].Text = rstResultado!COD_PROYECTO
+    objGridView[i, 3].Text = rstResultado!DESCRIPCION
+    objGridView[i, 4].Text = rstResultado!HORAS_ESTIMADAS
+    If rstResultado!ES_BAJA = "+" Then
+      objGridView[i, 5].Picture = gConst.picBaja
+    Else If rstResultado!ES_CERRADO = "+" Then
+      objGridView[i, 5].Picture = gConst.picCerrado
+    Else
+      objGridView[i, 5].Picture = gConst.picActivo
+    End If
+    i += 1
+    rstResultado.MoveNext
+  Loop
+  Return objGridView
+
+End
+
+' Funcion que nos devuelve el ID i COD_PROYECTO segun texto entrado
+Public Function GetProjects(sFiltro As String, sIdCliente As String, sEstadoBaja As String, sEstadoCerrado As String) As Result
+
+  Dim rstResultado As Result = Null
+  Dim sSql As String = Null
+
+  sSql = "SELECT "
+  sSql &= "P.ID_PROYECTO, "
+  sSql &= "C.COD_CLIENTE, "
+  sSql &= "P.COD_PROYECTO, "
+  sSql &= "P.DESCRIPCION, "
+  sSql &= "P.HORAS_ESTIMADAS, "
+  sSql &= "P.ES_BAJA, "
+  sSql &= "P.ES_CERRADO "
+  sSql &= "FROM PROYECTOS P "
+  sSql &= "LEFT JOIN CLIENTES C "
+  sSql &= "ON P.ID_CLIENTE = C.ID_CLIENTE "
+  sSql &= "WHERE (P.COD_PROYECTO  LIKE '%" & Upper(sFiltro) & "%' "
+  sSql &= "OR P.DESCRIPCION LIKE '%" & sFiltro & "%') "
+  sSql &= "AND P.ES_BAJA LIKE '" & sEstadoBaja & "' "
+  sSql &= "AND P.ES_CERRADO LIKE '" & sEstadoCerrado & "' "
+  If sIdCliente <> "%" And sIdCliente <> "0" Then
+    sSql &= "AND C.ID_CLIENTE like '" & sIdCliente & "' "
+  Endif
+
+  sSql &= "GROUP BY P.ID_PROYECTO"
+
+  conn = gConexion.ConectarDB()
+
+  rstResultado = conn.Exec(sSql)
+
+  Return rstResultado
+
+End

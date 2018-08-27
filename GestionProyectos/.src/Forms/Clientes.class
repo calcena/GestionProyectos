@@ -1,11 +1,6 @@
 ' Gambas class file
 
 Private rstResultado As Result
-'
-Private picActivo As Picture = Picture.Load("images/alta.png")
-Private picBaja As Picture = Picture.Load("images/baja.png")
-Private picCerrado As Picture = Picture.Load("images/cerrado.png")
-Private picWarn As Picture = Picture.Load("images/warning.png")
 ' variables seleccion del Cliente :::::::::::::::::::::::::::::::::::::
 Private iSelectCli As Integer = 0
 ' variables seleccion del Proyecto ::::::::::::::::::::::::::::::::::::
@@ -42,16 +37,16 @@ Public Sub ObtenerProyectosId(iSelect As Integer)
   Do While rstResultado.Available
     ' Proyecto Cerrado |Cliente Alta
     If rstResultado!P_CERRADO = "+" And rstResultado!C_BAJA = "-" Then
-      lsvProyectos.Add(rstResultado!ID_PROYECTO, " - " & rstResultado!COD_PROYECTO, picCerrado)
+      lsvProyectos.Add(rstResultado!ID_PROYECTO, " - " & rstResultado!COD_PROYECTO, gConst.picCerrado)
       ' Proyecto Baja | Cliente Alta
     Else If rstResultado!P_BAJA = "+" And rstResultado!C_BAJA = "-" Then
-      lsvProyectos.Add(rstResultado!ID_PROYECTO, " - " & rstResultado!COD_PROYECTO, picBaja)
+      lsvProyectos.Add(rstResultado!ID_PROYECTO, " - " & rstResultado!COD_PROYECTO, gConst.picBaja)
       ' Cliente Baja
     Else If rstResultado!C_BAJA = "+" Then
-      lsvProyectos.Add(rstResultado!ID_PROYECTO, " - " & rstResultado!COD_PROYECTO, picWarn)
+      lsvProyectos.Add(rstResultado!ID_PROYECTO, " - " & rstResultado!COD_PROYECTO, gConst.picWarn)
     Else
       ' Proyecto activo por deferencia
-      lsvProyectos.Add(rstResultado!ID_PROYECTO, " - " & rstResultado!COD_PROYECTO, picActivo)
+      lsvProyectos.Add(rstResultado!ID_PROYECTO, " - " & rstResultado!COD_PROYECTO, gConst.picActivo)
     Endif
 
     rstResultado.MoveNext
@@ -59,6 +54,7 @@ Public Sub ObtenerProyectosId(iSelect As Integer)
 
 End
 
+' Metodo que carga los datos en un Grid pasados por Referencia
 Public Sub CargarGrid()
 
   rstResultado = cClientes.GetClients(sFiltroCli, sIdProyecto, sEstadoCli)
@@ -69,20 +65,16 @@ Public Sub CargarGrid()
 
 End
 
+' Metodo que se ejecuta al pulsar sobre una celda
 Public Sub grvClientes_Click()
+
   ' Guardamos la variable local de la acción realizada
-
   sAccion = "edit"
-
 
   iSelectCli = CInt(grvClientes[grvClientes.Row, 0].text)
   'Obtenemos los proyectos según el cliente seleccioando
   ObtenerProyectosId(iSelectCli)
-
   btnLimpiar.Enabled = True
-
-
-
 
 End
 
@@ -101,6 +93,7 @@ Public Sub txtFiltroClientes_KeyRelease()
 
 End
 
+' Método para contar los registros recuperados
 Public Sub GetRows()
 
   Dim resultado As String
@@ -138,16 +131,16 @@ Public Sub FiltroProyectos()
   Do While rstResultado.Available
     ' Proyectos cerrados con clientes Activos
     If rstResultado!P_CERRADO = "+" And rstResultado!C_BAJA = "-" Then
-      lsvProyectos.Add(rstResultado!ID_PROYECTO, " - " & rstResultado!COD_PROYECTO, picCerrado)
+      lsvProyectos.Add(rstResultado!ID_PROYECTO, " - " & rstResultado!COD_PROYECTO, gConst.picCerrado)
       ' Proyectos que están de Baja con el clientes Activo
     Else If rstResultado!P_BAJA = "+" And rstResultado!C_BAJA = "-" Then
-      lsvProyectos.Add(rstResultado!ID_PROYECTO, " - " & rstResultado!COD_PROYECTO, picBaja)
+      lsvProyectos.Add(rstResultado!ID_PROYECTO, " - " & rstResultado!COD_PROYECTO, gConst.picBaja)
       ' Clientes de Baja
     Else If rstResultado!C_BAJA = "+" Then
-      lsvProyectos.Add(rstResultado!ID_PROYECTO, " - " & rstResultado!COD_PROYECTO, picWarn)
+      lsvProyectos.Add(rstResultado!ID_PROYECTO, " - " & rstResultado!COD_PROYECTO, gConst.picWarn)
       ' El resto se consideran activos
     Else
-      lsvProyectos.Add(rstResultado!ID_PROYECTO, " - " & rstResultado!COD_PROYECTO, picActivo)
+      lsvProyectos.Add(rstResultado!ID_PROYECTO, " - " & rstResultado!COD_PROYECTO, gConst.picActivo)
     Endif
 
     rstResultado.MoveNext
@@ -235,8 +228,8 @@ Public Sub txtFiltroClientes_GotFocus()
 End
 
 Public Sub lsvProyectos_Click()
-  'Guardamos el id de proyecto en la estructura
 
+  'Guardamos el id de proyecto en la estructura
   gEstructuras.setIdProyecto(lsvProyectos.key)
 
   sIdProyecto = gEstructuras.getIdProyecto()
